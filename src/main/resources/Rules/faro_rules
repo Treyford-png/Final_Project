@@ -1,0 +1,17 @@
+Set up a table as follows below:
+K Q J 10 9 8
+             7
+A 2 3 4 5 6
+
+Dealer flips the top card of the deck, showing it to the players
+Players then place bets on cards on the table
+
+Dealer flips 2 cards
+    First card is the loser. All bets placed on it are lost
+    Second card is the winner. All bets pay out 1:1
+    Rest of the bets stay on the table
+Players then place new bets
+Repeat until 3 cards are left
+
+Players then guess the order of the final 3 cards
+    payout is 4:1
