@@ -3,15 +3,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Scanner;
 
-public class LoginTerminal {
+public class LogIn extends SignIn {
     public static boolean loginPrompt() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Username: ");
-        String Username = scanner.nextLine();
-        System.out.print("Password: ");
-        String password = scanner.nextLine();
+        String Username = getUsername();
+        String password = getPassword();
         return login(Username, password);
     }
 
