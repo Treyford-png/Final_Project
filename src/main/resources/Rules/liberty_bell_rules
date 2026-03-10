@@ -1,0 +1,11 @@
+Contains 6 suits - diamond, heart, spade, horseshoe, star, liberty bell
+
+User inserts 5c
+3 cards are shown
+payout as follows:
+2 horseshoes = 5 cents
+2 horseshoe + 1 star = 10 cents
+3 spades = 20 cents
+3 diamonds = 30 cents
+3 hearts = 40 cents
+3 Liberty Bells = 50 cents
