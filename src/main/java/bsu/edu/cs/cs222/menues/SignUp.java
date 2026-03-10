@@ -54,11 +54,11 @@ public class SignUp extends SignIn {
 
     public static String validatePassword(String password, String confirmedPassword) {
         if (!password.equals(confirmedPassword)) {
-            return ("passwords do not match");
+            return ("Passwords do not match");
         }
 
         if (password.length() < 8) {
-            return "password is too short";
+            return "Password is too short";
         }
 
         boolean meetsRequirements = isStrongPassword(password);
@@ -69,7 +69,7 @@ public class SignUp extends SignIn {
         return "VALID";
     }
 
-    private static boolean isStrongPassword(String password) {
+    public static boolean isStrongPassword(String password) {
         boolean containsNumber = false;
         boolean containsLowerCase = false;
         boolean containUpperCase = false;

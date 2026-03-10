@@ -3,17 +3,27 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class SignUpTest {
     @Test
     public void testNewUsernamePassword() {
-        File file = new File("src/main/resources/users/SignUpTest.csv");
-        file.delete();
+        Path file = Paths.get("src/main/resources/users/SignUpTest.csv");
+        try {
+            Files.delete(file);
+        } catch (IOException e) {
 
-        assert(SignUp.signUp("SignUpTest", "1234").equals("Account created"));
-        assert(LogIn.login("SignUpTest", "1234"));
-        file = new File("src/main/resources/users/SignUpTest.csv");
-        file.delete();
+        }
+
+        assert(SignUp.signUp("SignUpTest", "Test1234!", "Test1234!").equals("Account Created"));
+        assert(LogIn.login("SignUpTest", "Test1234!"));
+        try {
+            Files.delete(file);
+        } catch (IOException e) {
+
+        }
     }
 
     @Test
@@ -21,17 +31,21 @@ public class SignUpTest {
         File file = new File("src/main/resources/users/SignUpTest.csv");
         file.createNewFile();
 
-        assert(!SignUp.signUp("SignUpTest", "1234").equals("Account with that username already exists"));
+        assert(SignUp.signUp("SignUpTest", "Tets1234", "Test1234").equals("Account with that username already exists"));
         file.delete();
     }
 
     @Test
-    public void testMatchingPasswords() {
-        assert(SignUp.validatePassword("1234", "1234"));
+    public void testNonMatchingPasswords() {
+        assert(SignUp.validatePassword("NoMatch1234!", "DoesNotMatch4321!").equals("Passwords do not match"));
     }
 
     @Test
-    public void testNonMatchingPasswords() {
-        assert(SignUp.validatePassword("1234", "4321"));
+    public void testWeakPasswords() {
+        assert(SignUp.isStrongPassword("Strong1234!"));
+        assert(!SignUp.isStrongPassword("no_uppercase_1234!"));
+        assert(!SignUp.isStrongPassword("no_lowercase_1234!"));
+        assert(!SignUp.isStrongPassword("NoNumbers!"));
+        assert(!SignUp.isStrongPassword("NoSymbols1234"));
     }
 }
