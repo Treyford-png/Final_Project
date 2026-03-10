@@ -5,10 +5,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class LogIn extends SignIn {
-    public static boolean loginPrompt() {
-        String Username = getUsername();
-        String password = getPassword();
-        return login(Username, password);
+    public static void loginPrompt() {
+        String username;
+        String password;
+        for (int i = 0; i < 10; i++) {
+            username = getUsername();
+            password = getPassword();
+            if (login(username, password)) {
+                return;
+            }
+        }
+        System.out.println("Too many attempts, please try again later");
     }
 
     public static boolean login(String username, String password) {

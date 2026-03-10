@@ -10,7 +10,7 @@ public class SignUpTest {
         File file = new File("src/main/resources/users/SignUpTest.csv");
         file.delete();
 
-        assert(SignUp.signUp("SignUpTest", "1234"));
+        assert(SignUp.signUp("SignUpTest", "1234").equals("Account created"));
         assert(LogIn.login("SignUpTest", "1234"));
         file = new File("src/main/resources/users/SignUpTest.csv");
         file.delete();
@@ -21,17 +21,17 @@ public class SignUpTest {
         File file = new File("src/main/resources/users/SignUpTest.csv");
         file.createNewFile();
 
-        assert(!SignUp.signUp("SignUpTest", "1234"));
+        assert(!SignUp.signUp("SignUpTest", "1234").equals("Account with that username already exists"));
         file.delete();
     }
 
     @Test
     public void testMatchingPasswords() {
-        assert(SignUp.MatchingPasswords("1234", "1234"));
+        assert(SignUp.validatePassword("1234", "1234"));
     }
 
     @Test
     public void testNonMatchingPasswords() {
-        assert(SignUp.MatchingPasswords("1234", "4321"));
+        assert(SignUp.validatePassword("1234", "4321"));
     }
 }
