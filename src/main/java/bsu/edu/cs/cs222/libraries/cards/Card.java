@@ -12,6 +12,7 @@ public class Card {
         this.suit = suit;
         this.value = value;
     }
+
     public String getShortName() {
         return shortName;
     }
