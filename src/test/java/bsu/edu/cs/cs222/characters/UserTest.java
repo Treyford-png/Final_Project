@@ -34,25 +34,26 @@ public class UserTest {
     @Test
     public void testReadUserFile() {
         SignUp.signUp("Test", "StrongPass123!", "StrongPass123!");
-        User user = new User(Paths.get("src/main/resources/users/test.csv"));
+        User user = new User(Paths.get("src/main/resources/users/Test.csv"));
         assert user.getUsername().equals("Test");
         assert user.getPoints() == 0;
-        File file = new File("src/main/resources/users/test.csv");
+        File file = new File("src/main/resources/users/Test.csv");
         file.delete();
 
     }
+
     @Test
     public void testSavePoints() {
         SignUp.signUp("Test", "StrongPass123!", "StrongPass123!");
-        User user = new User(Paths.get("src/main/resources/users/test.csv"));
+        User user = new User(Paths.get("src/main/resources/users/Test.csv"));
         assert user.getUsername().equals("Test");
         assert user.getPoints() == 0;
         user.addPoints(500);
         user.savePoints();
 
-        User userChecker = new User(Paths.get("src/main/resources/users/test.csv"));
+        User userChecker = new User(Paths.get("src/main/resources/users/Test.csv"));
         assert (userChecker.getPoints() == 500);
-        File file = new File("src/main/resources/users/test.csv");
+        File file = new File("src/main/resources/users/Test.csv");
         file.delete();
     }
 

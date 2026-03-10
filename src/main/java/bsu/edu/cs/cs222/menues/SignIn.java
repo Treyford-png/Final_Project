@@ -8,7 +8,7 @@ public class SignIn {
         return scanner.nextLine();
     }
 
-    static String getPassword() {
+    public static String getPassword() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Password: ");
         return scanner.nextLine();
@@ -27,7 +27,7 @@ public class SignIn {
         Scanner scanner = new Scanner(System.in);
         int input;
         for (int i = 0; i < 10; i++) {
-            System.out.println("Would you like to\n(1) Sign In\n(2) Sign Up\n");
+            System.out.println("Would you like to\n(1) Sign In\n(2) Sign Up");
             input = scanner.nextInt();
             if (input == 1) {
                 LogIn.loginPrompt();

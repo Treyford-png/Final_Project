@@ -39,7 +39,7 @@ public class SignUp extends SignIn {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter("src/main/resources/users/" + username + ".csv");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(password + ",0");
+            bufferedWriter.write(username + "," + password + ",0");
             bufferedWriter.close();
             return ("Account Created");
         } catch (Exception e) {

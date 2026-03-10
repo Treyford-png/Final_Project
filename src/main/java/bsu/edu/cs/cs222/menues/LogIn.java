@@ -25,7 +25,7 @@ public class LogIn extends SignIn {
             BufferedReader userFileReader = Files.newBufferedReader(path);
             String userLine = userFileReader.readLine();
             String[] parsedUserLine = userLine.split(",");
-            if (parsedUserLine[0].equals(password)) {
+            if (parsedUserLine[0].equals(username) && parsedUserLine[1].equals(password)) {
                 System.out.println("Welcome Back!");
                 return true;
             }
