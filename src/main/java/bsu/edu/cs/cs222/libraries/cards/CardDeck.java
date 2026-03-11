@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CardDeck {
-    private final ArrayList<Card> deck = new ArrayList<>();
+    private ArrayList<Card> deck = new ArrayList<>();
     Random random = new Random();
 
     public CardDeck() {
@@ -68,7 +68,21 @@ public class CardDeck {
         return deck;
     }
 
+    public Card lookAtTop() {
+        return deck.getFirst();
+    }
+
+    public Card deal() {
+        if (deck.isEmpty()) {
+            return null;
+        }
+        Card card = deck.getFirst();
+        deck.removeFirst();
+        return card;
+    }
+
     public void shuffle() {
+        deck = new CardDeck().getDeck();
         ArrayList<Card> shuffledDeck = deck;
         for (int i = 51; i > 0; i--) {
             int index = random.nextInt(0, i);

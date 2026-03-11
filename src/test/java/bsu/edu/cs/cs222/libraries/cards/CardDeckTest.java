@@ -24,4 +24,26 @@ public class CardDeckTest {
             assert(!currentShuffle.equals(previousShuffle));
         }
     }
+
+    @Test
+    public void testDealCard() {
+        CardDeck deckOfCards = new CardDeck();
+        deckOfCards.shuffle();
+        Card currentCard;
+        Card previousCard;
+        Card topCard;
+
+        topCard = deckOfCards.lookAtTop();
+        currentCard = deckOfCards.deal();
+        assert (topCard.equals(currentCard));
+        for (int i = 1; i < 52; i++) {
+            previousCard = currentCard;
+            currentCard = deckOfCards.deal();
+            System.out.println(previousCard.getShortName() + " " + currentCard.getShortName());
+            assert !(previousCard.equals(currentCard));
+        }
+
+        currentCard = deckOfCards.deal();
+        assert currentCard == null;
+    }
 }

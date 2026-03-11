@@ -28,4 +28,8 @@ public class Card {
     public String getName() {
         return name;
     }
+
+    public boolean equals(Card c) {
+        return shortName.equals(c.shortName);
+    }
 }
