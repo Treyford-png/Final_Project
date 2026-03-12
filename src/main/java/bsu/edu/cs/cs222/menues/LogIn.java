@@ -5,17 +5,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class LogIn extends SignIn {
-    public static void loginPrompt() {
+    public static boolean loginPrompt() {
         String username;
         String password;
         for (int i = 0; i < 10; i++) {
             username = getUsername();
             password = getPassword();
             if (login(username, password)) {
-                return;
+                return true;
             }
         }
         System.out.println("Too many attempts, please try again later");
+        return false;
     }
 
     public static boolean login(String username, String password) {
@@ -36,6 +37,6 @@ public class LogIn extends SignIn {
         } catch (IOException e) {
             System.out.println("Username could not be found");
             return false;
-        }
-    }
+        } // close try-catch
+    } // close login
 }

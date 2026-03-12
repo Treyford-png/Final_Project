@@ -4,7 +4,7 @@ public class Card {
     private final String shortName;
     private final String name;
     private final Suit suit;
-    private final double value;
+    private double value;
 
     Card(String shortName, String name, Suit suit, double value) {
         this.shortName = shortName;
@@ -31,5 +31,13 @@ public class Card {
 
     public boolean equals(Card c) {
         return shortName.equals(c.shortName);
+    }
+
+    public boolean tryLowerAce() {
+        if (value == 11.0) {
+            value = 1.0;
+            return true;
+        }
+        return false;
     }
 }

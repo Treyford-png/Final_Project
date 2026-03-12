@@ -23,15 +23,14 @@ public class SignIn {
         return hasSpace == -1 && hasDot == -1 && hasSlash == -1 && hasComma == -1;
     }
 
-    public static void signIn() {
+    public static boolean signIn() {
         Scanner scanner = new Scanner(System.in);
         int input;
         for (int i = 0; i < 10; i++) {
             System.out.println("Would you like to\n(1) Sign In\n(2) Sign Up");
             input = scanner.nextInt();
             if (input == 1) {
-                LogIn.loginPrompt();
-                break;
+                return LogIn.loginPrompt();
             }
             else if (input == 2) {
                 SignUp.signUpPrompt();
@@ -39,6 +38,8 @@ public class SignIn {
             else {
                 System.out.println("Invalid input");
             }
-        }
-    }
+        } // close for
+
+        return false;
+    } // close sign in
 }
