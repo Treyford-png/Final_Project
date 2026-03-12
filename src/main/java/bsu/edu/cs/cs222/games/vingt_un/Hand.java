@@ -48,6 +48,10 @@ public class Hand {
         }
     }
 
+    /**
+     * In order to get a hand below 21, the game tries to find an ace it can turn from an 11 to a 1
+     * @return if a card got lowered
+     */
     public boolean tryConvertAce() {
         for (Card card : hand) {
             if (card.tryLowerAce()) {
@@ -58,6 +62,9 @@ public class Hand {
         return false;
     } // Close convertAces()
 
+    /**
+     * Checks if a hand is busted even when accounting for aces
+     */
     public boolean checkForBust() {
         if (handValue > 21) {
             // Try turning an 11 into a 1 to resolve issue
@@ -69,6 +76,9 @@ public class Hand {
         return false;
     }
 
+    /**
+     * Deals 2 cards from a deck to a player face down
+     */
     public void firstTwoCards(CardDeck deck) {
         hand.add(deck.deal());
         hand.add(deck.deal());
@@ -86,6 +96,9 @@ public class Hand {
         handValue = 0;
     }
 
+    /**
+     * @return a string formated "[#] [#] which has a value of #"
+     */
     public String getOutput() {
         StringBuilder returner = new StringBuilder();
         for (Card card : hand) {

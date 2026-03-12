@@ -18,7 +18,7 @@ public class SignUpTest {
         }
 
         assert(SignUp.signUp("SignUpTest", "Test1234!", "Test1234!").equals("Account Created"));
-        assert(LogIn.login("SignUpTest", "Test1234!"));
+        assert(LogIn.login("SignUpTest", "Test1234!")!= null);
         try {
             Files.delete(file);
         } catch (IOException e) {

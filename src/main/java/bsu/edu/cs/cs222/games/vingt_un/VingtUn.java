@@ -70,7 +70,7 @@ public class VingtUn {
 
         while (player.getHand().getHandValue() < riskFactor && player.getHand().getHandValue() != 0) {
             // Deals new card to player to reach riskFactor
-            System.out.println("Hit");
+            System.out.println("\nHit");
             player.hit(deck);
             for (Card card : player.getHand().getHand()) {
                 System.out.print("[?] ");
@@ -80,6 +80,7 @@ public class VingtUn {
             if (player.getHand().getHandValue() > 21) {
                 if(player.getHand().checkForBust()) {
                     System.out.println(player.getName() + "'s hand busts");
+                    player.getHand().setValueToZero();
                     return;
                 }
             }
@@ -143,5 +144,15 @@ public class VingtUn {
             winner = player3;
         }
         return winner;
+    }
+
+    public void clearHands() {
+        userPlayer.getHand().newHand();
+        player2.getHand().newHand();
+        player3.getHand().newHand();
+    }
+
+    public void shuffleDeck() {
+        deck.shuffle();
     }
 }
