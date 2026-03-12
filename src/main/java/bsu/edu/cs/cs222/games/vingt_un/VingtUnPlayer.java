@@ -38,7 +38,7 @@ public class VingtUnPlayer {
     }
 
     public void setWager(int wager) {
-        this.wager = Math.min(wager, points);
+        this.wager = Math.min(wager, points); // Prevents wager from being more than total points
         points -= this.wager;
     }
 

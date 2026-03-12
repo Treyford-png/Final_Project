@@ -29,6 +29,10 @@ public class Hand {
         return handStatus;
     }
 
+    public void setValueToZero() {
+        handValue = 0;
+    }
+
     public Card getCard(int i) {
         if (i >= hand.size()) {
             return null;
@@ -59,7 +63,6 @@ public class Hand {
             // Try turning an 11 into a 1 to resolve issue
             if (!tryConvertAce()) {
                 handStatus = BUSTED;
-                handValue = 0;
                 return true;
             }
         } // Close if
@@ -86,7 +89,7 @@ public class Hand {
     public String getOutput() {
         StringBuilder returner = new StringBuilder();
         for (Card card : hand) {
-            returner.append(card.getShortName()).append(" ");
+            returner.append("[").append(card.getShortName()).append("] ");
         }
         returner.append("which has a value of ").append(handValue);
         return returner.toString();
