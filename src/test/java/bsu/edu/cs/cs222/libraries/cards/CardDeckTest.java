@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static bsu.edu.cs.cs222.libraries.cards.Suit.CLUBS;
+
 
 public class CardDeckTest {
     @Test
@@ -45,5 +47,15 @@ public class CardDeckTest {
 
         currentCard = deckOfCards.deal();
         assert currentCard == null;
+    }
+
+    @Test
+    public void testRemoveCard() {
+        Card card = new Card("10c", "10", CLUBS, 10);
+        CardDeck deck = new CardDeck();
+        deck.removeCard(card);
+        for (int i = 0; i < 51; i++) {
+            assert(!deck.deal().equals(card));
+        }
     }
 }
