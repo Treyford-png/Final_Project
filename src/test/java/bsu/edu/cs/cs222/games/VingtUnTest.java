@@ -12,8 +12,8 @@ public class VingtUnTest {
         VingtUn game = new VingtUn(new User("test", "test", 0));
         for (int i = 0; i < 1000; i++) {
             game.startGame();
-            game.aiTurn(game.getPlayer2());
-            assert(game.getPlayer2().getHand().getHandValue() < 22);
+            game.getPlayer2().aiTurn(game.getDeck(), 15);
+            assert(game.getPlayer2().getHand().value() < 22);
             game.clearHands();
             game.shuffleDeck();
         }

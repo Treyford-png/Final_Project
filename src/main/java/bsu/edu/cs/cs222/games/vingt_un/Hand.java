@@ -17,7 +17,7 @@ public class Hand {
         handStatus = OK;
     }
 
-    public int getHandValue() {
+    public int value() {
         return handValue;
     }
 
@@ -94,6 +94,7 @@ public class Hand {
     public void newHand() {
         hand.clear();
         handValue = 0;
+        handStatus = OK;
     }
 
     /**

@@ -44,6 +44,10 @@ public class User {
         points += pointsToAdd;
     }
 
+    public void subtractPoints(int pointsToSubtract) {
+        points -= points;
+    }
+
     public boolean makeWager(int wager) {
         if (wager > points) {
             return false;

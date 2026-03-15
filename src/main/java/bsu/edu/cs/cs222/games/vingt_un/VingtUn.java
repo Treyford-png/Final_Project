@@ -1,158 +1,282 @@
 package bsu.edu.cs.cs222.games.vingt_un;
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.libraries.cards.*;
-import static bsu.edu.cs.cs222.games.vingt_un.HandStatus.*;
 
-import java.util.Random;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class VingtUn {
-    private final Random random;
     private final User user;
-    private final VingtUnPlayer userPlayer;
-    private final VingtUnPlayer player2;
-    private final VingtUnPlayer player3;
-    private final CardDeck deck;
+    private final VingtUnPlayer[] players;
+    private CardDeck deck;
+    private final ArrayList<Card> removedCards;
+    private final Scanner vuScanner = new Scanner(System.in);
 
     public VingtUn(User user) {
         this.user = user;
-        userPlayer = new VingtUnPlayer(user.getUsername(), user.getPoints(), true);
-        player2 = new VingtUnPlayer("John", 5000, false);
-        player3 = new VingtUnPlayer("Arthur", 5000, false);
+        VingtUnPlayer userPlayer = new VingtUnPlayer(user.getUsername(), user.getPoints(), true);
+        VingtUnPlayer player2 = new VingtUnPlayer("John", 5000, false);
+        VingtUnPlayer player3 = new VingtUnPlayer("Arthur", 5000, false);
+        players = new VingtUnPlayer[]{userPlayer, player2, player3};
         deck = new CardDeck();
-        random = new Random(); // Used to generate riskFactor
+        removedCards = new ArrayList<>();
+        players[0].setIsDealer(true); // Temp set dealer to prevent lack of dealer errors
     }
 
     public void runGame() {
-        startGame();
+        ArrayList<VingtUnPlayer> winners;
+        deck.shuffle();
+        System.out.println(determineDealer().getName() + " is the dealer");
+        boolean playAgain = true;
+        int[] oldPoints = {0, 0, 0};
+        while (playAgain) {
+            for(VingtUnPlayer player : players) {
+                System.out.println(player.getName() + " - " + player.getPoints());
+            }
+            oldPoints[0] = players[0].getPoints();
+            oldPoints[1] = players[1].getPoints();
+            oldPoints[2] = players[2].getPoints();
 
-        // Turns
-        userTurn();
-        System.out.println("\nJohn:");
-        aiTurn(player2);
-        System.out.println("\nArthur:");
-        aiTurn(player3);
+            startGame();
 
-        // Reveal
-        System.out.println("You: " + userPlayer.getHand().getOutput());
-        System.out.println("John: " + player2.getHand().getOutput());
-        System.out.println("Arthur: " + player3.getHand().getOutput());
-        System.out.println("\n" + getWinner().getName() + " is the winner!!!!");
+            // Turns
+            ensureDeckHas(5);
+            players[0].userTurn(deck);
+            System.out.println();
+            ensureDeckHas(5);
+            players[1].aiTurn(deck, 15);
+            System.out.println();
+            ensureDeckHas(5);
+            players[2].aiTurn(deck, 17);
+            System.out.println();
+
+            // Reveal
+            System.out.println("You: " + players[0].getHand().getOutput());
+            System.out.println("John: " + players[1].getHand().getOutput());
+            System.out.println("Arthur: " + players[2].getHand().getOutput());
+            scoreGame();
+
+            for (int i = 0; i < 3; i++) {
+                System.out.println(winnings(oldPoints[i], players[i]));
+            }
+            // Prevent duplicate cards in reshuffled deck
+            for (VingtUnPlayer player : players) {
+                removedCards.addAll(player.getHand().getHand());
+            }
+            clearHands();
+
+            for (VingtUnPlayer player : players) {
+                if (player.getHand().getHandStatus() == HandStatus.NATURAL_21) {
+                    deck = new CardDeck();
+                    getDealer().setIsDealer(false);
+                    player.setIsDealer(true);
+                    System.out.println(player.getName() + " is the new dealer\n");
+                    break;
+                }
+            }
+
+            if (checkForOuts()) {
+                break;
+            }
+            int playAgainInt = playAgainPrompt();
+            if (playAgainInt == 0) {
+                playAgain = false;
+            }
+        }
+        endGame();
     }
 
     public void startGame() {
-        deck.shuffle();
-        userPlayer.getHand().firstTwoCards(deck);
-        player2.getHand().firstTwoCards(deck);
-        player3.getHand().firstTwoCards(deck);
+        // Set wagers
+        if (!players[0].isDealer()) {
+            players[0].wagerPrompt();
+        }
+        if (!players[1].isDealer()) {
+            players[1].setWager(50);
+        }
+        if (!players[2].isDealer()) {
+            players[2].setWager(50);
+        }
+
+        System.out.println(players[1].getWager());
+
+        // Draws initial hand
+        ensureDeckHas(6);
+        players[0].getHand().firstTwoCards(deck);
+        players[1].getHand().firstTwoCards(deck);
+        players[2].getHand().firstTwoCards(deck);
     }
 
     public VingtUnPlayer getPlayer2() {
-        return player2;
+        return players[1];
     }
 
     public VingtUnPlayer getPlayer3() {
-        return player3;
+        return players[2];
     }
 
-    /**
-     * Controls the AI for NPCs
-     * AI hits until its risk tolerance is passed or breaks 21
-     */
-    public void aiTurn(VingtUnPlayer player) {
-        System.out.println("[?] [?]"); // Hides cards
-        if (player.getHand().getHandStatus() == NATURAL_21) {
-            System.out.println("Stay"); // Hides if that player has a 21
-            return;
-        }
-        // Number AI will stop on
-        int riskFactor = 15 + (random.nextInt() % 3);
-
-        while (player.getHand().getHandValue() < riskFactor && player.getHand().getHandValue() != 0) {
-            // Deals new card to player to reach riskFactor
-            System.out.println("\nHit");
-            player.hit(deck);
-            for (Card card : player.getHand().getHand()) {
-                System.out.print("[?] ");
+    public VingtUnPlayer determineDealer() {
+        getDealer().setIsDealer(false);
+        System.out.println("First player to draw an ace is the dealer");
+        Scanner scanner = new Scanner(System.in);
+        Card card;
+        while (!deck.getDeck().isEmpty()) {
+            // Player draws card
+            System.out.println("Press any number to draw a card");
+            scanner.nextInt();
+            card = deck.deal();
+            System.out.println("[" + card.getShortName() + "]");
+            if (card.getValue() == 11) {
+                players[0].setIsDealer(true);
+                return players[0];
             }
 
-            // Handles AI's hand exceeding 21
-            if (player.getHand().getHandValue() > 21) {
-                if(player.getHand().checkForBust()) {
-                    System.out.println(player.getName() + "'s hand busts");
-                    player.getHand().setValueToZero();
-                    return;
+            // Players 2 and 3 draw cards
+            for (int i = 1; i < 3; i++) {
+                card = deck.deal();
+                System.out.println(players[i].getName() + ": [" + card.getShortName() + "]");
+                if (card.getValue() == 11) {
+                    players[i].setIsDealer(true);
+                    return players[i];
                 }
             }
-        }
-
-        // If riskFactor is met, AI stands
-        System.out.println("Stand");
+        } // end for
+        return null;
     }
 
-    /**
-     * Allows a player to complete their turn
-     * For each turn, game displays their hand then asks to hit or stand
-     * Invalid inputs handled by ending turn
-     */
-    public void userTurn() {
-        System.out.println(userPlayer.getHand().getOutput());
-        if (userPlayer.getHand().getHandStatus() == NATURAL_21) { // Rules do not allow for a hit on a nat 21
+    public void scoreGame() {
+        VingtUnPlayer dealer = getDealer();
+        for (VingtUnPlayer player : players) {
+            if (!player.isDealer()) {
+                calculateWinnings(player, dealer);
+            }
+        }
+    }
+
+    public void calculateWinnings(VingtUnPlayer player, VingtUnPlayer dealer) {
+        System.out.println(players[1].getWager());
+        // Beats Dealer
+        if (player.getHand().value() > dealer.getHand().value()) {
+            // Sets dealer's wager to amount needed to pay player
+            dealer.setWager(player.getWager());
+            if (player.getHand().value() == 21) {
+                dealer.doubleWager();
+            }
+            // Readds wager and adds points won from dealer
+            player.addPoints(player.getWager() + dealer.getWager());
             return;
         }
-        int userInput;
-        while (userPlayer.getHand().getHandValue() <= 21) {
-            userInput = userActionPrompt();
-            if (userInput == 1) { // HIT
-                userPlayer.hit(deck);
-            }
-            else if (userInput == 2) { // STAND
-                break;
-            }
-            else { // INVALID
-                System.out.println("Invalid input. Ending turn");
-                break;
-            }
-        }
-        System.out.println(userPlayer.getHand().getOutput());
 
-        if (userPlayer.getHand().getHandValue() > 21) {
-            System.out.println("Your hand busts");
-            userPlayer.getHand().setValueToZero();
+        // Loses to dealer
+        if (player.getHand().value() < dealer.getHand().value() || player.getHand().value() == 0) {
+            if (dealer.getHand().value() == 21 && player.getHand().value() > 0) {
+                player.doubleWager();
+            }
+            dealer.addPoints(player.getWager());
+            return;
         }
-    }
 
-    /**
-     * Allows the user to choose if they hit or stand
-     * @return user's input
-     */
-    public int userActionPrompt() {
-        System.out.print("Your current hand is: ");
-        System.out.println(userPlayer.getHand().getOutput());
-        System.out.print("Would you like to (1) HIT or (2) STAND: ");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt(); // invalid input handled in userTurn
-    }
-
-    public VingtUnPlayer getWinner() {
-        // TODO: handle ties
-        VingtUnPlayer winner = userPlayer;
-        if (winner.getHand().getHandValue() < player2.getHand().getHandValue()) {
-            winner = player2;
-        }
-        if (winner.getHand().getHandValue() < player3.getHand().getHandValue()) {
-            winner = player3;
-        }
-        return winner;
+        // Ties dealer
+        player.addPoints(player.getWager());
     }
 
     public void clearHands() {
-        userPlayer.getHand().newHand();
-        player2.getHand().newHand();
-        player3.getHand().newHand();
+        for (VingtUnPlayer player : players) {
+            player.getHand().newHand();
+        }
     }
 
     public void shuffleDeck() {
         deck.shuffle();
+    }
+
+    public void ensureDeckHas(int cards) {
+        if (deck.getDeck().size() < cards) {
+            newDeck();
+        }
+    }
+
+    public void newDeck() {
+        for (VingtUnPlayer player : players) {
+            removedCards.addAll(player.getHand().getHand());
+        }
+
+        deck = new CardDeck();
+        for (Card card : removedCards) {
+            deck.removeCard(card);
+        }
+        deck.shuffle();
+        removedCards.clear();
+        System.out.println("New deck has been created");
+    }
+    /**
+     * Solely used for test cases
+     */
+    public CardDeck getDeck() {
+        return deck;
+    }
+
+    public VingtUnPlayer getDealer() {
+        for (VingtUnPlayer player : players) {
+            if (player.isDealer()) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public String winnings(int oldPoints, VingtUnPlayer player) {
+        int newPoints = player.getPoints();
+        if (oldPoints > newPoints) {
+            return player.getName() + " lost " + (oldPoints - newPoints) + " points";
+        }
+        else {
+            return player.getName() + " made " + (newPoints - oldPoints) + " points";
+        }
+    }
+
+    public int playAgainPrompt() {
+        System.out.print("Would you like to play again? (0) No, (1) Yes: ");
+        int input = vuScanner.nextInt();
+        if (input != 0 && input != 1) {
+            System.out.println("\nInvalid input");
+            return playAgainPrompt();
+        }
+        else {
+            return input;
+        }
+    }
+
+    public boolean checkForOuts() {
+        for(VingtUnPlayer player : players) {
+            if (player.getPoints() <= 0) {
+                crashout(player);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void crashout(VingtUnPlayer player) {
+        if (player.isDealer()) {
+            System.out.println(player.getName() + " storms out of the saloon with the deck of cards");
+            System.out.println("Everyone else shrugs and heads home for the night");
+        }
+        else {
+            System.out.println(player.getName() + " punches the dealer " + getDealer().getName());
+            if (player.getName().equals(user.getUsername())) {
+                System.out.println(player.getName() + " is promptly escorted to the a holding cell for the night");
+            }
+            else {
+                System.out.println("You see yourself out of the saloon to avoid any trouble");
+            }
+        }
+    }
+
+    public void endGame() {
+        int pointsEarned = players[0].getPoints() - user.getPoints();
+        user.addPoints(pointsEarned);
+        user.savePoints();
+        vuScanner.close();
     }
 }

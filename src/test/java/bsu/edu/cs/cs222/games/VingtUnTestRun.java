@@ -13,10 +13,10 @@ public class VingtUnTestRun {
         VingtUn game = new VingtUn(new User("Test", "test", 500));
         game.startGame();
 
-        game.aiTurn(game.getPlayer2());
+        game.getPlayer2().aiTurn(game.getDeck(), 15);
         System.out.println(game.getPlayer2().getHand().getOutput());
         System.out.println();
-        game.aiTurn(game.getPlayer3());
+        game.getPlayer3().aiTurn(game.getDeck(), 17);
         System.out.println(game.getPlayer3().getHand().getOutput());
     }
 }
