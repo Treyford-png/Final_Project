@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CardDeck {
-    private final ArrayList<Card> deck = new ArrayList<>();
+    private ArrayList<Card> deck = new ArrayList<>();
     Random random = new Random();
 
     public CardDeck() {
@@ -68,7 +68,25 @@ public class CardDeck {
         return deck;
     }
 
+    public Card lookAtTop() {
+        return deck.getFirst();
+    }
+
+    public Card deal() {
+        if (deck.isEmpty()) {
+            return null;
+        }
+        Card card = deck.getFirst();
+        deck.removeFirst();
+        return card;
+    }
+
+    /**
+     * Adds all cards to a new deck one a time at random
+     * Once added to new deck, card is removed from old deck to keep space consistent
+     */
     public void shuffle() {
+        deck = new CardDeck().getDeck();
         ArrayList<Card> shuffledDeck = deck;
         for (int i = 51; i > 0; i--) {
             int index = random.nextInt(0, i);
@@ -84,6 +102,54 @@ public class CardDeck {
         }
     }
 
+    /**
+     * Assumes deck is not shuffled
+     * Finds the default location of the requested card in the card
+     * If not at that location, works backwards to find it
+     * @param card to remove
+     */
+    public void removeCard(Card card) {
+        int index = 0;
+        // Shifts index to section containing matching suit
+        switch (card.getSuit()) {
+            case DIAMONDS:
+                index += 13;
+                break;
+            case CLUBS:
+                index += 26;
+                break;
+            case SPADES:
+                index += 39;
+        }
+
+        // Handles face cards by adding the decimal weight * 10
+        if (card.getValue() != (double) ((int) card.getValue())) {
+            index += (int) ((card.getValue() % 10) * 10);
+        }
+        if (card.getValue() == 11) {
+            index += 12;
+        }
+        else {
+            index += (int) card.getValue() - 2;
+        }
+
+        // Works backwards to find card
+        for (int i = index; i >=0; i--) {
+            System.out.println(deck.get(i).getShortName());
+            if (deck.get(i).equals(card)) {
+                deck.remove(i);
+                return;
+            }
+        }
+    }
+
+    public Card getAt(int index) {
+        return deck.get(index);
+    }
+
+    /**
+     * @return "[value][suit] " * n
+     */
     public String getOutput() {
         String output = "";
         for (int i = 0; i < 52; i++) {
