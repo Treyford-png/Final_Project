@@ -1,17 +1,11 @@
-package bsu.edu.cs;
+package bsu.edu.cs222;
 
 public class Horse {
-    private int name;
-    private int flipChance;
+    private final int name;
+    private final int flipChance;
     private int position;
 
-    public static final int TRACK_LEN = 15;
-
-    public Horse()  {
-        this.name = -1;
-        this.flipChance = 0;
-        this.position = 0;
-    }
+    public static final int TRACK_LEN = 10;
 
     public Horse(int name, int flipChance) {
         this.name = name;
@@ -31,7 +25,7 @@ public class Horse {
         position = 0;
     }
     public boolean hasWon() {
-        return position == TRACK_LEN;
+        return position >= TRACK_LEN;
     }
 
     public void printLane() {
@@ -39,9 +33,9 @@ public class Horse {
 
         for (int i = 0; i < TRACK_LEN; i++) {
             if (i == position) {
-                lane += " ";
+                lane += name + " ";
             } else {
-                lane += " ";
+                lane += ". ";
             }
         }
 
