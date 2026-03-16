@@ -24,7 +24,6 @@ public class VingtUn {
     }
 
     public void runGame() {
-        ArrayList<VingtUnPlayer> winners;
         deck.shuffle();
         System.out.println(determineDealer().getName() + " is the dealer");
         boolean playAgain = true;
@@ -247,6 +246,11 @@ public class VingtUn {
         }
     }
 
+    /**
+     * Checks if a player has run out of money
+     * If they have, crash() is called
+     * @return a player's points are 0
+     */
     public boolean checkForOuts() {
         for(VingtUnPlayer player : players) {
             if (player.getPoints() <= 0) {
@@ -257,17 +261,20 @@ public class VingtUn {
         return false;
     }
 
+    /**
+     * Keeping with the nature of the Wild West, if a player loses, a bar fight breaks out
+     * If the dealer loses, they leave like the kid that owned the basketball in middle school
+     * @param player that lost
+     */
     public void crashout(VingtUnPlayer player) {
-        if (player.isDealer()) {
+        if (player.isDealer()) { // Dealer lost
             System.out.println(player.getName() + " storms out of the saloon with the deck of cards");
             System.out.println("Everyone else shrugs and heads home for the night");
         }
-        else {
+        else { // A player lost
             System.out.println(player.getName() + " punches the dealer " + getDealer().getName());
-            if (player.getName().equals(user.getUsername())) {
-                System.out.println(player.getName() + " is promptly escorted to the a holding cell for the night");
-            }
-            else {
+            System.out.println(player.getName() + " is promptly escorted to a holding cell for the night");
+            if (!player.getName().equals(user.getUsername())) {
                 System.out.println("You see yourself out of the saloon to avoid any trouble");
             }
         }
@@ -277,6 +284,5 @@ public class VingtUn {
         int pointsEarned = players[0].getPoints() - user.getPoints();
         user.addPoints(pointsEarned);
         user.savePoints();
-        vuScanner.close();
     }
 }

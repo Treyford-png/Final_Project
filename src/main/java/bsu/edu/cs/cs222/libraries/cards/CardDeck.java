@@ -143,6 +143,10 @@ public class CardDeck {
         }
     }
 
+    public Card getAt(int index) {
+        return deck.get(index);
+    }
+
     /**
      * @return "[value][suit] " * n
      */

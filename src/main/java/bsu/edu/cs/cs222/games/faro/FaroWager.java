@@ -2,30 +2,35 @@ package bsu.edu.cs.cs222.games.faro;
 
 public class FaroWager {
     private String card;
-    private int pointsPlaced;
+    private int amount;
 
-    public FaroWager(String card, int pointsPlaced) {
+    public FaroWager(String card, int amount) {
         this.card = card;
-        this.pointsPlaced = pointsPlaced;
+        this.amount = amount;
     }
 
     public String getCard() {
         return card;
     }
 
-    public int getPointsPlaced() {
-        return pointsPlaced;
+    public int getAmount() {
+        return amount;
     }
 
-    public boolean setWager(int wagerToPlace, FaroPlayer player) {
+    public boolean setAmount(int wagerToPlace, FaroPlayer player) {
         if (wagerToPlace >= player.getPoints()) {
             return false;
         }
-        pointsPlaced = wagerToPlace;
+        amount = wagerToPlace;
         return true;
     }
 
     public void setCard(String card) {
         this.card = card;
+    }
+
+    public void setAll(String card, int amount) {
+        this.card = card;
+        this.amount = amount;
     }
 }
