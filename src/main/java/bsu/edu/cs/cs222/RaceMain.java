@@ -1,4 +1,4 @@
-package bsu.edu.cs222;
+package bsu.edu.cs.cs222;
 
 import java.util.Random;
 import java.util.Scanner;
