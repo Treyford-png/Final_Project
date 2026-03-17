@@ -16,5 +16,5 @@ public enum LibertyBellSymbols {
     }
 
     public String getDisplayName() { return displayName; }
-    public int getPoints() { return points; }
+    public int getUserPoints() { return points; }
 }
