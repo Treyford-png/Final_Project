@@ -1,27 +1,40 @@
 package bsu.edu.cs.cs222.games.roulette;
 
+import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.HashMap;
+import bsu.edu.cs.cs222.characters.*;
 
 public class Roulette {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        Random number = new Random();
+    private final User user;
+    private Scanner input;
+    private HashMap<String, String> colorMap;
 
-        String slot = "";
-        String colorGuess;
-        String numberGuess;
+    public Roulette(User  user) {
+        this.user = user;
+        populationRouletteWheel();
 
-        int count = 1;
-        int points = 1000;
-        int bet;
+    }
+    public void runRoulette() {
+        for (int i = 0; i < 1000; i++) {
+            rouletteGame();
+            input = new Scanner(System.in);
+            System.out.println("Do you want to spin again? (1) yes, (2) no: ");
+            if (!(input.nextInt() == 1)) {
+                return;
+            }
+        }
+    }
 
-        HashMap<String, String> colorMap = new HashMap<>();
+    public String getColor(String key) {
+        return colorMap.get(key);
+    }
 
+    public void populationRouletteWheel() {
+        colorMap = new HashMap<>();
         colorMap.put("0", "green");
         colorMap.put("00", "green");
-
         colorMap.put("1", "red");
         colorMap.put("2", "black");
         colorMap.put("3", "red");
@@ -58,6 +71,21 @@ public class Roulette {
         colorMap.put("34", "red");
         colorMap.put("35", "black");
         colorMap.put("36", "red");
+    }
+
+        public void rouletteGame() {
+        Random number = new Random();
+        input = new Scanner(System.in);
+
+        String slot = "";
+        String colorGuess;
+        String numberGuess;
+
+        int count = 1;
+        int points = user.getPoints();
+        int bet;
+
+
 
         while (count <= 1) {
 
@@ -109,6 +137,17 @@ public class Roulette {
             System.out.println("You now have " + points + " points.");
 
             count += 1;
+
+            savePoints(points);
+            System.out.println();
         }
+    }
+
+    public void savePoints(int points) {
+        int pointsEarned = points - user.getPoints();
+        user.addPoints(pointsEarned);
+        user.savePoints();
+        System.out.println("You current points: " + user.getPoints());
+
     }
 }
