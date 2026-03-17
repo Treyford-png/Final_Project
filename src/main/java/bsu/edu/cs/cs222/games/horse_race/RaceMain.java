@@ -72,7 +72,7 @@ public class RaceMain {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Welcome to the Horse Race!");
-        System.out.println("Which horse will win? (1, 2, 3, 4, or 5");
+        System.out.println("Which horse will win? (1, 2, 3, 4, or 5)");
 
         return scanner.nextInt();
     }
