@@ -9,9 +9,8 @@ public class Launcher {
     public static void main(String[] args) {
         User user = SignIn.signIn();
         if (user != null) {
-            VingtUn vingtUn = new VingtUn(user);
-            vingtUn.runGame();
-            MainMenu.mainMenu(user);
+            MainMenu mainMenu = new MainMenu(user);
+            mainMenu.runMainMenu();
         }
     }
 }
