@@ -36,7 +36,7 @@ public class UserTest {
         SignUp.signUp("Test", "StrongPass123!", "StrongPass123!");
         User user = new User(Paths.get("src/main/resources/users/Test.csv"));
         assert user.getUsername().equals("Test");
-        assert user.getPoints() == 0;
+        assert user.getPoints() == 5000;
         File file = new File("src/main/resources/users/Test.csv");
         file.delete();
 
@@ -47,12 +47,12 @@ public class UserTest {
         SignUp.signUp("Test", "StrongPass123!", "StrongPass123!");
         User user = new User(Paths.get("src/main/resources/users/Test.csv"));
         assert user.getUsername().equals("Test");
-        assert user.getPoints() == 0;
-        user.addPoints(500);
+        assert user.getPoints() == 5000;
+        user.addPoints(5000);
         user.savePoints();
 
         User userChecker = new User(Paths.get("src/main/resources/users/Test.csv"));
-        assert (userChecker.getPoints() == 500);
+        assert (userChecker.getPoints() == 10000);
         File file = new File("src/main/resources/users/Test.csv");
         file.delete();
     }
