@@ -10,12 +10,12 @@ public class Roulette {
     private Scanner input;
     private HashMap<String, String> colorMap;
 
-    public Roulette(User user) {
+    public Roulette(User user) { // creating the roulette hashmap per session per user
         this.user = user;
         populateRouletteWheel();
     }
 
-    public void runRoulette() {
+    public void runRoulette() { // Requests if the user wants to keep playing or not.
         for (int i = 0; i < 1000; i++) {
             rouletteGame();
             input = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class Roulette {
         return colorMap.get(key);
     }
 
-    public void populateRouletteWheel() {
+    public void populateRouletteWheel() { // Hashmap that assigns colors to corresponding numbers
         colorMap = new HashMap<>();
         colorMap.put("0", "green");
         colorMap.put("00", "green");
@@ -72,7 +72,7 @@ public class Roulette {
         colorMap.put("36", "red");
     }
 
-    public String spinWheel() {
+    public String spinWheel() { // randomly selects number from hashmap
         Random random = new Random();
         int rand = random.nextInt(38);
         if (rand == 37) {
@@ -82,7 +82,7 @@ public class Roulette {
         }
     }
 
-    public void rouletteGame() {
+    public void rouletteGame() { //Runs the game based on user input
         input = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
         Random number = new Random();
@@ -128,7 +128,7 @@ public class Roulette {
         }
     }
 
-    public int calcResults(String number, String numberGuess, String colorGuess, int bet) {
+    public int calcResults(String number, String numberGuess, String colorGuess, int bet) { //checks results and adjusts points accordingly
         String color = colorMap.get(number);
         System.out.println("> The computer chose " + number + " which is " + color);
 
@@ -144,7 +144,7 @@ public class Roulette {
         return 0;
     }
 
-    public void savePoints(int points) {
+    public void savePoints(int points) { // Saves points for user
         int pointsEarned = points - user.getPoints();
         user.addPoints(pointsEarned);
         user.savePoints();
