@@ -2,7 +2,7 @@ package bsu.edu.cs.cs222.menues;
 
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.games.faro.Faro;
-import bsu.edu.cs.cs222.games.horse_race.RaceMain;
+import bsu.edu.cs.cs222.games.horse_race.HorseRace;
 import bsu.edu.cs.cs222.games.liberty_bell.LibertyBellGame;
 import bsu.edu.cs.cs222.games.roulette.Roulette;
 import bsu.edu.cs.cs222.games.vingt_un.VingtUn;
@@ -43,14 +43,14 @@ public class MainMenu {
                 "\n(6) Get points" +
                 "\n(0) Exit");
         int choice = menuScanner.nextInt();
-        choiceToGame(choice);
+        launchGame(choice);
         if (choice == 0) {
             return - 1;
         }
         return 0;
     }
 
-    public void choiceToGame(int choice) {
+    public void launchGame(int choice) {
         switch (choice) {
             case 0: // Exit
                 System.out.println("So long partner!");
@@ -60,7 +60,8 @@ public class MainMenu {
                 faro.runGame();
                 break;
             case 2: // Horse Race
-                RaceMain.main(new String[0]);
+                HorseRace horseRace = new HorseRace(user);
+                horseRace.horseRace();
                 break;
             case 3: // Liberty Bell
                 LibertyBellGame libertyBell = new LibertyBellGame(user);

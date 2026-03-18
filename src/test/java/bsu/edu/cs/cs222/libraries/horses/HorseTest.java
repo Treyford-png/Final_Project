@@ -1,9 +1,9 @@
 package bsu.edu.cs.cs222.libraries.horses;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import bsu.edu.cs.cs222.Horse;
+import bsu.edu.cs.cs222.games.horse_race.Horse;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HorseTest {
 
