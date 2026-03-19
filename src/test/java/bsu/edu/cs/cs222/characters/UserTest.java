@@ -33,25 +33,25 @@ public class UserTest {
 
     @Test
     public void testReadUserFile() {
-        SignUp.signUp("Test", "StrongPass123!", "StrongPass123!");
-        User user = new User(Paths.get("src/main/resources/users/Test.csv"));
-        assert user.getUsername().equals("Test");
+        SignUp.signUp("Test2", "StrongPass123!", "StrongPass123!");
+        User user = new User(Paths.get("src/main/resources/users/Test2.csv"));
+        assert user.getUsername().equals("Test2");
         assert user.getPoints() == 5000;
-        File file = new File("src/main/resources/users/Test.csv");
+        File file = new File("src/main/resources/users/Test2.csv");
         file.delete();
 
     }
 
     @Test
     public void testSavePoints() {
-        SignUp.signUp("Test", "StrongPass123!", "StrongPass123!");
-        User user = new User(Paths.get("src/main/resources/users/Test.csv"));
-        assert user.getUsername().equals("Test");
+        SignUp.signUp("Test2", "StrongPass123!", "StrongPass123!");
+        User user = new User(Paths.get("src/main/resources/users/Test2.csv"));
+        assert user.getUsername().equals("Test2");
         assert user.getPoints() == 5000;
         user.addPoints(5000);
         user.savePoints();
 
-        User userChecker = new User(Paths.get("src/main/resources/users/Test.csv"));
+        User userChecker = new User(Paths.get("src/main/resources/users/Test2.csv"));
         assert (userChecker.getPoints() == 10000);
         File file = new File("src/main/resources/users/Test.csv");
         file.delete();
