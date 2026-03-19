@@ -106,7 +106,7 @@ public class Roulette {
             System.out.println("Guess a color for betting (red or black):");
             colorGuess = input.nextLine();
 
-            System.out.println("Type a number if you want to guess a number, or type 'no' to just bet the color:");
+            System.out.println("Type a number if you want to guess a number, or type 'x' to just bet the color:");
             numberGuess = input.nextLine();
 
             int winnings = calcResults(spinWheel(), colorGuess, numberGuess, bet);
@@ -128,11 +128,12 @@ public class Roulette {
         }
     }
 
-    public int calcResults(String number, String numberGuess, String colorGuess, int bet) { //checks results and adjusts points accordingly
+    public int calcResults(String number, String numberGuess, String colorGuess, int bet) {
+        //checks results and adjusts points accordingly
         String color = colorMap.get(number);
         System.out.println("> The computer chose " + number + " which is " + color);
 
-        if (numberGuess.equalsIgnoreCase("no")) {
+        if (numberGuess.equalsIgnoreCase("x")) {
             if (colorGuess.equalsIgnoreCase(color)) {
                 return user.getPoints() + (bet * 2);
             }
@@ -141,7 +142,7 @@ public class Roulette {
                 return user.getPoints() + (bet * 7);
             }
         }
-        return 0;
+        return user.getPoints() - bet;
     }
 
     public void savePoints(int points) { // Saves points for user

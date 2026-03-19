@@ -2,9 +2,8 @@ package bsu.edu.cs.cs222.games.horse_race;
 
 public class Horse {
     private final int name;
-    private final int flipChance;
-    private int position;
-
+    private final int flipChance; // Chance of 'flipping a coin' and advancing
+    private int position; // location on track
     public static final int TRACK_LEN = 10;
 
     public Horse(int name, int flipChance) {
@@ -24,18 +23,22 @@ public class Horse {
     public void moveToStart() {
         position = 0;
     }
+
     public boolean hasWon() {
         return position >= TRACK_LEN;
     }
 
+    /**
+     * Prints 10 space track and horse's position on it
+     */
     public void printLane() {
-        String lane = "[";
+        StringBuilder lane = new StringBuilder("[");
 
         for (int i = 0; i < TRACK_LEN; i++) {
             if (i == position) {
-                lane += name + " ";
+                lane.append(name).append(" ");
             } else {
-                lane += ". ";
+                lane.append(". ");
             }
         }
 
@@ -46,6 +49,11 @@ public class Horse {
         }
     }
 
+    /**
+     * Generates if the horse moves forward or not
+     * If the number exceeds the horse's chance, it moves forward
+     * @param coinFlipNumber number 0-100
+     */
     public void turn(int coinFlipNumber) {
         if (coinFlipNumber <= flipChance) {
             advance();

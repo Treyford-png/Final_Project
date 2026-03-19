@@ -11,6 +11,10 @@ public class FaroPlayerCPU extends FaroPlayer {
         random = new Random();
     }
 
+    /**
+     * AI logic for placing a wager
+     * Hoping to improve in later iterations
+     */
     @Override
     public String placeWager(CardDeck deck) {
         int amount = 50;

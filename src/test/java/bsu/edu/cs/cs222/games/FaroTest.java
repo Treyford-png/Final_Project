@@ -5,29 +5,26 @@ import bsu.edu.cs.cs222.libraries.cards.*;
 import org.junit.jupiter.api.Test;
 
 public class FaroTest {
-    /*
     @Test
     public void testPlayGame() {
-        Faro faro = new Faro(null);
+        Faro faro = new Faro(new User("Test", "test", 1000));
         FaroPlayer player = new FaroPlayer("Test", 1000);
+        faro.populateCasekeep();
         faro.burn();
         int previousPoints;
         int previousDealerPoints;
         for (int i = 0; i < 24; i++) {
+            System.out.println(i);
             previousPoints = player.getPoints();
             previousDealerPoints = faro.getDealer().getPoints();
-            player.clearWager();
-            assert(player.getWagerCard().isEmpty() && player.getWagerPoints() == 0);
-            player.setWager("K", 10);
-            assert(player.getWagerCard().equals("K") && player.getWagerPoints() == 10);
 
             faro.drawCards();
             faro.scoreGame();
-            if (faro.getLosingCard().equals(player.getWagerCard())) {
+            if (player.getWagerPoints(faro.getLosingCard()) > 0) {
                 assert player.getPoints() == previousPoints - 10;
                 assert faro.getDealer().getPoints() == previousDealerPoints + 10;
             }
-            else if (faro.getWinningCard().equals(player.getWagerCard())) {
+            else if (player.getWagerPoints(faro.getWinningCard()) > 0) {
                 assert player.getPoints() == previousPoints + 10;
                 assert faro.getDealer().getPoints() == previousDealerPoints - 10;
             }
@@ -44,9 +41,7 @@ public class FaroTest {
         faro.populateCasekeep();
         CardDeck deck = new CardDeck(); // unshuffled 52 card deck
         Card card = deck.lookAtTop(); // 2h
-        faro.updateCasekeep(faro.getCardKey(card));
+        faro.updateCasekeep(GetCardKey.getCardKey(card));
         assert(faro.getTypeLeft("2") == 3);
     }
-
-     */
 }
