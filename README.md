@@ -54,12 +54,16 @@ Cards are discarded and only reshuffled when the deck is empty. If a natural 21 
 
 ### Faro
 
+_Author: Holden Hankins_
+
 Considered "The King of All Games" was the premier game in the American West. Born from the Spanish Montebank style of games (that the 3-Card-Monte scam is named for), the game was simple.
 
 Players put wagers on which card they believe will be drawn next. At the start, 1/52 cards is burned off, called the 'soda'. Then, two cards are delt face up. The first card is the Dealer's Card. All wagers on that card are lost. The second, the Player's Card. All wagers on it pay back 1:1. When 3 cards remain, players guess the order of the last 3 cards. If they guess correctly, they recieve 4:1 rewards.
 
 
 ### Horse Racing
+
+_Author: JJ Owsley_
 
 Just like today, horse racing was incredibly popular in the American West. However, unlike the polished events of today, it was normally work horses raced on dirt and sand tracks. Our version of the game works as follows.
 
