@@ -29,16 +29,16 @@ public class Horse {
     }
 
     /**
-     * Prints 15 space track and horse's position on it
+     * Prints 10 space track and horse's position on it
      */
     public void printLane() {
-        String lane = "[";
+        StringBuilder lane = new StringBuilder("[");
 
         for (int i = 0; i < TRACK_LEN; i++) {
             if (i == position) {
-                lane += name + " ";
+                lane.append(name).append(" ");
             } else {
-                lane += ". ";
+                lane.append(". ");
             }
         }
 

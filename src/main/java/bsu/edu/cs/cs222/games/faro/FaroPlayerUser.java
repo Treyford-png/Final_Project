@@ -12,6 +12,11 @@ public class FaroPlayerUser extends FaroPlayer {
         super(name, points);
     }
 
+    /**
+     * Allows the user to place a wager on a card
+     * @param deck deck in the Faro game
+     * @return output for confirming the wager to the player
+     */
     @Override
     public String placeWager(CardDeck deck) {
         faroScanner = new Scanner(System.in);
@@ -30,6 +35,10 @@ public class FaroPlayerUser extends FaroPlayer {
         return "You wagered " + amount + " on "  + card;
     }
 
+    /**
+     * Asks for the amount the user wants to wager
+     * @return amount given by the player
+     */
     @Override
     public int getAmountToWager() {
         System.out.print("How much would you like to wager? ");
@@ -42,13 +51,17 @@ public class FaroPlayerUser extends FaroPlayer {
             if (input == 1) {
                 return getPoints();
             }
-            else {
+            else { // Recursive call if invalid input is given
                 return getAmountToWager();
             }
         }
         return amount;
     }
 
+    /**
+     * Gets the card that the user wants to wager on
+     * @return key for card
+     */
     public String getCard() {
         System.out.print("Which card would you like to wager on? Press 'x' for none\nEnter number, face card's " +
                 "first letter, or [h]igh card: ");
@@ -56,8 +69,10 @@ public class FaroPlayerUser extends FaroPlayer {
         if (input.equals("x")) {
             return "x";
         }
+
+        // Check for valid input
         Set<String> validInputs = Set.of("2", "3", "4", "5", "6", "7", "8", "9", "10", "j", "q", "k", "a", "h");
-        if (!(validInputs.contains(input))) {
+        if (!(validInputs.contains(input))) { // Recursive call
             System.out.println("Invalid input. Please give a number 2 through 10, j, q, k, or a");
             return getCard();
         }
