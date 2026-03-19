@@ -1,11 +1,11 @@
 package bsu.edu.cs.cs222.games.liberty_bell;
 
 public enum LibertyBellSymbols {
-    LIBERTY_BELL("Libery Bell", 10000),
-    HORSESHOE("Horseshoe", 5000),
-    DIAMOND("Diamond",2000),
-    SPADE("Spade",1000),
-    HEART("Heart",500);
+    LIBERTY_BELL("Libery Bell", 1000),
+    HORSESHOE("Horseshoe", 500),
+    DIAMOND("Diamond",200),
+    SPADE("Spade",100),
+    HEART("Heart",50);
 
     private final String displayName;
     private final int points;
