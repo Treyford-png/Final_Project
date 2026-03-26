@@ -6,8 +6,15 @@ import bsu.edu.cs.cs222.games.horse_race.HorseRace;
 import bsu.edu.cs.cs222.games.liberty_bell.LibertyBellGame;
 import bsu.edu.cs.cs222.games.roulette.Roulette;
 import bsu.edu.cs.cs222.games.vingt_un.VingtUn;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.util.Scanner;
+
+
 
 public class MainMenu {
     private Scanner menuScanner;
