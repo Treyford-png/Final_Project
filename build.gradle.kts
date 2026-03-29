@@ -2,6 +2,7 @@ import org.gradle.kotlin.dsl.implementation
 
 plugins {
     java
+    application
     id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
@@ -15,6 +16,10 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+application {
+    mainClass.set("bsu.edu.cs.cs222.menues.GUI_Main")
 }
 
 dependencies {
