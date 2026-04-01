@@ -9,7 +9,7 @@ public class Horse {
     public Horse(int name, int flipChance) {
         this.name = name;
         this.flipChance = flipChance;
-        this.position = 0;
+        this.position = 9;
     }
 
     public int getName() {
@@ -17,7 +17,7 @@ public class Horse {
     }
 
     public void advance() {
-        position++;
+        position--;
     }
 
     public void moveToStart() {
@@ -25,7 +25,7 @@ public class Horse {
     }
 
     public boolean hasWon() {
-        return position >= TRACK_LEN;
+        return position == -1;
     }
 
     /**
@@ -63,5 +63,9 @@ public class Horse {
 
     public static int getTrackLen() {
         return TRACK_LEN;
+    }
+
+    public int getPosition() {
+        return position;
     }
 }
