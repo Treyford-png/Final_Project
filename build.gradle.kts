@@ -33,3 +33,7 @@ tasks.test {
 application {
     mainClass.set("bsu.edu.cs.cs222.games.liberty_bell.RunLibertyBell")
 }
+
+tasks.withType<JavaExec> {
+    jvmArgs("--enable-native-access=javafx.graphics")
+}
