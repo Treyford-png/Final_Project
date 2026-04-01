@@ -10,19 +10,22 @@ public class HorseRace {
     private final Random random;
     private final User user;
     private JTextArea outputArea;
+    private JFrame frame;
 
     public HorseRace(User user) {
         this.user = user;
         random = new Random();
 
         //Create GUI window
-        JFrame frame = new JFrame("Horse Race");
+        frame = new JFrame("Horse Race");
         frame.setSize(600, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         outputArea = new JTextArea();
         outputArea.setEditable(false);
         outputArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        outputArea.setBackground(Color.decode("#d6b588"));
+
 
         frame.add(new JScrollPane(outputArea));
         frame.setVisible(true);
@@ -41,10 +44,15 @@ public class HorseRace {
      * Gets guess and wager, runs horses, then calculates points
      */
     public void horseRace() {
+
         // User guesses which horse will win
         int userGuess = getUserGuess();
-        while (userGuess < 1 || userGuess > 5) { // Invalid Input
+        while (userGuess < 0 || userGuess > 5) { // Invalid Input
             userGuess = getUserGuess();
+        }
+        if (userGuess == 0) { // User cancels
+            frame.dispose();
+            return;
         }
 
         // User places wager
@@ -73,6 +81,9 @@ public class HorseRace {
                 "Welcome to the Horse Race!",
                 "\nWhich horse will win? (1, 2, 3, 4, or 5): ");
         try {
+            if (input == null) {
+                return 0;
+            }
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             return -1;
