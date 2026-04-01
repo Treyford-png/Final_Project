@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.Controller">
+    <children>
+        <Label text="FRONTIER GAMES" />
+        <HBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0" spacing="6.0">
+            <children>
+                <Label text="Article Name:" />
+                <Button mnemonicParsing="false" onAction="#runGame1" text="Game1" />
+                <Button mnemonicParsing="false" onAction="#runGame2" text="Game2" />
+                <Button mnemonicParsing="false" onAction="#runGame3" text="Game3" />
+                <Button mnemonicParsing="false" onAction="#runGame4" text="Game4" />
+                <Button mnemonicParsing="false" onAction="#runGame5" text="Game5" />
+            </children>
+        </HBox>
+
+    </children>
+</VBox>
