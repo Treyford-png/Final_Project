@@ -3,6 +3,7 @@ import org.gradle.kotlin.dsl.implementation
 plugins {
     java
     id("org.openjfx.javafxplugin") version "0.1.0"
+    application
 }
 
 
@@ -21,13 +22,14 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("org.openjfx:javafx-controls:21")
+    implementation("org.openjfx:javafx-fxml:21")
 }
 
 tasks.test {
     useJUnitPlatform()
 }
-dependencies {
-    implementation("org.openjfx:javafx-controls:21")
-    implementation("org.openjfx:javafx-fxml:21")
-}
 
+application {
+    mainClass.set("bsu.edu.cs.cs222.games.liberty_bell.RunLibertyBell")
+}
