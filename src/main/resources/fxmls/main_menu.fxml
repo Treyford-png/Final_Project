@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.Controller">
    <children>
@@ -10,7 +12,52 @@
             <Image url="@deadwood_town.png" />
          </image>
       </ImageView>
-      <Pane prefHeight="200.0" prefWidth="200.0" />
-      <BorderPane prefHeight="350.0" prefWidth="600.0" style="-fx-border-width: 1; -fx-border-color: grey;" />
+      <Button fx:id="btnLdrbrd" layoutX="31.0" layoutY="227.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="38.0" style="-fx-opacity: 0.5; -fx-border-color: gray;" />
+      <Button fx:id="btnHorseRace" layoutX="121.0" layoutY="222.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="54.0" style="-fx-opacity: 0.5; -fx-border-color: gray;" />
+      <Button fx:id="btnLibbyBell" layoutX="520.0" layoutY="224.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="38.0" style="-fx-opacity: 0.5; -fx-border-color: gray;" />
+      <Button fx:id="btnFaro" layoutX="314.0" layoutY="227.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0" style="-fx-opacity: 0.5; -fx-border-color: gray;" />
+      <Button fx:id="btnRoulette" layoutX="433.0" layoutY="227.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="38.0" style="-fx-opacity: 0.5; -fx-border-color: gray;" />
+      <Button fx:id="btnVU" layoutX="264.0" layoutY="227.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="22.0" style="-fx-opacity: 0.5; -fx-border-color: gray;" />
+      <Button fx:id="btnExit" layoutX="567.0" layoutY="263.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="18.0" style="-fx-opacity: 0.5; -fx-border-color: gray;" />
+      <Label layoutX="121.0" layoutY="175.0" prefHeight="16.0" prefWidth="75.0" text="horse race">
+         <font>
+            <Font name="Engravers MT" size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="6.0" layoutY="183.0" prefHeight="16.0" prefWidth="87.0" text="leaderboard" textAlignment="CENTER">
+         <font>
+            <Font name="Engravers MT" size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="231.0" layoutY="199.0" prefHeight="16.0" prefWidth="87.0" text="vingt-un" textAlignment="CENTER">
+         <font>
+            <Font name="Engravers MT" size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="325.0" layoutY="160.0" prefHeight="16.0" prefWidth="38.0" text="faro" textAlignment="CENTER">
+         <font>
+            <Font name="Engravers MT" size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="421.0" layoutY="152.0" prefHeight="16.0" prefWidth="75.0" text="roulette" textAlignment="CENTER">
+         <font>
+            <Font name="Engravers MT" size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="543.0" layoutY="183.0" prefHeight="16.0" prefWidth="47.0" text="slots" textAlignment="CENTER">
+         <font>
+            <Font name="Engravers MT" size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="489.0" layoutY="278.0" prefHeight="16.0" prefWidth="87.0" text="hit the road" textAlignment="CENTER">
+         <font>
+            <Font name="Engravers MT" size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="239.0" layoutY="14.0" prefHeight="42.0" prefWidth="187.0" text="DEADEND, OK" textAlignment="CENTER" textFill="#a67c2d">
+         <font>
+            <Font name="Playbill" size="34.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
