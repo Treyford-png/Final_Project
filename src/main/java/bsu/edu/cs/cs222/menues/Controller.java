@@ -12,31 +12,31 @@ public class Controller {
 
     @FXML
     private void runGame1(ActionEvent event) {
-        System.out.println("Running Game 1...");
+        System.out.println("Running Faro...");
         new Thread(() -> RunFaro.main(null)).start();
     }
 
     @FXML
     private void runGame2(ActionEvent event) {
-        System.out.println("Running Game 2...");
+        System.out.println("Running Horse Race...");
         new Thread(() -> RunHorseRace.main(null)).start();
     }
 
     @FXML
     private void runGame3(ActionEvent event) {
-        System.out.println("Running Game 3...");
+        System.out.println("Running Liberty Bell...");
         new Thread(() -> RunLibertyBell.main(null)).start();
     }
 
     @FXML
     private void runGame4(ActionEvent event) {
-        System.out.println("Running Game 4...");
+        System.out.println("Running Roulette...");
         new Thread(() -> RunRoulette.main(null)).start();
     }
 
     @FXML
     private void runGame5(ActionEvent event) {
-        System.out.println("Running Game 5...");
+        System.out.println("Running VingtUn...");
         new Thread(() -> RunVingtUn.main(null)).start();
     }
 }
