@@ -31,7 +31,7 @@ tasks.test {
 }
 
 application {
-    mainClass.set("bsu.edu.cs.cs222.games.liberty_bell.RunLibertyBell")
+    mainClass.set("bsu.edu.cs.cs222.Launcher")
 }
 
 tasks.withType<JavaExec> {
