@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.Controller">
+   <children>
+      <ImageView fitHeight="348.0" fitWidth="600.0" layoutY="-4.0" pickOnBounds="true">
+         <image>
+            <Image url="@background.jpg" />
+         </image></ImageView>
+      <Label layoutX="112.0" layoutY="-11.0" prefHeight="98.0" prefWidth="376.0" text="FRONTIER GAMES" textFill="#2b1903">
+         <font>
+            <Font name="Engravers MT" size="31.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="344.0" stroke="#7e7e7e" strokeType="INSIDE" strokeWidth="2.0" width="600.0" />
+      <Button fx:id="btnLogIn" layoutX="226.0" layoutY="143.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #937362; -fx-border-color: #3d2b1f;" text="Log In" textFill="#efdecd">
+         <font>
+            <Font name="Engravers MT" size="16.0" />
+         </font></Button>
+      <Button fx:id="BtnSignUp" layoutX="226.0" layoutY="189.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #937362; -fx-border-color: #3d2b1f;" text="Sign up" textFill="#efdecd">
+         <font>
+            <Font name="Engravers MT" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCredits" layoutX="226.0" layoutY="236.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #937362; -fx-border-color: #3d2b1f;" text="credits" textFill="#efdecd">
+         <font>
+            <Font name="Engravers MT" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnExit" layoutX="226.0" layoutY="285.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #937362; -fx-border-color: #3d2b1f;" text="exit" textFill="#efdecd">
+         <font>
+            <Font name="Engravers MT" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
