@@ -28,7 +28,7 @@ public class LibertyBellController {
         private void handleSpin() {
             String wagerText = wagerField.getText().trim();
             if (wagerText.isEmpty()) {
-                resultLabel.setText("⚠️ Please enter a wager!");
+                resultLabel.setText(" Please enter a wager : ");
                 return;
             }
 
@@ -36,12 +36,12 @@ public class LibertyBellController {
             try {
                 wager = Integer.parseInt(wagerText);
             } catch (NumberFormatException e) {
-                resultLabel.setText("⚠️ Wager must be a number!");
+                resultLabel.setText("️ Wager must be a number : ");
                 return;
             }
 
             if (wager <= 0 || wager > user.getPoints()) {
-                resultLabel.setText("⚠️ Invalid wager amount!");
+                resultLabel.setText(" Invalid wager amount ");
                 return;
             }
 
@@ -56,10 +56,10 @@ public class LibertyBellController {
             if (payout > 0) {
                 user.addPoints(payout * 2);
                 resultLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #00ff88; -fx-font-weight: bold;");
-                resultLabel.setText("🏆 You won " + payout + " points!");
+                resultLabel.setText("You won " + payout + " points!");
             } else {
                 resultLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #ff4444; -fx-font-weight: bold;");
-                resultLabel.setText("💸 No luck this time...");
+                resultLabel.setText(" No luck this time...");
             }
         }
 

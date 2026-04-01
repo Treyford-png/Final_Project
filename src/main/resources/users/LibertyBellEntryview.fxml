@@ -12,7 +12,7 @@
       style="-fx-background-color: #2b1a0e; -fx-padding: 30;">
 
     <!-- Title -->
-    <Label text="🤠 LIBERTY BELL SLOTS 🤠"
+    <Label text=" LIBERTY BELL SLOTS "
            style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f5c842;"/>
 
     <Label text="~ Frontier Games ~"
