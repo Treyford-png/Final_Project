@@ -1,4 +1,4 @@
-package bsu.edu.cs.cs222.menues;
+package bsu.edu.cs.cs222.menues.log_in;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

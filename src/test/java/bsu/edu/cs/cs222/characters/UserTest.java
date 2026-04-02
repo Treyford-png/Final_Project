@@ -1,5 +1,5 @@
 package bsu.edu.cs.cs222.characters;
-import bsu.edu.cs.cs222.menues.SignUp;
+import bsu.edu.cs.cs222.menues.log_in.SignUp;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

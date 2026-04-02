@@ -14,8 +14,8 @@ public class AllNPCs implements Serializable {
     }
 
     public void generateNPCs() {
-        npcs.put("HOM", new NPC("HOM", "Homesteader Lyle Kerland", 2000, 15));
-        npcs.put("FRM", new NPC("FRM", "Farmer Sarah McMillan", 1500, 14));
+        npcs.put("HOM", new NPC("HOM", "Homesteader Lyle McMillan", 2000, 15));
+        npcs.put("FRM", new NPC("FRM", "Farmer Jessie McMillan", 1500, 14));
         npcs.put("COW", new NPC("COW", "Cowhand Mateo Hernandez", 2000, 17));
         npcs.put("MNR", new NPC("MNR", "Miner Charlie Wilmington", 7500, 15));
         npcs.put("MNO", new NPC("MNO", "Mine Owner Lawrence DuPonte", 500000, 17));

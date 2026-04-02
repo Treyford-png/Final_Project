@@ -1,4 +1,5 @@
 package bsu.edu.cs.cs222.menues;
+import bsu.edu.cs.cs222.menues.log_in.LogIn;
 import org.junit.jupiter.api.Test;
 
 public class LoginTest {
