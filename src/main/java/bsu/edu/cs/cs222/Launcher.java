@@ -1,16 +1,52 @@
 package bsu.edu.cs.cs222;
 
-import bsu.edu.cs.cs222.characters.User;
-import bsu.edu.cs.cs222.games.vingt_un.VingtUn;
-import bsu.edu.cs.cs222.menues.MainMenu;
-import bsu.edu.cs.cs222.menues.SignIn;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Launcher {
-    public static void main(String[] args) {
-        User user = SignIn.signIn();
-        if (user != null) {
-            MainMenu mainMenu = new MainMenu(user);
-            mainMenu.runMainMenu();
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Launcher extends Application {
+    @Override
+    public void start(Stage stage) {
+        try {
+            // Legal Notices
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/legal_stuff.fxml")));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+            // Splash Screen
+            Parent root2 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/splash_screen.fxml")));
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> scene.setRoot(root2));
+                }
+            }, 2000);
+
+            // Title Screen
+            Parent root3 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/launch_page.fxml")));
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> scene.setRoot(root3));
+                }
+            }, 4000);
+
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

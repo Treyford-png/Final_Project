@@ -3,51 +3,55 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="221.0" prefWidth="342.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.log_in.LogInController">
+<AnchorPane prefHeight="343.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.log_in.SignUpController">
    <children>
-      <ImageView fitHeight="345.0" fitWidth="500.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="343.0" fitWidth="513.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@log_book.png" />
+            <Image url="@log_book_1.png" />
          </image>
       </ImageView>
       <VBox layoutX="269.0" layoutY="59.0" prefHeight="36.0" prefWidth="186.0">
          <children>
-            <Label text="username">
+            <Label text="Write your name" textFill="#363636">
                <font>
-                  <Font name="Courier New Bold" size="16.0" />
+                  <Font name="Bradley Hand ITC" size="18.0" />
                </font>
             </Label>
-            <TextField />
+            <TextField fx:id="usernameField" />
          </children>
       </VBox>
       <VBox layoutX="269.0" layoutY="125.0" prefHeight="102.0" prefWidth="186.0">
          <children>
-            <Label text="password">
+            <Label text="Write your password">
                <font>
-                  <Font name="Courier New Bold" size="16.0" />
+                  <Font name="Bradley Hand ITC" size="16.0" />
                </font>
             </Label>
-            <PasswordField />
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="38.0" prefWidth="186.0" text="minimum 8 characters, 1 upper case, lowercase, number, and symbol" textFill="#797575" textOverrun="CLIP" wrapText="true">
+            <PasswordField fx:id="passwordField" />
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="38.0" prefWidth="186.0" text="minimum 8 characters, 1 upper case, lowercase, number, and symbol" textFill="#484848" textOverrun="CLIP" wrapText="true">
                <font>
-                  <Font name="Courier New Bold" size="10.0" />
+                  <Font name="Bradley Hand ITC" size="12.0" />
                </font>
             </Label>
          </children>
       </VBox>
       <VBox layoutX="269.0" layoutY="220.0" prefHeight="102.0" prefWidth="186.0">
          <children>
-            <Label text="confirm password">
+            <Label text="Confirm your password">
                <font>
-                  <Font name="Courier New Bold" size="16.0" />
+                  <Font name="Bradley Hand ITC" size="16.0" />
                </font>
             </Label>
-            <PasswordField />
+            <PasswordField fx:id="confirmField" />
+            <Label fx:id="messageLabel" prefHeight="18.0" prefWidth="192.0" textAlignment="CENTER" textFill="#cf5353" />
          </children>
       </VBox>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="343.0" stroke="#969696" strokeType="INSIDE" width="501.0" />
+      <Button fx:id="signButton" layoutX="198.0" layoutY="298.0" mnemonicParsing="false" onAction="#attemptLogIn" text="Sign Book">
+         <font>
+            <Font name="Engravers MT" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

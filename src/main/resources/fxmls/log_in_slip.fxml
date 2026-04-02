@@ -5,28 +5,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="215.0" prefWidth="400.0" style="-fx-background-color: #f2e8d9;" styleClass="f2e8d9" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.Controller">
+<AnchorPane prefHeight="215.0" prefWidth="400.0" style="-fx-background-color: #f2e8d9;" styleClass="f2e8d9" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.log_in.LogInController">
    <children>
       <ImageView fitHeight="81.0" fitWidth="98.0" layoutX="14.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" styleClass="f2e8d9">
          <image>
             <Image url="@who_are_you.png" />
          </image>
       </ImageView>
-      <TextArea layoutX="125.0" layoutY="36.0" prefHeight="39.0" prefWidth="254.0" />
-      <Label layoutX="125.0" layoutY="5.0" prefHeight="28.0" prefWidth="200.0" text="Username">
+      <Label layoutX="125.0" layoutY="20.0" prefHeight="28.0" prefWidth="200.0" text="Username">
          <font>
             <Font name="Playbill" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="125.0" layoutY="85.0" prefHeight="28.0" prefWidth="200.0" text="Password">
+      <Label layoutX="125.0" layoutY="87.0" prefHeight="28.0" prefWidth="200.0" text="Password">
          <font>
             <Font name="Playbill" size="29.0" />
          </font>
       </Label>
-      <PasswordField layoutX="126.0" layoutY="115.0" prefHeight="38.0" prefWidth="254.0" />
-      <Button layoutX="103.0" layoutY="170.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #353b49;" text="Log In" textFill="#bf9e43">
+      <PasswordField fx:id="passwordField" layoutX="126.0" layoutY="121.0" prefHeight="26.0" prefWidth="246.0" />
+      <Button layoutX="103.0" layoutY="170.0" mnemonicParsing="false" onAction="#attemptLogIn" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #353b49;" text="Log In" textFill="#bf9e43">
          <font>
             <Font name="Engravers MT" size="16.0" />
          </font></Button>
+      <TextField fx:id="usernameField" layoutX="126.0" layoutY="59.0" prefHeight="26.0" prefWidth="246.0" />
+      <Label fx:id="messageLabel" layoutX="97.0" layoutY="149.0" textFill="RED" />
    </children>
 </AnchorPane>
