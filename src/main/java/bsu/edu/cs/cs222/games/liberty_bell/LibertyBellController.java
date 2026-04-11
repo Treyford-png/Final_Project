@@ -55,10 +55,10 @@ public class LibertyBellController {
             int payout = machine.calculatePayout(result);
             if (payout > 0) {
                 user.addPoints(payout * 2);
-                resultLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #00ff88; -fx-font-weight: bold;");
+                resultLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #d2691e; -fx-font-weight: bold;");
                 resultLabel.setText("You won " + payout + " points!");
             } else {
-                resultLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #ff4444; -fx-font-weight: bold;");
+                resultLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #c2abab; -fx-font-weight: bold;");
                 resultLabel.setText(" No luck this time...");
             }
         }

@@ -2,7 +2,7 @@ package bsu.edu.cs.cs222.games.liberty_bell;
 import java.util.Objects;
 import java.util.Random;
 import bsu.edu.cs.cs222.characters.User;
-import bsu.edu.cs.cs222.games.liberty_bell.LibertyBellSymbols;
+
 
 public class LibertyBellMachine {
     private final LibertyBellSymbols[] strip;
