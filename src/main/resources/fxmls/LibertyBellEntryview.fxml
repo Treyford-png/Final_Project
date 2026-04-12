@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -15,10 +16,13 @@
 
     <VBox alignment="CENTER" spacing="20" style="-fx-padding: 30; -fx-background-color: rgba(43,26,14,0.75); -fx-background-radius: 12;">
 
-        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f5c842;" text="LIBERTY BELL SLOTS" textFill="#fcfcfc" wrapText="true">
+        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f5c842;" text="LIBERTY BELL SLOTS" textAlignment="RIGHT" textFill="#fcfcfc" underline="true" wrapText="true">
          <font>
-            <Font name="Party LET Plain" size="26.0" />
-         </font></Label>
+            <Font name="Papyrus Condensed" size="26.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect></Label>
 
         <Label style="-fx-font-size: 13px; -fx-text-fill: #c9a84c; -fx-font-style: italic; -fx-font-family: ;" text=" Frontier Games ">
          <font>
@@ -34,7 +38,10 @@
         <Label style="-fx-font-size: 14px; -fx-text-fill: #f5c842;" text="Place Your Wager, Partner ">
          <font>
             <Font name="Plantagenet Cherokee" size="13.0" />
-         </font></Label>
+         </font>
+         <effect>
+            <Glow />
+         </effect></Label>
 
         <TextField fx:id="wagerField" maxWidth="200" promptText="Enter coins..." style="-fx-background-color: #1a0e05; -fx-text-fill: #f5c842;                           -fx-border-color: #f5c842; -fx-border-width: 2;                           -fx-border-radius: 6; -fx-background-radius: 6;                           -fx-font-size: 14px; -fx-padding: 6 12;" />
 
@@ -44,6 +51,7 @@
          </font></Button>
 
         <Label fx:id="resultLabel" style="-fx-font-size: 16px; -fx-text-fill: #f5c842; -fx-font-weight: bold;" text="" />
+      <ColorPicker />
 
     </VBox>
 
