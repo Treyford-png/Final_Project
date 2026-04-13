@@ -16,7 +16,7 @@
 
     <VBox alignment="CENTER" spacing="20" style="-fx-padding: 30; -fx-background-color: rgba(43,26,14,0.75); -fx-background-radius: 12;">
 
-        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f5c842;" text="LIBERTY BELL SLOTS" textAlignment="RIGHT" textFill="#fcfcfc" underline="true" wrapText="true">
+        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f5c842;" text="LIBERTY BELL SLOTS" textAlignment="RIGHT" textFill="#fcfcfc" wrapText="true">
          <font>
             <Font name="Papyrus Condensed" size="26.0" />
          </font>
@@ -24,15 +24,18 @@
             <Bloom />
          </effect></Label>
 
-        <Label style="-fx-font-size: 13px; -fx-text-fill: #c9a84c; -fx-font-style: italic; -fx-font-family: ;" text=" Frontier Games ">
+        <Label style="-fx-font-size: 13px; -fx-text-fill: #c9a84c; -fx-font-style: italic; -fx-font-family: ;" text="FRONTIER GAMES" underline="true">
          <font>
-            <Font name="Galvji" size="13.0" />
-         </font></Label>
+            <Font name="Galvani" size="13.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect></Label>
 
         <HBox alignment="CENTER" spacing="12">
-            <Label fx:id="reel1" style="-fx-font-size: 44px; -fx-background-color: #1a0e05;                           -fx-border-color: #e9b528; -fx-border-width: 3;                           -fx-border-radius: 8; -fx-background-radius: 8;                           -fx-padding: 12 18;" text="?" />
-            <Label fx:id="reel2" style="-fx-font-size: 44px; -fx-background-color: #1a0e05;                           -fx-border-color: #f5c842; -fx-border-width: 3;                           -fx-border-radius: 8; -fx-background-radius: 8;                           -fx-padding: 12 18;" text="?" />
-            <Label fx:id="reel3" style="-fx-font-size: 44px; -fx-background-color: #1a0e05;                           -fx-border-color: #f5c842; -fx-border-width: 3;                           -fx-border-radius: 8; -fx-background-radius: 8;                           -fx-padding: 12 18;" text="?" />
+            <Label fx:id="reel1" style="-fx-font-size: 44px; -fx-background-color: #ff8400eb;                           -fx-border-color: #e9b528; -fx-border-width: 3;                           -fx-border-radius: 8; -fx-background-radius: 8;                           -fx-padding: 12 18;" text="?" textFill="#ae1313" />
+            <Label fx:id="reel2" style="-fx-font-size: 44px; -fx-background-color: #ff8400e6;                           -fx-border-color: #f5c842; -fx-border-width: 3;                           -fx-border-radius: 8; -fx-background-radius: 8;                           -fx-padding: 12 18;" text="?" textFill="#7c1111" />
+            <Label fx:id="reel3" style="-fx-font-size: 44px; -fx-background-color: #ff8c00;                           -fx-border-color: #f5c842; -fx-border-width: 3;                           -fx-border-radius: 8; -fx-background-radius: 8;                           -fx-padding: 12 18;" text="?" textFill="#800909" />
         </HBox>
 
         <Label style="-fx-font-size: 14px; -fx-text-fill: #f5c842;" text="Place Your Wager, Partner ">
@@ -43,16 +46,19 @@
             <Glow />
          </effect></Label>
 
-        <TextField fx:id="wagerField" maxWidth="200" promptText="Enter coins..." style="-fx-background-color: #1a0e05; -fx-text-fill: #f5c842;                           -fx-border-color: #f5c842; -fx-border-width: 2;                           -fx-border-radius: 6; -fx-background-radius: 6;                           -fx-font-size: 14px; -fx-padding: 6 12;" />
+        <TextField fx:id="wagerField" maxWidth="200" promptText="Enter coins..." style="-fx-background-color: #f0e48c00; -fx-text-fill: #f5c842;                           -fx-border-color: #f5c842; -fx-border-width: 2;                           -fx-border-radius: 6; -fx-background-radius: 6;                           -fx-font-size: 14px; -fx-padding: 6 12;" />
 
-        <Button fx:id="spinButton" defaultButton="true" onAction="#handleSpin" style="-fx-background-color: #8b1a1a; -fx-text-fill: #f5c842;                        -fx-font-size: 14px; -fx-font-weight: bold;                        -fx-border-color: #f5c842; -fx-border-width: 2;                        -fx-border-radius: 8; -fx-background-radius: 8;                        -fx-padding: 8 20;" text="SPIN" textFill="#bcae51" wrapText="true">
+        <Button fx:id="spinButton" defaultButton="true" onAction="#handleSpin" style="-fx-background-color: #8b6d1a; -fx-text-fill: #f5c842;                        -fx-font-size: 14px; -fx-font-weight: bold;                        -fx-border-color: #f0f8ff; -fx-border-width: 2;                        -fx-border-radius: 8; -fx-background-radius: 8;                        -fx-padding: 8 20;" text="SPIN" textFill="#bcae51" wrapText="true">
          <font>
             <Font name="PingFang HK Regular" size="13.0" />
-         </font></Button>
+         </font>
+         <effect>
+            <Glow level="0.8" />
+         </effect></Button>
 
         <Label fx:id="resultLabel" style="-fx-font-size: 16px; -fx-text-fill: #f5c842; -fx-font-weight: bold;" text="" />
-      <ColorPicker />
-
     </VBox>
+
+
 
 </StackPane>
