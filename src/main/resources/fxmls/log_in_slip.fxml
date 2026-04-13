@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="81.0" fitWidth="98.0" layoutX="14.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" styleClass="f2e8d9">
          <image>
-            <Image url="@who_are_you.png" />
+            <Image url="@../images/who_are_you.png" />
          </image>
       </ImageView>
       <Label layoutX="125.0" layoutY="20.0" prefHeight="28.0" prefWidth="200.0" text="Username">

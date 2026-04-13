@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="700.0" fitWidth="1200.0" pickOnBounds="true">
          <image>
-            <Image url="@deadend_town.png" />
+            <Image url="@../images/deadend_town.png" />
          </image>
       </ImageView>
       <Button fx:id="btnLdrbrd" layoutX="73.0" layoutY="465.0" mnemonicParsing="false" onAction="#leaderboard" prefHeight="50.0" prefWidth="47.0" style="-fx-opacity: 0.5; -fx-border-color: gray;" />
