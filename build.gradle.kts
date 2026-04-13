@@ -32,6 +32,7 @@ tasks.test {
 
 application {
     mainClass.set("bsu.edu.cs.cs222.Launcher")
+    //mainClass.set("bsu.edu.cs.cs222.menues.leaderboard.RunLeaderboard");
 }
 
 tasks.withType<JavaExec> {
