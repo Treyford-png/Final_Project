@@ -1,5 +1,6 @@
-package bsu.edu.cs.cs222.menues;
+package bsu.edu.cs.cs222.menues.log_in;
 import bsu.edu.cs.cs222.characters.User;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class LogIn extends SignIn {
+
     public static User loginPrompt() {
         String username;
         String password;

@@ -1,4 +1,4 @@
-package bsu.edu.cs.cs222.menues;
+package bsu.edu.cs.cs222.menues.log_in;
 
 import java.io.BufferedWriter;
 import java.io.File;
