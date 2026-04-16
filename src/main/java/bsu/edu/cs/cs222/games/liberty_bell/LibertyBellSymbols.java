@@ -1,7 +1,8 @@
+
 package bsu.edu.cs.cs222.games.liberty_bell;
 
 public enum LibertyBellSymbols {
-    LIBERTY_BELL("Libery Bell", 1000),
+    LIBERTY_BELL("Liberty Bell", 1000),
     HORSESHOE("Horseshoe", 500),
     DIAMOND("Diamond",200),
     SPADE("Spade",100),

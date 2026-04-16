@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.LaunchController">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="1200.0" layoutY="-4.0" pickOnBounds="true">
+         <image>
+            <Image url="@background.jpg" />
+         </image></ImageView>
+      <Label layoutX="377.0" layoutY="8.0" prefHeight="126.0" prefWidth="446.0" text="FRONTIER GAMES" textAlignment="CENTER" textFill="#2b1903">
+         <font>
+            <Font name="Playbill" size="96.0" />
+         </font>
+      </Label>
+      <VBox alignment="TOP_CENTER" layoutX="456.0" layoutY="300.0" prefHeight="399.0" prefWidth="258.0">
+         <children>
+            <Button fx:id="btnLogIn" mnemonicParsing="false" onAction="#goToLogIn" prefHeight="70.0" prefWidth="284.0" style="-fx-background-color: #937362; -fx-border-color: #3d2b1f;" text="Log In" textFill="#efdecd">
+               <font>
+                  <Font name="Engravers MT" size="28.0" />
+               </font>
+            </Button>
+            <Pane prefHeight="25.0" prefWidth="202.0" />
+            <Button fx:id="BtnSignUp" mnemonicParsing="false" onAction="#goToSignUp" prefHeight="70.0" prefWidth="274.0" style="-fx-background-color: #937362; -fx-border-color: #3d2b1f;" text="Sign up" textFill="#efdecd">
+               <font>
+                  <Font name="Engravers MT" size="28.0" />
+               </font>
+            </Button>
+            <Pane layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="202.0" />
+            <Button fx:id="btnCredits" mnemonicParsing="false" onAction="#goToCredits" prefHeight="70.0" prefWidth="265.0" style="-fx-background-color: #937362; -fx-border-color: #3d2b1f;" text="credits" textFill="#efdecd">
+               <font>
+                  <Font name="Engravers MT" size="27.0" />
+               </font>
+            </Button>
+            <Pane layoutX="10.0" layoutY="176.0" prefHeight="25.0" prefWidth="202.0" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="286.0" style="-fx-background-color: #937362; -fx-border-color: #3d2b1f;" text="exit" textFill="#efdecd">
+               <font>
+                  <Font name="Engravers MT" size="28.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

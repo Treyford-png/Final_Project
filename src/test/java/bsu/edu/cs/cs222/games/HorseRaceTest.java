@@ -2,7 +2,7 @@ package bsu.edu.cs.cs222.games;
 
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.games.horse_race.HorseRace;
-import bsu.edu.cs.cs222.menues.SignUp;
+import bsu.edu.cs.cs222.menues.log_in.SignUp;
 
 import java.io.File;
 import java.nio.file.Paths;

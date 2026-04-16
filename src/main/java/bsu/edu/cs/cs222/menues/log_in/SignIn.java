@@ -1,4 +1,4 @@
-package bsu.edu.cs.cs222.menues;
+package bsu.edu.cs.cs222.menues.log_in;
 import bsu.edu.cs.cs222.characters.User;
 
 import java.util.Scanner;
@@ -35,7 +35,7 @@ public class SignIn {
 
     /**
      * Gets the user's request to either sign up or log in and directs them to the correct menu
-     * @return
+     * @return User date for user that just signed in
      */
     public static User signIn() {
         Scanner scanner = new Scanner(System.in);
