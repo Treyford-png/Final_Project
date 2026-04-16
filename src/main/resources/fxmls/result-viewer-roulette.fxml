@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bsu.edu.cs.cs222.games.roulette.ResultController">
+
+    <Label fx:id="landedLabel" text="Landed: "/>
+    <Label fx:id="outcomeLabel" text="Outcome"/>
+    <Label fx:id="pointsLabel" text="Points"/>
+
+</VBox>
