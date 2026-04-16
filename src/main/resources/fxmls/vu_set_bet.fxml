@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="194.0" prefWidth="323.0" style="-fx-background-color: #f6eee3;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.games.vingt_un.VUController">
+   <children>
+      <VBox alignment="CENTER" layoutX="70.0" layoutY="22.0" prefHeight="171.0" prefWidth="178.0">
+         <children>
+            <Label text="BALANCE:">
+               <font>
+                  <Font name="Monospaced Regular" size="30.0" />
+               </font>
+            </Label>
+            <Label text="50000000">
+               <font>
+                  <Font name="Monospaced Regular" size="24.0" />
+               </font>
+            </Label>
+            <TextField alignment="CENTER" />
+            <Button mnemonicParsing="false" text="BET" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutY="7.0" prefHeight="30.0" prefWidth="323.0">
+         <children>
+            <Label text="PLACE BET" textFill="#6b3e1e">
+               <font>
+                  <Font name="Playbill" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
