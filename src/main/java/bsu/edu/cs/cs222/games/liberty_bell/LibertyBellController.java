@@ -7,8 +7,6 @@ import javafx.scene.control.TextField;
 
 public class LibertyBellController {
 
-
-
         @FXML private Label reel1;
         @FXML private Label reel2;
         @FXML private Label reel3;
@@ -19,16 +17,13 @@ public class LibertyBellController {
         private LibertyBellMachine machine;
         private User user;
 
-        public void initialize() {
-            user = new User("Test", "test", 900);
-            machine = new LibertyBellMachine(user);
-        }
+
 
         @FXML
         private void handleSpin() {
             String wagerText = wagerField.getText().trim();
             if (wagerText.isEmpty()) {
-                resultLabel.setText(" Please enter a wager : ");
+                resultLabel.setText(" Place your wager partner: ");
                 return;
             }
 
@@ -59,7 +54,7 @@ public class LibertyBellController {
                 resultLabel.setText("You won " + payout + " points!");
             } else {
                 resultLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #c2abab; -fx-font-weight: bold;");
-                resultLabel.setText(" No luck this time...");
+                resultLabel.setText(" No luck this time partner!");
             }
         }
 
