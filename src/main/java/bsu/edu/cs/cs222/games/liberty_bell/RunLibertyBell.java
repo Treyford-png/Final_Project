@@ -18,7 +18,7 @@ public class RunLibertyBell extends Application {
                 getClass().getResource("/fxmls/LibertyBellEntryview.fxml")
         );
         Scene scene = new Scene(root, 500, 500);
-        stage.setTitle("🤠 Liberty Bell Slots");
+        stage.setTitle(" Liberty Bell Slots");
         stage.setScene(scene);
         stage.show();
     }
