@@ -31,8 +31,8 @@ tasks.test {
 }
 
 application {
-    mainClass.set("bsu.edu.cs.cs222.games.roulette.RunRoulette")
-    //mainClass.set("bsu.edu.cs.cs222.Launcher")
+    //mainClass.set("bsu.edu.cs.cs222.games.roulette.RunRoulette")
+    mainClass.set("bsu.edu.cs.cs222.BypassLauncher")
     //mainClass.set("bsu.edu.cs.cs222.menues.leaderboard.RunLeaderboard");
 }
 
