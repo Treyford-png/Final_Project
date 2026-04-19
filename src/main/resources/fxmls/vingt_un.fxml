@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,14 +18,19 @@
             <DropShadow height="198.8" radius="97.14500000000001" width="191.78" />
          </effect>
       </Rectangle>
-      <VBox alignment="CENTER" layoutX="-29.0" layoutY="204.0" prefHeight="151.0" prefWidth="550.0" rotate="90.0">
+      <VBox alignment="CENTER" layoutX="-11.0" layoutY="204.0" prefHeight="151.0" prefWidth="550.0" rotate="90.0">
          <children>
-            <Label alignment="CENTER" text="Label">
+            <Label fx:id="handValue1" alignment="CENTER" layoutX="214.0" layoutY="75.0" text="#">
+               <font>
+                  <Font name="SansSerif Bold" size="50.0" />
+               </font>
+            </Label>
+            <Label fx:id="npcOneBet" alignment="CENTER" text="(ppp)">
                <font>
                   <Font name="SansSerif Bold" size="32.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="246.0" layoutY="53.0" text="[?] [?]">
+            <Label fx:id="npcOneCards" alignment="CENTER" layoutX="246.0" layoutY="53.0" text="[?] [?]">
                <font>
                   <Font name="SansSerif Bold" size="50.0" />
                </font>
@@ -32,31 +39,31 @@
       </VBox>
       <VBox alignment="CENTER" layoutX="294.0" layoutY="402.0" prefHeight="151.0" prefWidth="629.0">
          <children>
-            <Label alignment="CENTER" text="Label">
+            <Label fx:id="userBetAmount" alignment="CENTER" text="Label">
                <font>
                   <Font name="SansSerif Bold" size="32.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="246.0" layoutY="53.0" text="[?] [?]">
+            <Label fx:id="userCards" alignment="CENTER" layoutX="246.0" layoutY="53.0" text="[?] [?]">
                <font>
                   <Font name="SansSerif Bold" size="50.0" />
                </font>
             </Label>
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutX="464.0" layoutY="248.0" prefHeight="38.0" prefWidth="315.0" text="[[[?]">
-         <font>
-            <Font name="SansSerif Bold" size="50.0" />
-         </font>
-      </Label>
       <VBox alignment="CENTER" layoutX="679.0" layoutY="203.0" prefHeight="151.0" prefWidth="550.0" rotate="-90.0">
          <children>
-            <Label alignment="CENTER" text="Label">
+            <Label fx:id="handValue2" alignment="CENTER" layoutX="214.0" layoutY="75.0" text="#">
+               <font>
+                  <Font name="SansSerif Bold" size="50.0" />
+               </font>
+            </Label>
+            <Label fx:id="npcTwoBet" alignment="CENTER" text="(ppp)">
                <font>
                   <Font name="SansSerif Bold" size="32.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="246.0" layoutY="53.0" text="[?] [?]">
+            <Label fx:id="npcTwoCards" alignment="CENTER" layoutX="246.0" layoutY="53.0" text="[?] [?]">
                <font>
                   <Font name="SansSerif Bold" size="50.0" />
                </font>
@@ -65,27 +72,75 @@
       </VBox>
       <Label alignment="CENTER" layoutX="441.0" layoutY="4.0" prefHeight="38.0" prefWidth="315.0" text="VINGT-UN">
          <font>
-            <Font name="SansSerif Bold" size="50.0" />
+            <Font name="Playbill" size="75.0" />
          </font>
       </Label>
       <HBox alignment="CENTER" layoutX="161.0" layoutY="562.0" prefHeight="106.0" prefWidth="874.0" spacing="40.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="120.0" text="HIT">
+            <Button fx:id="buttonHit" disable="true" mnemonicParsing="false" onAction="#playerHit" prefHeight="70.0" prefWidth="120.0" text="HIT">
                <font>
                   <Font name="SansSerif Bold" size="24.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
             </Button>
-            <Label text="16">
+            <Label fx:id="userHandValue" text="16" visible="false">
                <font>
                   <Font name="SansSerif Bold" size="44.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="120.0" text="STAND">
+            <Button fx:id="buttonStand" disable="true" mnemonicParsing="false" onAction="#playerStand" prefHeight="70.0" prefWidth="120.0" text="STAND">
                <font>
                   <Font name="SansSerif Bold" size="24.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
             </Button>
          </children>
       </HBox>
+      <VBox alignment="CENTER" layoutX="-190.0" layoutY="214.0" prefHeight="151.0" prefWidth="550.0" rotate="90.0">
+         <children>
+            <Label fx:id="npcOneName" alignment="CENTER" layoutX="246.0" layoutY="53.0" text="NAME">
+               <font>
+                  <Font name="Playbill" size="75.0" />
+               </font>
+            </Label>
+            <Label fx:id="npcOneTotal" alignment="CENTER" text="(pppp)">
+               <font>
+                  <Font name="SansSerif Bold" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="836.0" layoutY="206.0" prefHeight="151.0" prefWidth="550.0" rotate="-90.0">
+         <children>
+            <Label fx:id="npcTwoName" alignment="CENTER" layoutX="246.0" layoutY="53.0" text="NAME">
+               <font>
+                  <Font name="Playbill" size="75.0" />
+               </font>
+            </Label>
+            <Label fx:id="npcTwoTotal" alignment="CENTER" text="(pppp)">
+               <font>
+                  <Font name="SansSerif Bold" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <ToolBar layoutX="-3.0" layoutY="666.0" prefHeight="39.0" prefWidth="1204.0" style="-fx-background-color: maroon;">
+         <items>
+            <Label fx:id="userPointsLabel" prefHeight="30.0" prefWidth="496.0" text=" Username - 0000" textFill="WHITE">
+               <font>
+                  <Font name="Playbill" size="28.0" />
+               </font>
+            </Label>
+         </items>
+      </ToolBar>
+      <Label alignment="CENTER" layoutX="442.0" layoutY="260.0" prefHeight="38.0" prefWidth="315.0" text="[[[?]">
+         <font>
+            <Font name="SansSerif Bold" size="50.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package bsu.edu.cs.cs222.games.vingt_un;
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.libraries.cards.*;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,12 +21,11 @@ public class VingtUn {
         players = new VingtUnPlayer[]{userPlayer, player2, player3};
         deck = new CardDeck();
         removedCards = new ArrayList<>();
-        players[0].setIsDealer(true); // Temp set dealer to prevent lack of dealer errors
+        player2.setIsDealer(true);
     }
 
     public void runGame() {
         deck.shuffle();
-        System.out.println(determineDealer().getName() + " is the dealer");
         boolean playAgain = true;
         int[] oldPoints = {0, 0, 0};
         while (playAgain) {
@@ -67,8 +67,6 @@ public class VingtUn {
             for (VingtUnPlayer player : players) {
                 if (player.getHand().getHandStatus() == HandStatus.NATURAL_21) {
                     deck = new CardDeck();
-                    getDealer().setIsDealer(false);
-                    player.setIsDealer(true);
                     System.out.println(player.getName() + " is the new dealer\n");
                     break;
                 }
@@ -87,17 +85,14 @@ public class VingtUn {
 
     public void startGame() {
         // Set wagers
-        if (!players[0].isDealer()) {
-            players[0].wagerPrompt();
-        }
+        deck.shuffle();
+
         if (!players[1].isDealer()) {
             players[1].setWager(50);
         }
         if (!players[2].isDealer()) {
             players[2].setWager(50);
         }
-
-        System.out.println(players[1].getWager());
 
         // Draws initial hand
         ensureDeckHas(6);
@@ -106,6 +101,9 @@ public class VingtUn {
         players[2].getHand().firstTwoCards(deck);
     }
 
+    public VingtUnPlayer getMainPlayer() {
+        return players[0];
+    }
     public VingtUnPlayer getPlayer2() {
         return players[1];
     }
@@ -114,7 +112,7 @@ public class VingtUn {
         return players[2];
     }
 
-    public VingtUnPlayer determineDealer() {
+    public VingtUnPlayer determineDealer(Label userLabel, Label npc1Label, Label npc2Label) {
         getDealer().setIsDealer(false);
         System.out.println("First player to draw an ace is the dealer");
         Scanner scanner = new Scanner(System.in);

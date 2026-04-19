@@ -40,4 +40,8 @@ public class Card {
         }
         return false;
     }
+
+    public String getCardOutput() {
+        return "[" + shortName + "]";
+    }
 }
