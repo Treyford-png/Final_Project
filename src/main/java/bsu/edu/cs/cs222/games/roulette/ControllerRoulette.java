@@ -47,7 +47,7 @@ public class ControllerRoulette {
         roulette = new Roulette(new User("You", "test", 0));
 
         Image image = new Image(
-                getClass().getResource("/fxmls/roulette.png").toExternalForm()
+                getClass().getResource("/images/wheel_pixel.jpg").toExternalForm()
         );
         wheelImage.setImage(image);
 
