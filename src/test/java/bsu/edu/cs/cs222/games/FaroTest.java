@@ -9,7 +9,7 @@ public class FaroTest {
     public void testPlayGame() {
         Faro faro = new Faro(new User("Test", "test", 1000));
         FaroPlayer player = new FaroPlayer("Test", 1000);
-        faro.populateCasekeep();
+        faro.getCasekeep().populate();
         faro.burn();
         int previousPoints;
         int previousDealerPoints;
@@ -38,10 +38,10 @@ public class FaroTest {
     @Test
     public void testUpdateCasekeep() {
         Faro faro = new Faro(new User("Test", "test", 500));
-        faro.populateCasekeep();
+        faro.getCasekeep().populate();
         CardDeck deck = new CardDeck(); // unshuffled 52 card deck
         Card card = deck.lookAtTop(); // 2h
-        faro.updateCasekeep(GetCardKey.getCardKey(card));
+        faro.getCasekeep().update(GetCardKey.getCardKey(card));
         assert(faro.getTypeLeft("2") == 3);
     }
 }

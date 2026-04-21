@@ -2,16 +2,28 @@ package bsu.edu.cs.cs222.games.faro;
 
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.libraries.cards.*;
-
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.util.*;
 
 public class Faro {
-    private final User user;
-    private final FaroPlayer[] players;
-    private final Map<String, Integer> casekeep; // Used to hold list of cards left
+    private User user;
+    private FaroPlayer[] players;
+    private Casekeep casekeep; // Used to hold list of cards left
     private CardDeck deck;
     private String winningCard;
     private String losingCard;
+
+    @FXML public TextArea casekeepText;
+
+    public Faro () {
+
+    }
 
     public Faro(User user) {
         this.user = user;
@@ -23,8 +35,25 @@ public class Faro {
         players = new FaroPlayer[]{userPlayer, player2, player3};
 
         // Establish deck
-        casekeep = new HashMap<>();
+        casekeep = new Casekeep();
         deck = new CardDeck();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        FaroPlayerUser userPlayer = new FaroPlayerUser(user.getUsername(), user.getPoints());
+        FaroPlayerCPU player2 = new FaroPlayerCPU("Angel Eyes", 5000);
+        FaroPlayerCPU player3 = new FaroPlayerCPU("Tuco", 5000);
+        player3.setDealer(true);
+        players = new FaroPlayer[]{userPlayer, player2, player3};
+
+        // Establish deck
+        casekeep = new Casekeep();
+        deck = new CardDeck();
+    }
+
+    public Casekeep getCasekeep() {
+        return casekeep;
     }
 
     /**
@@ -38,7 +67,7 @@ public class Faro {
         for (int i = 0; i < 24; i++) {
             // Print casekeep
             System.out.println("\n" + getPlayers() + "\n");
-            System.out.println(casekeepOutput() + "\n");
+            System.out.println(casekeep.output() + "\n");
 
             // User turn
             for (FaroPlayer player : players) {
@@ -88,7 +117,7 @@ public class Faro {
      * Resets the game state for a run
      */
     public void startGame() {
-        populateCasekeep();
+        casekeep.populate();
         deck = new CardDeck();
         deck.shuffle();
         burn();
@@ -99,7 +128,7 @@ public class Faro {
     // Removes 1 card from the deck
     public void burn() {
         Card card = deck.deal();
-        updateCasekeep(GetCardKey.getCardKey(card));
+        casekeep.update(GetCardKey.getCardKey(card));
         System.out.println("Burned card: " + card.getShortName());
     }
 
@@ -118,49 +147,8 @@ public class Faro {
         // Updates casekeep
         winningCard = GetCardKey.getCardKey(wCard);
         losingCard = GetCardKey.getCardKey(lCard);
-        updateCasekeep(winningCard);
-        updateCasekeep(losingCard);
-    }
-
-    /**
-     * Casekeep is used as a way to keep track of cards remaining in the deck
-     */
-    public void populateCasekeep() {
-        casekeep.put("2", 4);
-        casekeep.put("3", 4);
-        casekeep.put("4", 4);
-        casekeep.put("5", 4);
-        casekeep.put("6", 4);
-        casekeep.put("7", 4);
-        casekeep.put("8", 4);
-        casekeep.put("9", 4);
-        casekeep.put("10", 4);
-        casekeep.put("k", 4);
-        casekeep.put("q", 4);
-        casekeep.put("j", 4);
-        casekeep.put("a", 4);
-    }
-
-    /**
-     * Removed card from the casekeep
-     * @param key of a card in the HashMap
-     */
-    public void updateCasekeep(String key) {
-        int numLeft = casekeep.get(key) - 1;
-        casekeep.put(key, numLeft);
-    }
-
-    /**
-     * Prints entire casekeep
-     * @return formated [key] - #\n...
-     */
-    public String casekeepOutput() {
-        StringBuilder output = new StringBuilder();
-        output.append("Casekeep:\n");
-        for (String key : casekeep.keySet()) {
-            output.append("[").append(key).append("]").append(" - ").append(casekeep.get(key)).append("\n");
-        }
-        return output.toString();
+        casekeep.update(winningCard);
+        casekeep.update(losingCard);
     }
 
     /**
@@ -228,7 +216,7 @@ public class Faro {
      */
     public void finalThree() {
         char[] guessedOrder = new char[3];
-        System.out.println("Three cards left:\n" + casekeepOutput() + "\n\nGuess the cards in order:");
+        System.out.println("Three cards left:\n" + casekeep.output() + "\n\nGuess the cards in order:");
         Scanner faroScanner = new Scanner(System.in);
         for (int i = 0; i < 3; i++) {
             System.out.print("\n" + (i + 1) + ": ");
@@ -270,6 +258,17 @@ public class Faro {
         System.out.println("\n" + player.getName() + " guessed [" + guess[0] + "] ["
                 + guess[1] + "] [" + guess[2] +"]");
         scoreFinalThree(guess, order, player.getAmountToWager(), player);
+    }
+
+    public void openCasekeep() throws IOException {
+        FXMLLoader casekeepLoader = new FXMLLoader(getClass().getResource("/fxmls/faro_casekeep.fxml"));
+        Parent root = casekeepLoader.load();
+        Stage stage2 = new Stage();
+        stage2.setTitle("Casekeep");
+        stage2.setScene(new Scene(root));
+        stage2.show();
+        CasekeepController casekeepController = casekeepLoader.getController();
+        casekeepController.setCasekeep(casekeep);
     }
 
     /**

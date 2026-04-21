@@ -38,10 +38,14 @@ public class MainMenuController {
         playerInfo.setText(" " + user.getUsername() + " - " + user.getPoints() + "p");
     }
 
-    public void faro(ActionEvent event) {
-        System.out.println("Running Faro...");
-        Faro faro = new Faro(user);
-        faro.runGame();
+    public void faro(ActionEvent event) throws IOException {
+        FXMLLoader faroLoader = new FXMLLoader(getClass().getResource("/fxmls/faro.fxml"));
+        Parent root = faroLoader.load();
+        Stage stage = (Stage) playerInfo.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        Faro faroController = faroLoader.getController();
+        faroController.setUser(user);
+        stage.show();
     }
 
     public void horseRace() throws IOException {
