@@ -18,5 +18,6 @@ public class ValueFactory {
                     }
                 };
         spinner.setValueFactory(valueFactory);
+        spinner.setEditable(true);
     }
 }

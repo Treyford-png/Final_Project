@@ -1,20 +1,17 @@
 package bsu.edu.cs.cs222.games.roulette;
 
 import bsu.edu.cs.cs222.characters.User;
+import bsu.edu.cs.cs222.helpers.ValueFactory;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import static javafx.scene.paint.Color.BLACK;
-import static javafx.scene.paint.Color.RED;
 
 public class ControllerRoulette {
 
@@ -23,12 +20,14 @@ public class ControllerRoulette {
     @FXML private Label resultLabel;
     @FXML private Label betLabel;
     @FXML private Spinner<Integer> setPoints;
+    @FXML private Label winsLabel;
+    @FXML private Label outcomeLabel;
 
     private Roulette roulette;
     User user;
     private int points = 1000;
     private int betAmount = 0;
-
+    private String betText;
     private String colorGuess = "";
     private String numberGuess = "x";
 
@@ -52,68 +51,47 @@ public class ControllerRoulette {
     public void setUser(User user) {
         this.user = user;
         points = user.getPoints();
-        setPoints.setPromptText(String.valueOf(points));
+        ValueFactory.setFactory(setPoints, user.getPoints());
+        pointsLabel.setText(user.getUsername() + ": " + user.getPoints());
     }
 
     @FXML
     public void initialize() {
-
-        roulette = new Roulette(new User("You", "test", 0));
+        roulette = new Roulette(new User("placeholder", "placeholder", 0));
 
         Image image = new Image(
                 getClass().getResource("/images/wheel_pixel.jpg").toExternalForm()
         );
         wheelImage.setImage(image);
-
-        //updatePoints();
-    }
-
-    @FXML
-    private void betRed() {
-        colorGuess = "red";
-    }
-
-    @FXML
-    private void betBlack() {
-        colorGuess = "black";
-    }
-
-    @FXML
-    private void colorOnlyBet() {
-        betMode = BetMode.COLOR_ONLY;
-        numberGuess = "x";
+        betText = "empty";
     }
 
     public void setBetToButton(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
-        String text = clickedButton.getText();
-        setTextColor(betLabel, text);
-        betLabel.setText(text);
+        betText = clickedButton.getText();
+        System.out.println(clickedButton.getText());
+        setTextColor(betLabel, betText);
+        getBet();
+        betLabel.setText(betAmount + "p on " + betText);
     }
 
-    public void getBet(ActionEvent event) {
-        Button clickedButton = (Button) event.getSource();
-        String text = clickedButton.getText();
-        if (text.equals("Red") || text.equals("Black")) {
-            colorGuess = text.toLowerCase();
+    public void getBet() {
+        betAmount = setPoints.getValue();
+        if (betText.equals("Black") || betText.equals("Red")) {
+            numberGuess = "x";
+            colorGuess = betText.toLowerCase();
         } else {
-            numberGuess = text;
+            numberGuess = betText;
+            colorGuess = "x";
         }
+
+        System.out.println(betText);
     }
 
     @FXML
     private void handleSpin() {
-
-        betAmount = 50;
-        betMode = BetMode.COLOR_ONLY;
-        colorGuess = "red";
-        if (betAmount <= 0 || betAmount > points || betMode == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Invalid Bet");
-            alert.setContentText("Complete your bet before spinning.");
-            alert.showAndWait();
-            return;
-        }
+        getBet();
+        System.out.println(numberGuess + " " + colorGuess);
 
         RotateTransition rotate = new RotateTransition(Duration.seconds(4), wheelImage);
         rotate.setByAngle(1440);
@@ -121,29 +99,25 @@ public class ControllerRoulette {
         rotate.setOnFinished(e -> {
 
             String number = roulette.spinWheel();
-            String color = roulette.getColor(number);
+            setTextColor(resultLabel, number);
+            resultLabel.setText(number);
 
-            int result = roulette.calcResults(
-                    number,
-                    numberGuess,
-                    colorGuess,
-                    betAmount
-            );
+            int points = roulette.calcResults(number, numberGuess, colorGuess, betAmount);
+            System.out.println(points);
 
-            points += result;
-            updatePoints();
-
-            String outcome;
-            if (result == betAmount * 7) {
-                outcome = "BIG WIN (x7)";
-            } else if (result == betAmount * 2) {
-                outcome = "WIN (x2)";
+            if (points <= 0) {
+                outcomeLabel.setText("LOSS");
+                winsLabel.setText(String.valueOf(points));
             } else {
-                outcome = "LOSS";
+                if (points == betAmount * 2) {
+                    outcomeLabel.setText("WIN (x2)");;
+                } else {
+                    outcomeLabel.setText("BIG WIN (x7)");
+                }
+                winsLabel.setText("+" + points);
             }
 
-
-            resultLabel.setText(number);
+            updatePoints(points);
 
             betAmount = 0;
             colorGuess = "";
@@ -154,8 +128,9 @@ public class ControllerRoulette {
         rotate.play();
     }
 
-    private void updatePoints() {
-        pointsLabel.setText("Points: " + points);
+    private void updatePoints(int points) {
+        user.addPoints(points);
+        pointsLabel.setText(user.getUsername() + ": " + user.getPoints());
     }
 
     public void setTextColor(Label label, String text) {
@@ -165,6 +140,9 @@ public class ControllerRoulette {
             return;
         } else if (text.equals("Black")) {
             label.setTextFill(BLACK);
+            return;
+        } else if (text.equals("0") || text.equals("00")) {
+            label.setTextFill(Color.web("#178A69"));
             return;
         }
 
