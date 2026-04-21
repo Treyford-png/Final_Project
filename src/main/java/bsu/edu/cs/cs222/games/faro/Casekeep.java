@@ -1,8 +1,5 @@
 package bsu.edu.cs.cs222.games.faro;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,17 +46,16 @@ public class Casekeep {
      */
     public String output() {
         StringBuilder output = new StringBuilder();
-        output.append("Casekeep:\n");
         int counter = 1;
         for (String key : casekeep.keySet()) {
             output.append("[").append(key).append("]").append(" - ").append(casekeep.get(key));
-            if (counter % 3 == 0) {
+            if (counter % 4 == 0) {
                 output.append("\n");
             } else {
-                output.append(" ");
+                output.append(", ");
             }
             counter++;
         }
-        return output.toString();
+        return output.substring(0, output.length() - 2); // truncates last comma-space
     }
 }
