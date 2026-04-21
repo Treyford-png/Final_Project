@@ -2,22 +2,30 @@ package bsu.edu.cs.cs222.games.roulette;
 
 import bsu.edu.cs.cs222.characters.User;
 import javafx.animation.RotateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import static javafx.scene.paint.Color.BLACK;
+import static javafx.scene.paint.Color.RED;
 
 public class ControllerRoulette {
 
     @FXML private ImageView wheelImage;
     @FXML private Label pointsLabel;
+    @FXML private Label resultLabel;
+    @FXML private Label betLabel;
+    @FXML private Spinner<Integer> setPoints;
 
     private Roulette roulette;
-
+    User user;
     private int points = 1000;
     private int betAmount = 0;
 
@@ -41,98 +49,64 @@ public class ControllerRoulette {
             "22","24","26","28","29","31","33","35"
     };
 
+    public void setUser(User user) {
+        this.user = user;
+        points = user.getPoints();
+        setPoints.setPromptText(String.valueOf(points));
+    }
+
     @FXML
     public void initialize() {
 
         roulette = new Roulette(new User("You", "test", 0));
 
         Image image = new Image(
-                getClass().getResource("/fxmls/roulette.png").toExternalForm()
+                getClass().getResource("/images/wheel_pixel.jpg").toExternalForm()
         );
         wheelImage.setImage(image);
 
-        updatePoints();
+        //updatePoints();
     }
 
     @FXML
     private void betRed() {
         colorGuess = "red";
-        showBetModeChoice();
     }
 
     @FXML
     private void betBlack() {
         colorGuess = "black";
-        showBetModeChoice();
     }
 
     @FXML
     private void colorOnlyBet() {
         betMode = BetMode.COLOR_ONLY;
         numberGuess = "x";
-
-        askBet();
     }
 
-    private void showBetModeChoice() {
-
-        ButtonType numberBet = new ButtonType("Number + Color");
-        ButtonType colorBet = new ButtonType("Color Only");
-        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Choose Bet Type");
-        alert.setHeaderText("Select betting mode");
-        alert.setContentText("How do you want to bet?");
-
-        alert.getButtonTypes().setAll(numberBet, colorBet, cancel);
-
-        alert.showAndWait().ifPresent(choice -> {
-
-            if (choice == numberBet) {
-                betMode = BetMode.NUMBER_COLOR;
-                showNumberPicker(colorGuess.equals("red") ? redNumbers : blackNumbers);
-            }
-
-            else if (choice == colorBet) {
-                betMode = BetMode.COLOR_ONLY;
-                colorOnlyBet();
-            }
-        });
+    public void setBetToButton(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        String text = clickedButton.getText();
+        setTextColor(betLabel, text);
+        betLabel.setText(text);
     }
 
-    private void showNumberPicker(String[] numbers) {
-
-        ChoiceDialog<String> dialog = new ChoiceDialog<>(numbers[0], numbers);
-        dialog.setTitle("Pick Number");
-        dialog.setHeaderText("Choose a " + colorGuess + " number");
-        dialog.setContentText("Number:");
-
-        dialog.showAndWait().ifPresent(choice -> {
-            numberGuess = choice;
-            askBet();
-        });
-    }
-
-    private void askBet() {
-
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Place Bet");
-        dialog.setHeaderText("You have " + points + " points");
-        dialog.setContentText("Enter bet amount:");
-
-        dialog.showAndWait().ifPresent(input -> {
-            try {
-                betAmount = Integer.parseInt(input);
-            } catch (Exception e) {
-                betAmount = 0;
-            }
-        });
+    public void getBet(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        String text = clickedButton.getText();
+        if (text.equals("Red") || text.equals("Black")) {
+            colorGuess = text.toLowerCase();
+        } else {
+            numberGuess = text;
+        }
     }
 
     @FXML
     private void handleSpin() {
 
+        betAmount = 50;
+        betMode = BetMode.COLOR_ONLY;
+        colorGuess = "red";
         if (betAmount <= 0 || betAmount > points || betMode == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Bet");
@@ -168,28 +142,8 @@ public class ControllerRoulette {
                 outcome = "LOSS";
             }
 
-            try {
-                FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/fxmls/result-viewer-roulette.fxml")
-                );
 
-                Stage stage = new Stage();
-                stage.setScene(new Scene(loader.load()));
-
-                ResultController controller = loader.getController();
-                controller.setData(
-                        number,
-                        color,
-                        outcome,
-                        points
-                );
-
-                stage.setTitle("Spin Result");
-                stage.show();
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            resultLabel.setText(number);
 
             betAmount = 0;
             colorGuess = "";
@@ -202,5 +156,30 @@ public class ControllerRoulette {
 
     private void updatePoints() {
         pointsLabel.setText("Points: " + points);
+    }
+
+    public void setTextColor(Label label, String text) {
+        // Handles colors
+        if (text.equals("Red")) {
+            label.setTextFill(Color.web("#BD203F"));
+            return;
+        } else if (text.equals("Black")) {
+            label.setTextFill(BLACK);
+            return;
+        }
+
+        // Handles numbers
+        boolean isRed = false;
+        for (String str : redNumbers) {
+            if (str.equals(text)) {
+                isRed = true;
+                break;
+            }
+        }
+        if (isRed) {
+            label.setTextFill(Color.web("#BD203F"));
+        } else {
+            label.setTextFill(BLACK);
+        }
     }
 }
