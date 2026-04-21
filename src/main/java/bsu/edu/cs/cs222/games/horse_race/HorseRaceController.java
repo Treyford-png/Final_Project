@@ -1,36 +1,33 @@
 package bsu.edu.cs.cs222.games.horse_race;
 import bsu.edu.cs.cs222.characters.User;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class HorseRace {
+public class HorseRaceController {
     private final Horse[] horses; // Array that holds all race horses
     private final Random random;
-    private final User user;
+    private User user;
     private JTextArea outputArea;
     private JFrame frame;
+    private int winningHorse;
     private int userGuess;
     private int wager;
+    @FXML private Label path1;
+    @FXML private Label path2;
+    @FXML private Label path3;
+    @FXML private Label path4;
+    @FXML private Label path5;
 
-    public HorseRace(User user) {
-        this.user = user;
+    public HorseRaceController() {
+        this.user = null;
         random = new Random();
-
-        //Create GUI window
-        frame = new JFrame("Horse Race");
-        frame.setSize(600, 400);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        outputArea = new JTextArea();
-        outputArea.setEditable(false);
-        outputArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
-        outputArea.setBackground(Color.decode("#d6b588"));
-
-
-        frame.add(new JScrollPane(outputArea));
-        frame.setVisible(true);
 
         // Populate horses
         Horse horse1 = new Horse(1, 50);
@@ -41,6 +38,11 @@ public class HorseRace {
         horses = new Horse[]{horse1, horse2, horse3, horse4, horse5};
     }
 
+    public void setUser(User user) {
+        this.user = user;
+        horseRace();
+    }
+
     /**
      * Primary logic for horse race
      * Gets guess and wager, runs horses, then calculates points
@@ -48,28 +50,26 @@ public class HorseRace {
     public void horseRace() {
 
         // User guesses which horse will win
-        int userGuess = getUserGuess();
+        userGuess = getUserGuess();
         while (userGuess < 0 || userGuess > 5) { // Invalid Input
             userGuess = getUserGuess();
         }
         if (userGuess == 0) { // User cancels
-            frame.dispose();
             return;
         }
 
         // User places wager
-        int wager = getUserWager();
+        wager = getUserWager();
         while (wager == -1) { // Invalid input
             wager = getUserWager();
         }
         user.makeWager(wager);
 
         // Race itself
-        int winningHorse = runRace();
-        calcPoints(winningHorse, userGuess, wager);
+        runRace();
 
         // As horse races were normally just one round, there is no need to loop
-        println("That completes today's entertainment. Please join us again for more racing\n");
+        //println("That completes today's entertainment. Please join us again for more racing\n");
     }
 
     /**
@@ -121,35 +121,41 @@ public class HorseRace {
     /**
      * Loops horse racing logic until one reaches the end
      * Horse on top wins in ties
-     *
-     * @return int of winning horse
      */
-    public int runRace() {
-        boolean raceOver = false;
-        int winningHorse = -1;
-        println("AND THEY'RE OFF!\n");
+    public void runRace() {
+        for (Horse horse : horses) {
+            horse.moveToStart();
+        }
+        //println("AND THEY'RE OFF!\n");
 
         // Loops until winner found
-        while (!raceOver) {
-            println("");
-            for (Horse horse : horses) {
-                horse.turn(random.nextInt(100)); // Randomizes if horse moves on its turn
-                println(buildTrackString(horse));
-                if (horse.hasWon()) {
-                    winningHorse = horse.getName();
-                    raceOver = true;
-                    break;
-                }
+        int time = 100;
+        Timer timer = new Timer();
+        winningHorse = -1;
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    runHorses();
+
+                    if (winningHorse != -1) {
+                        timer.cancel();
+                        calcPoints(winningHorse, userGuess, wager);
+                    }
+                });
             }
-            try {
-                // Prevents entire race from being displayed at once
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        }, 0, 100);
+    }
+
+    public void runHorses() {
+        for (Horse horse : horses) {
+            horse.turn(random.nextInt(100));
+            println(horse);
+            if (horse.hasWon()) {
+                winningHorse = horse.getName();
+                return; // Stop immediately on first winner
             }
         }
-
-        return winningHorse;
     }
 
     /**
@@ -161,11 +167,11 @@ public class HorseRace {
      */
     public void calcPoints(int winner, int userGuess, int wager) {
         if (userGuess == winner) { // Won
-            println("Congratulations, pardner! Horse " + winner + " won!");
+            //println("Congratulations, pardner! Horse " + winner + " won!");
             user.addPoints(wager + (wager * 5));
-            println("You just won " + (wager * 5) + " points!");
+            //println("You just won " + (wager * 5) + " points!");
         } else { // Lost
-            println("Ouch! Your horse wasn't quite fast enough this time.");
+            //println("Ouch! Your horse wasn't quite fast enough this time.");
         }
 
         // Make changes permanent
@@ -178,10 +184,10 @@ public class HorseRace {
      */
     public String buildTrackString(Horse horse) {
         StringBuilder lane = new StringBuilder();
-        lane.append("Horse ").append(horse.getName()).append(": ");
+        lane.append(horse.getName()).append(": ");
         for (int i = 0; i < horse.TRACK_LEN; i++) {
             if (i == horse.getPosition()) {
-                lane.append("\uD83C\uDFC7 ");
+                lane.append("\uD83C\uDFC7");
             } else {
                 lane.append(". ");
             }
@@ -190,8 +196,22 @@ public class HorseRace {
     }
 
     //Printing the GUI
-    private void println(String text) {
-        outputArea.append(text + "\n");
-        outputArea.setCaretPosition(outputArea.getDocument().getLength());
+    private void println(Horse horse) {
+        switch (horse.getName()) {
+            case 1:
+                path1.setText(buildTrackString(horse));
+                break;
+            case 2:
+                path2.setText(buildTrackString(horse));
+                break;
+            case 3:
+                path3.setText(buildTrackString(horse));
+                break;
+            case 4:
+                path4.setText(buildTrackString(horse));
+                break;
+            case 5:
+                path5.setText(buildTrackString(horse));
+        }
     }
 }

@@ -67,8 +67,8 @@ public class MainMenu {
                 faro.runGame();
                 break;
             case 2: // Horse Race
-                HorseRace horseRace = new HorseRace(user);
-                horseRace.horseRace();
+                //HorseRace horseRace = new HorseRace(user);
+                //horseRace.horseRace();
                 break;
             case 3: // Liberty Bell
                 LibertyBellGame libertyBell = new LibertyBellGame(user);

@@ -70,4 +70,8 @@ public class User {
             throw new RuntimeException(e);
         }
     }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }
