@@ -58,7 +58,6 @@ public class Horse {
         if (coinFlipNumber <= flipChance) {
             advance();
         }
-        printLane();
     }
 
     public static int getTrackLen() {
