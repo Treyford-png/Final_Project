@@ -35,7 +35,7 @@ public final class LibertyBellMachine {
             return a.getPoints();
         } else if (a == b || b == c || a == c ) {
             LibertyBellSymbols matched = (a == b || a== c) ? a : b;
-            return matched.getPoints() / 2;
+        return matched.getPoints() / 2;
         }
         return 0;
     }
