@@ -1,11 +1,17 @@
 package bsu.edu.cs.cs222.games.horse_race;
 import bsu.edu.cs.cs222.characters.User;
+import bsu.edu.cs.cs222.menues.MainMenuController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,16 +20,11 @@ public class HorseRaceController {
     private final Horse[] horses; // Array that holds all race horses
     private final Random random;
     private User user;
-    private JTextArea outputArea;
-    private JFrame frame;
     private int winningHorse;
     private int userGuess;
     private int wager;
-    @FXML private Label path1;
-    @FXML private Label path2;
-    @FXML private Label path3;
-    @FXML private Label path4;
-    @FXML private Label path5;
+    @FXML
+    private Label path1, path2, path3, path4, path5;
 
     public HorseRaceController() {
         this.user = null;
@@ -38,91 +39,31 @@ public class HorseRaceController {
         horses = new Horse[]{horse1, horse2, horse3, horse4, horse5};
     }
 
-    public void setUser(User user) {
+    public void setUser(User user) throws IOException {
         this.user = user;
-        horseRace();
+        createHorsePicker();
     }
 
     /**
      * Primary logic for horse race
      * Gets guess and wager, runs horses, then calculates points
      */
-    public void horseRace() {
+    public void horseRace(int userGuess, int wager) throws IOException {
 
         // User guesses which horse will win
-        userGuess = getUserGuess();
-        while (userGuess < 0 || userGuess > 5) { // Invalid Input
-            userGuess = getUserGuess();
-        }
-        if (userGuess == 0) { // User cancels
-            return;
-        }
-
-        // User places wager
-        wager = getUserWager();
-        while (wager == -1) { // Invalid input
-            wager = getUserWager();
-        }
+        this.userGuess = userGuess;
+        this.wager = wager;
         user.makeWager(wager);
 
         // Race itself
         runRace();
-
-        // As horse races were normally just one round, there is no need to loop
-        //println("That completes today's entertainment. Please join us again for more racing\n");
-    }
-
-    /**
-     * Asks the user which horse to wager on
-     *
-     * @return int of winning horse
-     */
-    public int getUserGuess() {
-        String input = JOptionPane.showInputDialog(
-                null,
-                "Welcome to the Horse Race!",
-                "\nWhich horse will win? (1, 2, 3, 4, or 5): ");
-        try {
-            if (input == null) {
-                return 0;
-            }
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return -1;
-        }
-    }
-
-    /**
-     * Asks user for amount to wager
-     *
-     * @return wager, -1 if invalid
-     */
-    public int getUserWager() {
-        int points = user.getPoints();
-        String input = JOptionPane.showInputDialog(
-                null,
-                "You have " + points + " points. How much would you like to wager: "
-        );
-        try {
-            int wager = Integer.parseInt(input);
-            if (wager >= points) { // Wager too high
-                int choice = JOptionPane.showConfirmDialog(
-                        null,
-                        "You only have " + points + ". Would you like to go all in?\n(0) no, (1) yes: "
-                );
-                return (choice == JOptionPane.YES_OPTION) ? points : -1;
-            }
-            return wager;
-        } catch (Exception e) {
-            return -1;
-        }
     }
 
     /**
      * Loops horse racing logic until one reaches the end
      * Horse on top wins in ties
      */
-    public void runRace() {
+    public void runRace() throws IOException {
         for (Horse horse : horses) {
             horse.moveToStart();
         }
@@ -141,6 +82,11 @@ public class HorseRaceController {
                     if (winningHorse != -1) {
                         timer.cancel();
                         calcPoints(winningHorse, userGuess, wager);
+                        try {
+                            resetToMainMenu();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 });
             }
@@ -167,16 +113,16 @@ public class HorseRaceController {
      */
     public void calcPoints(int winner, int userGuess, int wager) {
         if (userGuess == winner) { // Won
-            //println("Congratulations, pardner! Horse " + winner + " won!");
+            JOptionPane.showMessageDialog(null, "Congratulations, pardner! Horse " + winner + " won!");
             user.addPoints(wager + (wager * 5));
-            //println("You just won " + (wager * 5) + " points!");
+            JOptionPane.showMessageDialog(null, "You just won " + (wager * 5) + " points!");
         } else { // Lost
-            //println("Ouch! Your horse wasn't quite fast enough this time.");
+            JOptionPane.showMessageDialog(null, "Ouch! Your horse wasn't quite fast enough this time.");
         }
 
         // Make changes permanent
         user.savePoints();
-        System.out.println("That leaves you with " + user.getPoints() + " points");
+        JOptionPane.showMessageDialog(null, "That leaves you with " + user.getPoints() + " points");
     }
 
     /**
@@ -213,5 +159,29 @@ public class HorseRaceController {
             case 5:
                 path5.setText(buildTrackString(horse));
         }
+    }
+
+    public void createHorsePicker() throws IOException {
+        FXMLLoader pickerLoader = new FXMLLoader(getClass().getResource("/fxmls/pick_your_horse.fxml"));
+        Parent root = pickerLoader.load();
+        Stage stage2 = new Stage();
+        stage2.setTitle("Pick Your Horse");
+        stage2.setScene(new Scene(root));
+        stage2.show();
+
+        // Passes user and HorseRaceController into new stage
+        HorsePickerController hpc = pickerLoader.getController();
+        hpc.setUser(user);
+        hpc.setHorseRaceController(this);
+    }
+
+    private void resetToMainMenu() throws IOException {
+        FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/main_menu.fxml"));
+        Parent root = mmLoader.load();
+        Stage stage = (Stage) path1.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+        MainMenuController mmController = mmLoader.getController();
+        mmController.setUser(user);
     }
 }

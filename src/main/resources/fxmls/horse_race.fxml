@@ -4,6 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -14,29 +15,58 @@
             <Image url="@../images/horse_race_background.png" />
          </image>
       </ImageView>
-      <VBox layoutX="33.0" layoutY="415.0" prefHeight="247.0" prefWidth="1123.0">
+      <VBox layoutX="33.0" layoutY="355.0" prefHeight="307.0" prefWidth="1123.0">
          <children>
+            <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1123.0" spacing="50.0">
+               <children>
+                  <Label fx:id="path11" alignment="CENTER" prefHeight="51.0" prefWidth="111.0" text="1. Gibby" textFill="#810a0a">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="path111" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="51.0" prefWidth="111.0" text="2. Billy" textFill="#276314">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="path1111" alignment="CENTER" prefHeight="51.0" prefWidth="153.0" text="3. Belisarius" textFill="#6e107e">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="path11111" alignment="CENTER" prefHeight="51.0" prefWidth="153.0" text="4. Unicycle" textFill="#944807">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="path111111" alignment="CENTER" prefHeight="51.0" prefWidth="286.0" text="5. Canvas Discussion Thread" textFill="#121496">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <Label fx:id="path1" alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="1026.0" text="1: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ." textFill="#810a0a">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="path2" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="51.0" prefWidth="1026.0" text="2: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ." textFill="#1f0b8c">
+            <Label fx:id="path2" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="51.0" prefWidth="1026.0" text="2: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ." textFill="#276314">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="path3" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="61.0" prefHeight="51.0" prefWidth="1026.0" text="3: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ." textFill="#09690d">
+            <Label fx:id="path3" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="61.0" prefHeight="51.0" prefWidth="1026.0" text="3: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ." textFill="#6e107e">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="path4" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="112.0" prefHeight="51.0" prefWidth="1026.0" text="4: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ." textFill="#864a12">
+            <Label fx:id="path4" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="112.0" prefHeight="51.0" prefWidth="1026.0" text="4: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ." textFill="#944807">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="path5" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="164.0" prefHeight="51.0" prefWidth="1026.0" text="5: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .">
+            <Label fx:id="path5" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="164.0" prefHeight="51.0" prefWidth="1026.0" text="5: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ." textFill="#121496">
                <font>
                   <Font size="22.0" />
                </font>

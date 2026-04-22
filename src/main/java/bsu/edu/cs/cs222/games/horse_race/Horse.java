@@ -25,7 +25,7 @@ public class Horse {
     }
 
     public boolean hasWon() {
-        return position == 0;
+        return position == -1;
     }
 
     /**

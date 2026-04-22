@@ -39,4 +39,5 @@ public class HelpersFX {
         spinner.setValueFactory(valueFactory);
         spinner.setEditable(true);
     }
+
 }
