@@ -15,6 +15,12 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Controller for running the horse race game in JavaFX
+ *
+ * @author Holden Hankins
+ * @author JJ Owsley
+ */
 public class HorseRaceController {
     private final Horse[] horses; // Array that holds all race horses
     private final Random random;
@@ -23,7 +29,7 @@ public class HorseRaceController {
     private int userGuess;
     private int wager;
     @FXML
-    private Label path1, path2, path3, path4, path5;
+    private Label path1, path2, path3, path4, path5; // Horse lanes
 
     public HorseRaceController() {
         this.user = null;
@@ -40,6 +46,8 @@ public class HorseRaceController {
 
     public void setUser(User user) throws IOException {
         this.user = user;
+
+        // Waits until user is created before injecting user points to horsePicker
         createHorsePicker();
     }
 
@@ -92,6 +100,9 @@ public class HorseRaceController {
         }, 0, 100);
     }
 
+    /**
+     * Runs each horse once (one flip per horse)
+     */
     public void runHorses() {
         for (Horse horse : horses) {
             horse.turn(random.nextInt(100));
@@ -106,9 +117,9 @@ public class HorseRaceController {
     /**
      * Readds wager and adds 5:1 payout to user
      *
-     * @param winner    of the race
+     * @param winner of the race
      * @param userGuess guessed horse to win
-     * @param wager     points wagered by user
+     * @param wager points wagered by user
      */
     public void calcPoints(int winner, int userGuess, int wager) {
         if (userGuess == winner) { // Won
@@ -130,7 +141,7 @@ public class HorseRaceController {
     public String buildTrackString(Horse horse) {
         StringBuilder lane = new StringBuilder();
         lane.append(horse.getName()).append(": ");
-        for (int i = 0; i < horse.TRACK_LEN; i++) {
+        for (int i = 0; i < Horse.TRACK_LEN; i++) {
             if (i == horse.getPosition()) {
                 lane.append("\uD83C\uDFC7");
             } else {
@@ -140,9 +151,12 @@ public class HorseRaceController {
         return lane.toString();
     }
 
-    //Printing the GUI
+    /**
+     * Updates a horse's path with its new position
+     * @param horse Horse object
+     */
     private void println(Horse horse) {
-        switch (horse.getName()) {
+        switch (horse.getName()) { // I hate this too
             case 1:
                 path1.setText(buildTrackString(horse));
                 break;
@@ -160,6 +174,10 @@ public class HorseRaceController {
         }
     }
 
+    /**
+     * Creates a window to allow the user to pick a horse and bet on it
+     * @throws IOException generic exception
+     */
     public void createHorsePicker() throws IOException {
         FXMLLoader pickerLoader = new FXMLLoader(getClass().getResource("/fxmls/games/pick_your_horse.fxml"));
         Parent root = pickerLoader.load();
@@ -174,6 +192,12 @@ public class HorseRaceController {
         hpc.setHorseRaceController(this);
     }
 
+    /**
+     * Moves back to main menu
+     * Since this cannot be static, duplicating code seems optimal here rather than pass data
+     * to a new object
+     * @throws IOException generic exception
+     */
     private void resetToMainMenu() throws IOException {
         FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/main_menu.fxml"));
         Parent root = mmLoader.load();

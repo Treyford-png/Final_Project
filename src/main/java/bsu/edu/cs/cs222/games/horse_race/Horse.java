@@ -1,9 +1,19 @@
 package bsu.edu.cs.cs222.games.horse_race;
 
+/**
+ * Used for each horse in HorseRace and contains stored data needed to race
+ * int name
+ * int flipChance - Chance of 'flipping a coin' and advancing
+ * int position - location on track (starts from right)
+ * int TRACK_LEN
+ *
+ * @author JJ Owsley
+ * @author Holden Hankins
+ */
 public class Horse {
     private final int name;
-    private final int flipChance; // Chance of 'flipping a coin' and advancing
-    private int position; // location on track
+    private final int flipChance;
+    private int position;
     public static final int TRACK_LEN = 85;
 
     public Horse(int name, int flipChance) {
@@ -34,6 +44,7 @@ public class Horse {
     public void printLane() {
         StringBuilder lane = new StringBuilder("[");
 
+        // generates lane
         for (int i = 0; i < TRACK_LEN; i++) {
             if (i == position) {
                 lane.append(name).append(" ");
@@ -41,9 +52,9 @@ public class Horse {
                 lane.append(". ");
             }
         }
-
         System.out.println(lane + "]");
 
+        // Notifies that horse won race
         if (position >= TRACK_LEN) {
             System.out.println("HORSE #" + name + " WINS!!!");
         }

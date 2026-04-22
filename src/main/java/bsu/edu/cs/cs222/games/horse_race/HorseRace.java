@@ -5,14 +5,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * Runs logic for horse race game
+ * Mainly used for test cases
+ *
+ * @author JJ Owsley
+ * @author Holden Hankins
+ */
 public class HorseRace {
-    private final Horse[] horses; // Array that holds all race horses
+    private final Horse[] horses;
     private final Random random;
     private final User user;
-    private JTextArea outputArea;
-    private JFrame frame;
-    private int userGuess;
-    private int wager;
+    private final JTextArea outputArea;
+    private final JFrame frame;
 
     public HorseRace(User user) {
         this.user = user;
@@ -147,7 +152,7 @@ public class HorseRace {
                 // Prevents entire race from being displayed at once
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("error");
             }
         }
 
@@ -181,7 +186,7 @@ public class HorseRace {
     public String buildTrackString(Horse horse) {
         StringBuilder lane = new StringBuilder();
         lane.append("Horse ").append(horse.getName()).append(": ");
-        for (int i = 0; i < horse.TRACK_LEN; i++) {
+        for (int i = 0; i < Horse.TRACK_LEN; i++) {
             if (i == horse.getPosition()) {
                 lane.append("\uD83C\uDFC7 ");
             } else {
@@ -191,13 +196,17 @@ public class HorseRace {
         return lane.toString();
     }
 
-    //Replaces output area to text
+    /**
+     * Replaces output area to text
+     */
     private void setText(String text) {
         outputArea.setText(text);
         outputArea.setCaretPosition(0);
     }
 
-    //Printing the GUI
+    /**
+     * Prints the GUI
+     */
     private void println(String text) {
         outputArea.append(text + "\n");
         outputArea.setCaretPosition(outputArea.getDocument().getLength());
