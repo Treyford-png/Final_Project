@@ -4,6 +4,11 @@ import bsu.edu.cs.cs222.characters.User;
 
 import java.util.Scanner;
 
+/**
+ * Handles a text version of Liberty Bell slots
+ *
+ * @author Laura Romero
+ */
 public class LibertyBellGame {
     User user;
     LibertyBellMachine libertyBell;
@@ -14,6 +19,9 @@ public class LibertyBellGame {
         this.libertyBell = new LibertyBellMachine();
     }
 
+    /**
+     * Upon prompt, spins reels for player
+     */
     public void playGame() {
         int playAgain;
         for (int i = 0; i < 1000; i++) {
@@ -27,6 +35,9 @@ public class LibertyBellGame {
         }
     }
 
+    /**
+     * Gets the user's bet and spins the wheel
+     */
     public void spin() {
         int wager = getWager();
         while (wager == -1) {
@@ -36,6 +47,11 @@ public class LibertyBellGame {
         //libertyBell.spinAndApply(true);
     }
 
+    /**
+     * Gets the user's bet
+     *
+     * @return wager/bet
+     */
     public int getWager() {
         lbScanner = new Scanner(System.in);
         System.out.print("Please enter a new wager: ");

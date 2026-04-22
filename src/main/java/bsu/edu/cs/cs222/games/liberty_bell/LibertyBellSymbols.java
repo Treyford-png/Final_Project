@@ -1,6 +1,12 @@
-
 package bsu.edu.cs.cs222.games.liberty_bell;
 
+/**
+ * Enum for each symbol that can appear on the wheel
+ * String: name
+ * int: points received
+ *
+ * @author Laura Romero
+ */
 public enum LibertyBellSymbols {
     LIBERTY_BELL("Liberty Bell", 1000),
     HORSESHOE("Horseshoe", 500),
@@ -17,5 +23,6 @@ public enum LibertyBellSymbols {
     }
 
     public String getDisplayName() { return displayName; }
+
     public int getPoints() { return points; }
 }

@@ -4,7 +4,6 @@ import bsu.edu.cs.cs222.games.liberty_bell.*;
 import bsu.edu.cs.cs222.games.liberty_bell.LibertyBellMachine;
 import bsu.edu.cs.cs222.games.liberty_bell.LibertyBellSymbols;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,19 +14,18 @@ public class LibertyBellMachineTest {
     /**
      *  Returns a fake random from index 0 if the strip is {BELL,BELL,BELL} will return BELL BELL BELL
      */
-
     private LibertyBellMachine machineWithFixed(LibertyBellSymbols... symbols) {
         Random fakeRng = new Random(0);
-        return new LibertyBellMachine(fakeRng, symbols, user);
+        return new LibertyBellMachine(fakeRng, symbols);
     }
 
     @Test
     public void enumPointValues_areCorrect() {
-        assertEquals(10000, LibertyBellSymbols.LIBERTY_BELL.getPoints());
-        assertEquals(5000, LibertyBellSymbols.HORSESHOE.getPoints());
-        assertEquals(2000, LibertyBellSymbols.DIAMOND.getPoints());
-        assertEquals(1000, LibertyBellSymbols.SPADE.getPoints());
-        assertEquals(500,LibertyBellSymbols.HEART.getPoints());
+        assertEquals(1000, LibertyBellSymbols.LIBERTY_BELL.getPoints());
+        assertEquals(500, LibertyBellSymbols.HORSESHOE.getPoints());
+        assertEquals(200, LibertyBellSymbols.DIAMOND.getPoints());
+        assertEquals(100, LibertyBellSymbols.SPADE.getPoints());
+        assertEquals(50,LibertyBellSymbols.HEART.getPoints());
     }
 
     // calculate payout logic tests
@@ -40,7 +38,7 @@ public class LibertyBellMachineTest {
                 LibertyBellSymbols.LIBERTY_BELL,
                 LibertyBellSymbols.LIBERTY_BELL
         } ;
-        assertEquals(10000, machine.calculatePayout(result));
+        assertEquals(1000, machine.calculatePayout(result));
     }
 
 
@@ -53,7 +51,7 @@ public class LibertyBellMachineTest {
                 LibertyBellSymbols.HEART
 
         };
-        assertEquals(5000, machine.calculatePayout(result));
+        assertEquals(500, machine.calculatePayout(result));
     }
 
     @Test
@@ -83,7 +81,7 @@ public class LibertyBellMachineTest {
     @Test
     public void spin_SingleSymbolStrip_alwaysReturnsThatSymbol() {
         LibertyBellSymbols [] singleStrip = {LibertyBellSymbols.HEART};
-        LibertyBellMachine machine = new LibertyBellMachine(new Random(), singleStrip, user);
+        LibertyBellMachine machine = new LibertyBellMachine(new Random(), singleStrip);
     }
 
     @Test
