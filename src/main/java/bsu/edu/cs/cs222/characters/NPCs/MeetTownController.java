@@ -25,7 +25,7 @@ public class MeetTownController {
     }
 
     public void back() throws IOException {
-        FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/main_menu.fxml"));
+        FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/main_menu.fxml"));
         Parent root = mmLoader.load();
         Stage stage = (Stage) textArea.getScene().getWindow();
         stage.setScene(new Scene(root));

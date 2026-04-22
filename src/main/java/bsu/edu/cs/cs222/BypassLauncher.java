@@ -2,25 +2,18 @@ package bsu.edu.cs.cs222;
 
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.menues.MainMenuController;
-import bsu.edu.cs.cs222.menues.leaderboard.Leaderboard;
-import bsu.edu.cs.cs222.menues.leaderboard.RunLeaderboard;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class BypassLauncher extends Application {
     @Override
     public void start(Stage stage) {
         try {
 
-            FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/main_menu.fxml"));
+            FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/main_menu.fxml"));
             Parent root = mmLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);

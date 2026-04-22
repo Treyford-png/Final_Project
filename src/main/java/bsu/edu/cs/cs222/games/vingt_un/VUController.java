@@ -8,13 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
-
-import static bsu.edu.cs.cs222.games.vingt_un.HandStatus.NATURAL_21;
 
 public class VUController {
     private User user;
@@ -155,7 +151,7 @@ public class VUController {
     }
 
     public void launchBetScreen() throws IOException {
-        FXMLLoader betLoader = new FXMLLoader(getClass().getResource("/fxmls/vu_set_bet.fxml"));
+        FXMLLoader betLoader = new FXMLLoader(getClass().getResource("/fxmls/games/vu_set_bet.fxml"));
         Parent root = betLoader.load();
         Stage stage2 = new Stage();
         stage2.setTitle("Set Bet");

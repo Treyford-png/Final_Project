@@ -2,11 +2,9 @@ package bsu.edu.cs.cs222.helpers;
 
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.menues.MainMenuController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
@@ -15,7 +13,7 @@ import java.io.IOException;
 
 public class HelpersFX {
     public static void gotoMainMenu(User user, Stage mainStage) throws IOException {
-        FXMLLoader mmLoader = new FXMLLoader(HelpersFX.class.getResource("/fxmls/main_menu.fxml"));
+        FXMLLoader mmLoader = new FXMLLoader(HelpersFX.class.getResource("/fxmls/menues/main_menu.fxml"));
         Parent root = mmLoader.load();
         mainStage.setScene(new Scene(root));
         mainStage.show();

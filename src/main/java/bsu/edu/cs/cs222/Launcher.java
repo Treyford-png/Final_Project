@@ -1,7 +1,5 @@
 package bsu.edu.cs.cs222;
 
-import bsu.edu.cs.cs222.menues.leaderboard.Leaderboard;
-import bsu.edu.cs.cs222.menues.leaderboard.RunLeaderboard;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -18,13 +16,13 @@ public class Launcher extends Application {
     public void start(Stage stage) {
         try {
             // Legal Notices
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/legal_stuff.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/menues/legal_stuff.fxml")));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
 
             // Splash Screen
-            Parent root2 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/splash_screen.fxml")));
+            Parent root2 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/menues/splash_screen.fxml")));
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
@@ -34,7 +32,7 @@ public class Launcher extends Application {
             }, 2000);
 
             // Title Screen
-            Parent root3 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/launch_page.fxml")));
+            Parent root3 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/menues/launch_page.fxml")));
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {

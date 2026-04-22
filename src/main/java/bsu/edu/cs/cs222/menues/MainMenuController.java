@@ -34,7 +34,7 @@ public class MainMenuController {
     }
 
     public void faro() throws IOException {
-        FXMLLoader faroLoader = new FXMLLoader(getClass().getResource("/fxmls/faro.fxml"));
+        FXMLLoader faroLoader = new FXMLLoader(getClass().getResource("/fxmls/games/faro.fxml"));
         Parent root = faroLoader.load();
         Stage stage = (Stage) playerInfo.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -44,7 +44,7 @@ public class MainMenuController {
     }
 
     public void horseRace() throws IOException {
-        FXMLLoader hrLoader = new FXMLLoader(getClass().getResource("/fxmls/horse_race.fxml"));
+        FXMLLoader hrLoader = new FXMLLoader(getClass().getResource("/fxmls/games/horse_race.fxml"));
         Parent root = hrLoader.load();
         Stage stage = (Stage) playerInfo.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -54,7 +54,7 @@ public class MainMenuController {
     }
 
     public void libby() throws IOException {
-        FXMLLoader lbLoader = new FXMLLoader(getClass().getResource("/fxmls/LibertyBellEntryView.fxml"));
+        FXMLLoader lbLoader = new FXMLLoader(getClass().getResource("/fxmls/games/LibertyBellEntryview.fxml"));
         Parent root = lbLoader.load();
         Stage stage = (Stage) playerInfo.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -65,7 +65,7 @@ public class MainMenuController {
 
 
     public void roulette() throws IOException {
-        FXMLLoader rouletteLoader = new FXMLLoader(getClass().getResource("/fxmls/roulette-view.fxml"));
+        FXMLLoader rouletteLoader = new FXMLLoader(getClass().getResource("/fxmls/games/roulette-view.fxml"));
         Parent root = rouletteLoader.load();
         Stage stage = (Stage) playerInfo.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -76,7 +76,7 @@ public class MainMenuController {
 
 
     public void vu() throws IOException {
-        FXMLLoader vuLoader = new FXMLLoader(getClass().getResource("/fxmls/vingt_un.fxml"));
+        FXMLLoader vuLoader = new FXMLLoader(getClass().getResource("/fxmls/games/vingt_un.fxml"));
         Parent root = vuLoader.load();
         Stage stage = (Stage) playerInfo.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -88,7 +88,7 @@ public class MainMenuController {
     }
 
     public void leaderboard() throws IOException {
-        FXMLLoader leaderboardLoader = new FXMLLoader(getClass().getResource("/fxmls/leaderboard.fxml"));
+        FXMLLoader leaderboardLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/leaderboard.fxml"));
         Parent root = leaderboardLoader.load();
         Stage stage = (Stage) playerInfo.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -99,7 +99,7 @@ public class MainMenuController {
     }
 
     public void meetTown() throws IOException {
-        FXMLLoader townLoader = new FXMLLoader(getClass().getResource("/fxmls/meet_town.fxml"));
+        FXMLLoader townLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/meet_town.fxml"));
         Parent root = townLoader.load();
         Stage stage = (Stage) playerInfo.getScene().getWindow();
         stage.setScene(new Scene(root));

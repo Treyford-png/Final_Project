@@ -38,7 +38,7 @@ public class LogInController {
     }
 
     public void gotoMainMenu(User user) throws IOException {
-        FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/main_menu.fxml"));
+        FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/main_menu.fxml"));
         Parent root = mmLoader.load();
         mainStage.setScene(new Scene(root));
         mainStage.show();

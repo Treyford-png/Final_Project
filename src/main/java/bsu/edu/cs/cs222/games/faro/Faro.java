@@ -273,7 +273,7 @@ public class Faro {
     }
 
     public void openCasekeep() throws IOException {
-        FXMLLoader casekeepLoader = new FXMLLoader(getClass().getResource("/fxmls/faro_casekeep.fxml"));
+        FXMLLoader casekeepLoader = new FXMLLoader(getClass().getResource("/fxmls/games/faro_casekeep.fxml"));
         Parent root = casekeepLoader.load();
         Stage stage2 = new Stage();
         stage2.setTitle("Casekeep");
@@ -285,7 +285,7 @@ public class Faro {
 
     public void openCpuBets(ActionEvent event) throws IOException {
         // Loads table stage
-        FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("/fxmls/faro_table_npc.fxml"));
+        FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("/fxmls/games/faro_table_npc.fxml"));
         Parent root = tableLoader.load();
         Stage stage2 = new Stage();
         stage2.setTitle("Table");
@@ -303,7 +303,7 @@ public class Faro {
     }
 
     public void openPlayerBets() throws IOException {
-        FXMLLoader playerTableLoader = new FXMLLoader(getClass().getResource("/fxmls/faro_table_player.fxml"));
+        FXMLLoader playerTableLoader = new FXMLLoader(getClass().getResource("/fxmls/games/faro_table_player.fxml"));
         Parent root = playerTableLoader.load();
         Stage stage2 = new Stage();
         stage2.setTitle("Your Table");

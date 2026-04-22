@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Timer;
@@ -162,7 +161,7 @@ public class HorseRaceController {
     }
 
     public void createHorsePicker() throws IOException {
-        FXMLLoader pickerLoader = new FXMLLoader(getClass().getResource("/fxmls/pick_your_horse.fxml"));
+        FXMLLoader pickerLoader = new FXMLLoader(getClass().getResource("/fxmls/games/pick_your_horse.fxml"));
         Parent root = pickerLoader.load();
         Stage stage2 = new Stage();
         stage2.setTitle("Pick Your Horse");
@@ -176,7 +175,7 @@ public class HorseRaceController {
     }
 
     private void resetToMainMenu() throws IOException {
-        FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/main_menu.fxml"));
+        FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/main_menu.fxml"));
         Parent root = mmLoader.load();
         Stage stage = (Stage) path1.getScene().getWindow();
         stage.setScene(new Scene(root));

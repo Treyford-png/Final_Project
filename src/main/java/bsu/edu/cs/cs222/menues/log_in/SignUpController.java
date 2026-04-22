@@ -42,7 +42,7 @@ public class SignUpController {
     }
 
     public void loadSignedUp(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/signed_up_book.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/menues/signed_up_book.fxml")));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

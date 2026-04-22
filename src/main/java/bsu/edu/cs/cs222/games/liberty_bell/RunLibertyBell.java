@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class RunLibertyBell extends Application {
 
     public static void main(String[] args) {
@@ -14,9 +16,8 @@ public class RunLibertyBell extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(
-                getClass().getResource("/fxmls/LibertyBellEntryview.fxml")
-        );
+        Parent root = FXMLLoader.load(Objects.requireNonNull
+                (getClass().getResource("/fxmls/games/LibertyBellEntryview.fxml")));
         Scene scene = new Scene(root, 500, 500);
         stage.setTitle("Liberty Bell Slots");
         stage.setScene(scene);

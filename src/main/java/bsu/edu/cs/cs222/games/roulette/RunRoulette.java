@@ -11,7 +11,7 @@ public class RunRoulette extends Application {
     public void start(Stage stage) throws Exception {
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/fxmls/roulette-view.fxml")
+                getClass().getResource("/fxmls/games/roulette-view.fxml")
         );
 
         Scene scene = new Scene(loader.load());

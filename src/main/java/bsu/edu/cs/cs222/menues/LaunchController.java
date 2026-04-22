@@ -2,10 +2,8 @@ package bsu.edu.cs.cs222.menues;
 
 
 import bsu.edu.cs.cs222.menues.log_in.LogInController;
-import bsu.edu.cs.cs222.menues.log_in.SignUpController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +18,7 @@ public class LaunchController {
 
 
     public void goToLogIn() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/fxmls/log_in_book.fxml")));
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/fxmls/menues/log_in_book.fxml")));
         Parent root = loader.load();
 
         LogInController controller = loader.getController();
@@ -33,7 +31,7 @@ public class LaunchController {
     }
 
     public void goToSignUp() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/sign_up_book.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/menues/sign_up_book.fxml")));
         Stage stage2 = new Stage();
         stage2.setTitle("Logbook");
         stage2.setScene(new Scene(root));
@@ -51,7 +49,7 @@ public class LaunchController {
     }
 
     public void loadMainMenu() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/main_menu.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/menues/main_menu.fxml")));
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
