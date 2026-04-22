@@ -5,17 +5,29 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.HashMap;
 
+/**
+ * Terminal based version of roulette
+ * Logic methods such as calcResults still used
+ * Also used in testing
+ * HashMap<String, String> colorMap numbers and their corresponding color on wheel
+ *
+ * @author Treyford Mercer
+ */
 public class Roulette {
     private final User user;
     private Scanner input;
     private HashMap<String, String> colorMap;
 
-    public Roulette(User user) { // creating the roulette hashmap per session per user
+
+    public Roulette(User user) {
         this.user = user;
         populateRouletteWheel();
     }
 
-    public void runRoulette() { // Requests if the user wants to keep playing or not.
+    /**
+     * Requests if the user wants to keep playing or not.
+     */
+    public void runRoulette() {
         for (int i = 0; i < 1000; i++) {
             rouletteGame();
             input = new Scanner(System.in);
@@ -26,11 +38,19 @@ public class Roulette {
         }
     }
 
+    /**
+     * Gets the color of a number
+     * @param key number as String
+     * @return color as lowercase String
+     */
     public String getColor(String key) {
         return colorMap.get(key);
     }
 
-    public void populateRouletteWheel() { // Hashmap that assigns colors to corresponding numbers
+    /**
+     * Assigns all values to colorMap
+     */
+    public void populateRouletteWheel() {
         colorMap = new HashMap<>();
         colorMap.put("0", "green");
         colorMap.put("00", "green");
@@ -72,7 +92,11 @@ public class Roulette {
         colorMap.put("36", "red");
     }
 
-    public String spinWheel() { // randomly selects number from hashmap
+    /**
+     * randomly selects number from colorMap
+     * @return color selected
+     */
+    public String spinWheel() {
         Random random = new Random();
         int rand = random.nextInt(38);
         if (rand == 37) {
@@ -82,7 +106,10 @@ public class Roulette {
         }
     }
 
-    public void rouletteGame() { //Runs the game based on user input
+    /**
+     * Runs the game based on user input
+     */
+    public void rouletteGame() {
         input = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
         Random number = new Random();
@@ -127,6 +154,14 @@ public class Roulette {
         }
     }
 
+    /**
+     * Calculates
+     * @param number number generated
+     * @param numberGuess number the player guessed
+     * @param colorGuess color the player guessed
+     * @param bet amount the user bet
+     * @return amount won
+     */
     public int calcResults(String number, String numberGuess, String colorGuess, int bet) {
         System.out.println(number + ", " + numberGuess + ", " + colorGuess + ", " + bet);
 
@@ -157,10 +192,12 @@ public class Roulette {
         return bet - (bet * 2);
     }
 
+    /**
+     * Saves points to the user
+     * @param points points to save
+     */
     public void savePoints(int points) { // Saves points for user
         user.addPoints(points - user.getPoints());
         user.savePoints();
-        System.out.println("Your current points: " + user.getPoints());
-
     }
 }

@@ -5,6 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Runs an FXML version of roulette purely for testing
+ *
+ * @author Treyford Mercer
+ */
 public class RunRoulette extends Application {
 
     @Override
