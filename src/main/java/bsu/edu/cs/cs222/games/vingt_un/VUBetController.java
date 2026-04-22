@@ -1,6 +1,7 @@
 package bsu.edu.cs.cs222.games.vingt_un;
 
 import bsu.edu.cs.cs222.characters.User;
+import bsu.edu.cs.cs222.helpers.HelpersFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -9,7 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class VUBetController {
-    private User user;private VUController vuController;
+    private User user;
+    private VUController vuController;
     @FXML
     private Spinner<Integer> betSpinner;
     @FXML
@@ -31,7 +33,7 @@ public class VUBetController {
 
     public void setUser(User user) {
         this.user = user;
-        setValueFactory();
+        HelpersFX.setFactory(betSpinner, user.getPoints());
         pointsLabel.setText(String.valueOf(user.getPoints()));
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.setOnCloseRequest(event -> {
@@ -41,22 +43,6 @@ public class VUBetController {
                 throw new RuntimeException(e);
             }
         });
-    }
-
-    private void setValueFactory() {
-        SpinnerValueFactory<Integer> valueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(25, user.getPoints(), 25) {
-            @Override
-            public void increment(int steps) {
-                setValue(Math.min(getValue() + (steps * 25), user.getPoints()));
-            }
-
-            @Override
-            public void decrement(int steps) {
-                setValue(Math.max(getValue() - (steps * 25), 25));
-            }
-        };
-        betSpinner.setValueFactory(valueFactory);
     }
 
     public void placeBet() {

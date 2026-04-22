@@ -19,37 +19,18 @@ import static bsu.edu.cs.cs222.games.vingt_un.HandStatus.NATURAL_21;
 public class VUController {
     private User user;
     private VingtUn vu;
-    private  VingtUnPlayer player;
-    private VingtUnPlayer npc1;
-    private VingtUnPlayer npc2;
+    private  VingtUnPlayer player, npc1, npc2;
     private record NPCLabels(Label name, Label total, Label bet, Label cards) {}
 
     // Bottom panel
-    @FXML public Button buttonHit;
-    @FXML public Button buttonStand;
-    @FXML public Label userHandValue;
-    @FXML public Label userPointsLabel;
-
+    @FXML public Button buttonHit, buttonStand;
+    @FXML public Label userHandValue, userPointsLabel;
     // Player
-    @FXML public Label userCards;
-    @FXML public Label userBetAmount;
-
+    @FXML public Label userCards, userBetAmount;
     // Left side NPC
-    @FXML public Label npcOneTotal;
-    @FXML public Label npcOneName;
-    @FXML public Label npcOneBet;
-    @FXML public Label npcOneCards;
-    @FXML public Label handValue1;
-
+    @FXML public Label npcOneTotal, npcOneName, npcOneBet, npcOneCards, handValue1;
     // Right side NPC
-    @FXML public Label npcTwoTotal;
-    @FXML public Label npcTwoName;
-    @FXML public Label npcTwoBet;
-    @FXML public Label npcTwoCards;
-    @FXML public Label handValue2;
-
-    @FXML public VBox deckOutline;
-
+    @FXML public Label npcTwoTotal, npcTwoName, npcTwoBet, npcTwoCards, handValue2;
 
     public VUController() {
         user = new User("placeholder", "placeholder", 0);
