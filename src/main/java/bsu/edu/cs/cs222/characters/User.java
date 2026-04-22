@@ -1,6 +1,7 @@
 package bsu.edu.cs.cs222.characters;
 
 import bsu.edu.cs.cs222.characters.NPCs.AllNPCs;
+import bsu.edu.cs.cs222.characters.NPCs.NPC;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for a separate panel to allow the user to bet on this round
+ *
+ * @author Holden Hankins
+ */
 public class VUBetController {
     private User user;
     private VUController vuController;
@@ -31,6 +36,10 @@ public class VUBetController {
         this.vuController = vuController;
     }
 
+    /**
+     * Once the user is set, the spinner's value factor can be set, as well as the ability to exit
+     * @param user the user
+     */
     public void setUser(User user) {
         this.user = user;
         HelpersFX.setFactory(betSpinner, user.getPoints());
@@ -45,12 +54,19 @@ public class VUBetController {
         });
     }
 
+    /**
+     * Allows user to place a bet
+     */
     public void placeBet() {
         vuController.placeBet(betSpinner.getValue());
         close();
         vuController.gameTurn();
     }
 
+    /**
+     * Checks if user wants to leave the game
+     * @throws IOException catchall
+     */
     public void exit() throws IOException {
         // Create confirmation panel
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -64,6 +80,9 @@ public class VUBetController {
         }
     }
 
+    /**
+     * Closes the panel
+     */
     public void close() {
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.close();

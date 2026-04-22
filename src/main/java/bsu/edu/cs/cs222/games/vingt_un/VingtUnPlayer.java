@@ -1,13 +1,25 @@
 package bsu.edu.cs.cs222.games.vingt_un;
 
-import bsu.edu.cs.cs222.characters.*;
-import bsu.edu.cs.cs222.libraries.cards.*;
+import bsu.edu.cs.cs222.libraries.cards.Card;
+import bsu.edu.cs.cs222.libraries.cards.CardDeck;
 
 import java.util.Scanner;
 
 import static bsu.edu.cs.cs222.games.vingt_un.HandStatus.NATURAL_21;
 
-
+/**
+ * Player for Vingt-Un
+ * Includes both players and npcs
+ * String name/username
+ * int - points
+ * int - amount bet
+ * Hand - player's hand
+ * boolean isDealer
+ * boolean isUser
+ * Scanner - used for terminal version
+ *
+ * @author Holden Hankins
+ */
 public class VingtUnPlayer {
     private final String name;
     private int points;
@@ -15,7 +27,6 @@ public class VingtUnPlayer {
     private Hand hand;
     private boolean isDealer;
     private final boolean isUser;
-    private boolean isWinner;
     private final Scanner vuPlayerscanner = new Scanner(System.in);
 
 
@@ -26,7 +37,6 @@ public class VingtUnPlayer {
         isDealer = false;
         wager = 0;
         hand = new Hand();
-        isWinner = false;
     }
 
     public String getName() {
@@ -62,6 +72,9 @@ public class VingtUnPlayer {
         return wager;
     }
 
+    /**
+     * Used to double the wager if the player has to pay double
+     */
     public void doubleWager() {
         int extra = Math.min(wager, points);
         wager += extra;
@@ -74,17 +87,6 @@ public class VingtUnPlayer {
 
     public void hit(CardDeck deckOfCards) {
         hand.addCard(deckOfCards.deal());
-    }
-
-    public Card drawCard(CardDeck deckOfCards) {
-        return deckOfCards.deal();
-    }
-
-    public void endRound(boolean won) {
-        if (won) {
-            points += wager;
-        }
-        hand = new Hand();
     }
 
     /**
@@ -161,13 +163,5 @@ public class VingtUnPlayer {
         System.out.println(hand.getOutput());
         System.out.print("Would you like to (1) HIT or (2) STAND: ");
         return vuPlayerscanner.nextInt(); // invalid input handled in userTurn
-    }
-
-    public void setWinner(boolean isWinner) {
-        this.isWinner = isWinner;
-    }
-
-    public boolean isWinner() {
-        return isWinner;
     }
 }

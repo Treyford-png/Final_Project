@@ -6,6 +6,14 @@ import bsu.edu.cs.cs222.libraries.cards.CardDeck;
 import java.util.ArrayList;
 import static bsu.edu.cs.cs222.games.vingt_un.HandStatus.*;
 
+/**
+ * An object that contains a hand of cards for vingt-un
+ * ArrayList - cards in hand
+ * handValue - added together value of all cards(0 if busted)
+ * handStatus - if the hand is busted, 21, or in play
+ *
+ * @author Holden Hankins
+ */
 public class Hand {
     private final ArrayList<Card> hand;
     private int handValue;
@@ -33,17 +41,14 @@ public class Hand {
         handValue = 0;
     }
 
-    public Card getCard(int i) {
-        if (i >= hand.size()) {
-            return null;
-        }
-        return hand.get(i);
-    }
-
     public int getHandValue() {
         return handValue;
     }
 
+    /**
+     * Adds a card to hand and checks if it is over 21
+     * @param card Card to add
+     */
     public void addCard(Card card) {
         hand.add(card);
         handValue += (int) card.getValue();
@@ -95,6 +100,9 @@ public class Hand {
         }
     }
 
+    /**
+     * Creates a fresh new hand
+     */
     public void newHand() {
         hand.clear();
         handValue = 0;

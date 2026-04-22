@@ -2,6 +2,7 @@ package bsu.edu.cs.cs222.games.vingt_un;
 
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.libraries.cards.CardDeck;
+import bsu.edu.cs.cs222.menues.MainMenuController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller the handles the JavaFX gui for the Vingt-Un game
+ *
+ * @author Holden Hankins
+ */
 public class VUController {
     private User user;
     private VingtUn vu;
@@ -37,28 +43,45 @@ public class VUController {
         launchBetScreen();
     }
 
+    /**
+     * Iterates through a single game turn
+     * This turn includes dealing hands, hitting/standing, and the reveal
+     */
     public void gameTurn() {
+        // Reset
         vu.clearHands();
         resetLabels();
+
+        //Starting hands
         vu.startGame();
         userCards.setText(player.getHand().getOutput());
         userHandValue.setText(String.valueOf(player.getHand().getHandValue()));
+
+        // Set text and get npc wager
         npcOneCards.setText("[?] [?]");
         npcOneBet.setText("(" + npc1.getWager() + "p)");
         npcOneTotal.setText(npc1.getPoints() + "p");
-
         npcTwoCards.setText("[?] [?]");
         npcTwoBet.setText("(" + npc2.getWager() + "p)");
         npcTwoTotal.setText(npc2.getPoints() + "p");
+
+        // Allow user to bet
         unlockButtons();
     }
 
+    /**
+     * Starts a game
+     */
     public void start() {
         vu = new VingtUn(user);
         setNPCs();
         resetLabels();
         updateBottomBar();
     }
+
+    /**
+     * Sets local NPCs in a slightly more eloquent way
+     */
 
     private void setNPCs() {
         player = vu.getMainPlayer();
@@ -77,6 +100,9 @@ public class VUController {
         labels.total().setText(npc.getPoints() + "p");
     }
 
+    /**
+     * Resets all labels
+     */
     private void resetLabels() {
         npcOneBet.setText("");
         npcOneCards.setText("");
@@ -96,17 +122,27 @@ public class VUController {
         userPointsLabel.setText(user.getUsername() + " - " + player.getPoints());
     }
 
+    /**
+     * Allows player to gain 1 card
+     * @throws IOException catchall
+     */
     public void playerHit() throws IOException {
         player.hit(vu.getDeck());
         userCards.setText(player.getHand().getOutput());
         int value = player.getHand().getHandValue();
         userHandValue.setText(String.valueOf(value));
+
+        // Bust hand if needed
         if (value > 21) {
             player.getHand().setValueToZero();
             playerStand();
         }
     }
 
+    /**
+     * Ends turn if player elects to stand or hand exceeds 21
+     * @throws IOException catchall
+     */
     public void playerStand() throws IOException {
         lockButtons();
         aiTurns();
@@ -119,6 +155,13 @@ public class VUController {
         aiTurn(npc2, npcTwoCards, vu.getDeck(), 17);
     }
 
+    /**
+     * AI turn logic
+     * @param player npc
+     * @param cards their label on the board
+     * @param deck card deck
+     * @param riskFactor how much they are willing to bet
+     */
     public void aiTurn(VingtUnPlayer player, Label cards, CardDeck deck, int riskFactor) {
         Hand hand = player.getHand();
         if (hand.getHandValue() == 21) {
@@ -139,6 +182,10 @@ public class VUController {
         } // end while
     }
 
+    /**
+     * Sets all text to display the result to the user and launches another bet screen
+     * @throws IOException catchall
+     */
     public void endGame() throws IOException {
         npcOneCards.setText(npc1.getHand().getOutput());
         npcTwoCards.setText(npc2.getHand().getOutput());
@@ -150,6 +197,10 @@ public class VUController {
         launchBetScreen();
     }
 
+    /**
+     * Launches the bet screen for the player
+     * @throws IOException catchall
+     */
     public void launchBetScreen() throws IOException {
         FXMLLoader betLoader = new FXMLLoader(getClass().getResource("/fxmls/games/vu_set_bet.fxml"));
         Parent root = betLoader.load();
@@ -162,6 +213,10 @@ public class VUController {
         betController.setVUController(this);
     }
 
+    /**
+     * Takes a bet out of a player's account and shows it on screen
+     * @param bet int bet
+     */
     public void placeBet(int bet) {
         player.setWager(bet);
         userBetAmount.setText("(" + bet + "p)");
@@ -179,9 +234,17 @@ public class VUController {
         buttonStand.setDisable(true);
     }
 
-    public void closeGame() {
+    /**
+     * Reset to main screen
+     */
+    public void closeGame() throws IOException {
         vu.endGame();
+        FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/main_menu.fxml"));
+        Parent root = mmLoader.load();
         Stage stage = (Stage) buttonHit.getScene().getWindow();
-        stage.close();
+        stage.setScene(new Scene(root));
+        stage.show();
+        MainMenuController mmController = mmLoader.getController();
+        mmController.setUser(user);
     }
 }

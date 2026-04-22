@@ -78,6 +78,18 @@ public class AllNPCs implements Serializable {
         }
     }
 
+    public NPC getNPCAtIndex(int index) {
+        System.out.println(index);
+        int i = 0;
+        for (NPCHashMap.Entry<String, NPC> entry : npcs.entrySet()) {
+            if (i == index) {
+                return entry.getValue();
+            }
+            i++;
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
