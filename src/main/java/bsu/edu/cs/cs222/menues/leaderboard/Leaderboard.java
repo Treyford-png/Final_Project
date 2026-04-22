@@ -1,5 +1,14 @@
 package bsu.edu.cs.cs222.menues.leaderboard;
 
+import bsu.edu.cs.cs222.characters.User;
+import bsu.edu.cs.cs222.menues.MainMenuController;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,13 +20,20 @@ public class Leaderboard {
     private final ArrayList<LeaderboardNode> leaderboard; // username, points
     private final String userFileName; // ONLY MODIFIED IN TESTS
     private boolean corrupted; // USED FOR DEBUGGING ONLY
+    @FXML public TextArea textArea;
+    private User user; // Saves user to readd back to main menu
 
 
     public Leaderboard() {
         leaderboard = new ArrayList<>();
         userFileName = "list_of_users";
         corrupted = false;
+    }
+
+    @FXML
+    public void initialize() {
         populateLeaderboard();
+        textArea.setText(output());
     }
 
     /**
@@ -30,6 +46,11 @@ public class Leaderboard {
         leaderboard = new ArrayList<>();
         corrupted = false;
         populateLeaderboard();
+        textArea = new TextArea(output());
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void populateLeaderboard() {
@@ -71,12 +92,23 @@ public class Leaderboard {
         updateLeaderboard();
         StringBuilder output = new StringBuilder();
         for (LeaderboardNode node : leaderboard) {
-            output.append(node.toString()).append("\n");
+            System.out.println(node);
+            output.append(node).append("\n");
         }
-        return output.toString();
+        return output.substring(0, output.length() - 1); // truncates last \n char
     }
 
     public boolean isCorrupted() {
         return corrupted;
+    }
+
+    public void back() throws IOException {
+        FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/main_menu.fxml"));
+        Parent root = mmLoader.load();
+        Stage stage = (Stage) textArea.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+        MainMenuController mmController = mmLoader.getController();
+        mmController.setUser(user);
     }
 }
