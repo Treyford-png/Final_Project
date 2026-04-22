@@ -1,5 +1,6 @@
 package bsu.edu.cs.cs222.games.faro;
 
+import bsu.edu.cs.cs222.characters.NPCs.AllNPCs;
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.libraries.cards.*;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ public class Faro {
     private CardDeck deck;
     private String winningCard;
     private String losingCard;
+    private AllNPCs allNPCs;
     @FXML private Label dealerCard, playerCard, userPointsLabel,
             npcOneName, npcTwoName, npcOneTotal, npcTwoTotal, npcOneBetPoints, npcTwoBetPoints, playerBetPoints;
     @FXML private Button leftPlayerBets;
@@ -49,6 +51,7 @@ public class Faro {
 
     public void setUser(User user) {
         this.user = user;
+        allNPCs = user.getAllNPCS();
         FaroPlayerUser userPlayer = new FaroPlayerUser(user.getUsername(), user.getPoints());
         FaroPlayerCPU player2 = new FaroPlayerCPU("Angel Eyes", 5000);
         npcOneName.setText(player2.getName());

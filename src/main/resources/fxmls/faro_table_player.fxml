@@ -22,7 +22,7 @@
                <children>
                   <ChoiceBox fx:id="cardsDropdown" prefHeight="26.0" prefWidth="56.0" />
                   <Spinner fx:id="pointsSpinner" editable="true" />
-                  <Button mnemonicParsing="false" onAction="#addBetPlayer" text="ADD">
+                  <Button mnemonicParsing="false" onAction="#addBetPlayer" onMouseClicked="#addBetPlayer" text="ADD">
                      <font>
                         <Font name="Goudy Old Style Bold" size="12.0" />
                      </font></Button>
