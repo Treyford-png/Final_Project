@@ -17,16 +17,6 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) {
         try {
-
-            Leaderboard leaderboard = new Leaderboard();
-            System.out.println(leaderboard.output());
-
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/launch_page.fxml")));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-            /*
             // Legal Notices
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/legal_stuff.fxml")));
             Scene scene = new Scene(root);
@@ -51,7 +41,6 @@ public class Launcher extends Application {
                     Platform.runLater(() -> scene.setRoot(root3));
                 }
             }, 4000);
-             */
 
         } catch (Exception e) {
             System.out.println("Error");
