@@ -34,6 +34,21 @@ public class LibertyBellController {
                 resultLabel.setText("️ Wager must be a number : ");
                 return;
             }
+    public LibertyBellController() {}
+
+    public void setUser(User user) {
+        this.user = user;
+        setPointsLabel();
+        machine = new LibertyBellMachine();
+    }
+
+    @FXML
+    private void handleSpin() {
+        String wagerText = wagerField.getText().trim();
+        if (wagerText.isEmpty()) {
+            resultLabel.setText(" Place your wager partner: ");
+            return;
+        }
 
             if (wager <= 0 || wager > user.getPoints()) {
                 resultLabel.setText(" Invalid wager amount ");
@@ -58,14 +73,15 @@ public class LibertyBellController {
             }
         }
 
-        private String getEmoji(LibertyBellSymbols symbol) {
-            return switch (symbol) {
-                case LIBERTY_BELL -> "🔔";
-                case HORSESHOE -> "🧲";
-                case DIAMOND -> "💎";
-                case SPADE -> "♠️";
-                case HEART -> "❤️";
-            };
+        int payout = machine.calculatePayout(result);
+        if (payout > 0) {
+            user.addPoints(payout * 2);
+            resultLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #d2691e; -fx-font-weight: bold;");
+            resultLabel.setText("You won " + payout + " points!");
+        } else {
+            resultLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #c2abab; -fx-font-weight: bold;");
+            resultLabel.setText(" No luck this time partner!");
         }
+        setPointsLabel();
     }
 

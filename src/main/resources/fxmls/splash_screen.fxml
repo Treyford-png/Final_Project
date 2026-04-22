@@ -9,7 +9,7 @@
    <children>
       <ImageView cacheHint="SPEED" fitHeight="344.0" fitWidth="274.0" layoutX="478.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
          <image>
-            <Image url="@charles.png" />
+            <Image url="@../images/charles.png" />
          </image></ImageView>
       <Label cacheShape="false" layoutX="418.0" layoutY="472.0" prefHeight="92.0" prefWidth="364.0" text="Department of Computer Science" textFill="#cfcfcf">
          <font>

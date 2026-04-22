@@ -11,7 +11,7 @@ public class LibertyBellGame {
 
     public LibertyBellGame(User user) {
         this.user = user;
-        this.libertyBell = new LibertyBellMachine(user);
+        this.libertyBell = new LibertyBellMachine();
     }
 
     public void playGame() {
@@ -33,7 +33,7 @@ public class LibertyBellGame {
             wager = getWager();
         }
         user.makeWager(wager);
-        libertyBell.spinAndApply(true);
+        //libertyBell.spinAndApply(true);
     }
 
     public int getWager() {

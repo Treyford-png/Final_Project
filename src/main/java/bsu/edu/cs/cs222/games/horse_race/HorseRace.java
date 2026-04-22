@@ -11,6 +11,8 @@ public class HorseRace {
     private final User user;
     private JTextArea outputArea;
     private JFrame frame;
+    private int userGuess;
+    private int wager;
 
     public HorseRace(User user) {
         this.user = user;
@@ -126,19 +128,21 @@ public class HorseRace {
         boolean raceOver = false;
         int winningHorse = -1;
         println("AND THEY'RE OFF!\n");
+        StringBuilder roundDisplay;
 
         // Loops until winner found
         while (!raceOver) {
-            println("");
+            roundDisplay = new StringBuilder();
             for (Horse horse : horses) {
                 horse.turn(random.nextInt(100)); // Randomizes if horse moves on its turn
-                println(buildTrackString(horse));
+                roundDisplay.append(buildTrackString(horse));
                 if (horse.hasWon()) {
                     winningHorse = horse.getName();
                     raceOver = true;
                     break;
                 }
             }
+            setText(roundDisplay.toString());
             try {
                 // Prevents entire race from being displayed at once
                 Thread.sleep(500);
@@ -185,6 +189,12 @@ public class HorseRace {
             }
         }
         return lane.toString();
+    }
+
+    //Replaces output area to text
+    private void setText(String text) {
+        outputArea.setText(text);
+        outputArea.setCaretPosition(0);
     }
 
     //Printing the GUI

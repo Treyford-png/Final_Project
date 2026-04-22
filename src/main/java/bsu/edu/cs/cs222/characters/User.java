@@ -1,5 +1,7 @@
 package bsu.edu.cs.cs222.characters;
 
+import bsu.edu.cs.cs222.characters.NPCs.AllNPCs;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,6 +11,7 @@ public class User {
     private final String username;
     private final String password;
     private int points;
+    private AllNPCs allNPCS;
     Path filePath;
 
     public User(String username, String password, int points) {
@@ -16,17 +19,19 @@ public class User {
         this.password = password;
         this.points = points;
         filePath = Paths.get("src/main/resources/users/" + username + ".csv");
+        allNPCS = new AllNPCs(username);
     }
 
     public User(Path filePath) {
         try {
             BufferedReader userFileReader = Files.newBufferedReader(filePath);
-            String userLine = null;
+            String userLine;
             userLine = userFileReader.readLine();
             String[] parsedUserLine = userLine.split(",");
             username = parsedUserLine[0];
             password = parsedUserLine[1];
             points = Integer.parseInt(parsedUserLine[2]);
+            allNPCS = new AllNPCs(username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -42,10 +47,6 @@ public class User {
 
     public void addPoints(int pointsToAdd) {
         points += pointsToAdd;
-    }
-
-    public void subtractPoints(int pointsToSubtract) {
-        points -= points;
     }
 
     public boolean makeWager(int wager) {
@@ -73,5 +74,13 @@ public class User {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public AllNPCs getAllNPCS() {
+        return allNPCS;
     }
 }

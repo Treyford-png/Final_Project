@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.MainMenuController">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.menues.MainMenuController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1200.0" pickOnBounds="true">
          <image>
-            <Image url="@deadend_town.png" />
+            <Image url="@../images/deadend_town.png" />
          </image>
       </ImageView>
       <Button fx:id="btnLdrbrd" layoutX="73.0" layoutY="465.0" mnemonicParsing="false" onAction="#leaderboard" prefHeight="50.0" prefWidth="47.0" style="-fx-opacity: 0.5; -fx-border-color: gray;" />
@@ -54,7 +57,7 @@
             <Font name="Engravers MT" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="533.0" layoutY="55.0" prefHeight="82.0" prefWidth="336.0" text="DEADEND, OK" textAlignment="CENTER" textFill="#a67c2d">
+      <Label alignment="CENTER" layoutX="431.0" layoutY="60.0" prefHeight="82.0" prefWidth="336.0" text="DEADEND, OK" textAlignment="CENTER" textFill="#a67c2d">
          <font>
             <Font name="Playbill" size="80.0" />
          </font>

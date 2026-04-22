@@ -18,6 +18,7 @@ public class VingtUnPlayer {
     private boolean isWinner;
     private final Scanner vuPlayerscanner = new Scanner(System.in);
 
+
     public VingtUnPlayer(String name, int points, boolean isUser) {
         this.name = name;
         this.points = points;
@@ -62,14 +63,9 @@ public class VingtUnPlayer {
     }
 
     public void doubleWager() {
-        wager = wager * 2;
-        if (wager > points) {
-            wager = points;
-            points = 0;
-        }
-        else {
-            points -= wager / 2;
-        }
+        int extra = Math.min(wager, points);
+        wager += extra;
+        points -= extra;
     }
 
     public void addPoints(int newPoints) {
@@ -173,22 +169,5 @@ public class VingtUnPlayer {
 
     public boolean isWinner() {
         return isWinner;
-    }
-
-    public void wagerPrompt() {
-        System.out.println("You have " + points + " points. How much would you like to wager: ");
-        int userWager = vuPlayerscanner.nextInt();
-        if (userWager >= points) {
-            System.out.println("Would you like to go all in for " + points +"? (0) No, (1) Yes: ");
-            if (vuPlayerscanner.nextInt() == 1) {
-                setWager(points);
-            }
-            else {
-                wagerPrompt();
-            }
-        }
-        else {
-            setWager(userWager);
-        }
     }
 }

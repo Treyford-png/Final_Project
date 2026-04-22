@@ -1,5 +1,7 @@
 package bsu.edu.cs.cs222;
 
+import bsu.edu.cs.cs222.menues.leaderboard.Leaderboard;
+import bsu.edu.cs.cs222.menues.leaderboard.RunLeaderboard;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

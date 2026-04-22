@@ -40,6 +40,10 @@ public class Hand {
         return hand.get(i);
     }
 
+    public int getHandValue() {
+        return handValue;
+    }
+
     public void addCard(Card card) {
         hand.add(card);
         handValue += (int) card.getValue();
@@ -102,10 +106,10 @@ public class Hand {
      */
     public String getOutput() {
         StringBuilder returner = new StringBuilder();
+        returner.append(" "); // Offsets the extra space added during the loop
         for (Card card : hand) {
             returner.append("[").append(card.getShortName()).append("] ");
         }
-        returner.append("which has a value of ").append(handValue);
         return returner.toString();
     }
 }

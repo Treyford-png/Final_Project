@@ -33,11 +33,11 @@ public class LogInController {
             messageLabel.setText("username or password invalid");
         }
         else {
-            gotoMainMenu(user, event);
+            gotoMainMenu(user);
         }
     }
 
-    public void gotoMainMenu(User user, ActionEvent event) throws IOException {
+    public void gotoMainMenu(User user) throws IOException {
         FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/main_menu.fxml"));
         Parent root = mmLoader.load();
         mainStage.setScene(new Scene(root));

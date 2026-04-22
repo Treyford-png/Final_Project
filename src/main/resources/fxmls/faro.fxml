@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="700.0" maxWidth="1200.0" minHeight="700.0" minWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #eca256;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.games.faro.Faro">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1b084" height="573.0" layoutX="162.0" layoutY="-9.0" stroke="BLACK" strokeType="INSIDE" width="874.0">
+            <effect>
+                <DropShadow height="198.8" radius="97.14500000000001" width="191.78" />
+            </effect>
+        </Rectangle>
+        <Label alignment="CENTER" layoutX="448.0" layoutY="7.0" prefHeight="38.0" prefWidth="315.0" text="FARO">
+            <font>
+                <Font name="Playbill" size="75.0" />
+            </font>
+        </Label>
+        <HBox alignment="CENTER" layoutX="161.0" layoutY="562.0" prefHeight="106.0" prefWidth="874.0" spacing="40.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#drawCards" prefHeight="70.0" prefWidth="152.0" text="DEAL">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Button>
+         </children></HBox>
+        <VBox alignment="CENTER" layoutX="-190.0" layoutY="214.0" prefHeight="151.0" prefWidth="550.0" rotate="90.0">
+            <children>
+                <Label fx:id="npcOneName" alignment="CENTER" layoutX="246.0" layoutY="53.0" text="NAME">
+                    <font>
+                        <Font name="Playbill" size="75.0" />
+                    </font>
+                </Label>
+                <Label fx:id="npcOneTotal" alignment="CENTER" text="0p">
+                    <font>
+                        <Font name="SansSerif Bold" size="32.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+        <VBox alignment="CENTER" layoutX="836.0" layoutY="206.0" prefHeight="151.0" prefWidth="550.0" rotate="-90.0">
+            <children>
+                <Label fx:id="npcTwoName" alignment="CENTER" layoutX="246.0" layoutY="53.0" text="NAME">
+                    <font>
+                        <Font name="Playbill" size="75.0" />
+                    </font>
+                </Label>
+                <Label fx:id="npcTwoTotal" alignment="CENTER" text="0p">
+                    <font>
+                        <Font name="SansSerif Bold" size="32.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+      <Button layoutX="496.0" layoutY="149.0" mnemonicParsing="false" onAction="#openCasekeep" prefHeight="67.0" prefWidth="218.0" style="-fx-background-color: #855e42;" text="CASEKEEP">
+         <font>
+            <Font name="Goudy Old Style Bold" size="29.0" />
+         </font>
+      </Button>
+          <Button fx:id="bets" layoutX="463.0" layoutY="478.0" mnemonicParsing="false" onAction="#openPlayerBets" prefHeight="70.0" prefWidth="269.0" text="VIEW/PLACE BETS">
+              <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+              </font>
+              <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+              </cursor>
+          </Button>
+        <ToolBar layoutX="-3.0" layoutY="666.0" prefHeight="39.0" prefWidth="1204.0" style="-fx-background-color: maroon;">
+            <items>
+                <Label fx:id="userPointsLabel" prefHeight="30.0" prefWidth="496.0" text=" Username - 0000" textFill="WHITE">
+                    <font>
+                        <Font name="Playbill" size="28.0" />
+                    </font>
+                </Label>
+            </items>
+        </ToolBar>
+      <Button fx:id="leftPlayerBets" layoutX="146.0" layoutY="250.0" mnemonicParsing="false" onAction="#openCpuBets" prefHeight="69.0" prefWidth="136.0" rotate="90.0" text="BETS">
+         <font>
+            <Font name="SansSerif Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="rightPlayerBets" layoutX="916.0" layoutY="248.0" mnemonicParsing="false" onAction="#openCpuBets" prefHeight="69.0" prefWidth="136.0" rotate="-90.0" text="BETS">
+         <font>
+            <Font name="SansSerif Bold" size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="565.0" layoutY="291.0" prefHeight="67.0" prefWidth="90.0" text="[[[?]">
+         <font>
+            <Font name="SansSerif Bold" size="44.0" />
+         </font>
+      </Label>
+      <Label layoutX="349.0" layoutY="364.0" prefHeight="57.0" prefWidth="113.0" text="DEALER'S">
+         <font>
+            <Font name="Goudy Old Style" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="754.0" layoutY="363.0" prefHeight="58.0" prefWidth="113.0" text="PLAYER'S">
+         <font>
+            <Font name="Goudy Old Style" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="dealerCard" alignment="CENTER" layoutX="342.0" layoutY="291.0" prefHeight="67.0" prefWidth="113.0" text="[?]">
+         <font>
+            <Font name="SansSerif Bold" size="44.0" />
+         </font>
+      </Label>
+      <Label fx:id="playerCard" alignment="CENTER" layoutX="754.0" layoutY="291.0" prefHeight="67.0" prefWidth="114.0" text="[?]">
+         <font>
+            <Font name="SansSerif Bold" size="44.0" />
+         </font>
+      </Label>
+      <Label fx:id="npcOneBetPoints" alignment="CENTER" layoutX="262.0" layoutY="266.0" rotate="90.0" text="(0p)" textFill="#767676">
+         <font>
+            <Font name="SansSerif Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="npcTwoBetPoints" alignment="CENTER" layoutX="873.0" layoutY="266.0" rotate="-90.0" text="(0p)" textFill="#767676">
+         <font>
+            <Font name="SansSerif Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="playerBetPoints" alignment="CENTER" layoutX="570.0" layoutY="430.0" text="(0p)" textAlignment="CENTER" textFill="#767676">
+         <font>
+            <Font name="SansSerif Bold" size="32.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

@@ -122,27 +122,39 @@ public class Roulette {
             System.out.println("You now have " + points + " points.");
 
             count += 1;
-
             savePoints(points);
             System.out.println();
         }
     }
 
     public int calcResults(String number, String numberGuess, String colorGuess, int bet) {
-        //checks results and adjusts points accordingly
-        String color = colorMap.get(number);
-        System.out.println("> The spin is " + number + " which is " + color);
+        System.out.println(number + ", " + numberGuess + ", " + colorGuess + ", " + bet);
 
-        if (numberGuess.equalsIgnoreCase("x")) {
-            if (colorGuess.equalsIgnoreCase(color)) {
-                return (bet);
+        // Green 0 and 00 cases
+        if (number.equals("0") || number.equals("00")) {
+            return -bet;
+        }
+
+        String color = colorMap.get(number);
+        boolean colorMatch = colorGuess.equalsIgnoreCase(color);
+        boolean numberChosen = !numberGuess.equalsIgnoreCase("x");
+        boolean numberMatch = numberGuess.equals(number);
+
+        // Number bet x2
+        if (!numberChosen) {
+            if (colorMatch) {
+                System.out.println("color");
+                return bet * 2;
             }
-        } else {
-            if (colorGuess.equalsIgnoreCase(color) && numberGuess.equals(number)) {
-                return (bet * 6);
+        } else  {
+            if (numberMatch) {
+                System.out.println("number");
+                return bet * 7;
             }
         }
-        return 0;
+        // loss case
+        System.out.println("lost");
+        return bet - (bet * 2);
     }
 
     public void savePoints(int points) { // Saves points for user

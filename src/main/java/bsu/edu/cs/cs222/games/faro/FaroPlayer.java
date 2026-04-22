@@ -1,6 +1,4 @@
 package bsu.edu.cs.cs222.games.faro;
-
-import bsu.edu.cs.cs222.libraries.cards.Card;
 import bsu.edu.cs.cs222.libraries.cards.CardDeck;
 
 import java.util.HashMap;
@@ -61,7 +59,7 @@ public class FaroPlayer {
     }
 
     public void addToWager(String key, int amount) {
-        int current = wagers.get(key);
+        int current = wagers.get(key.toLowerCase());
         points -= amount;
         int amountToAdd = current + amount;
         wagers.put(key, amountToAdd);
@@ -81,5 +79,28 @@ public class FaroPlayer {
 
     public int getAmountToWager() {
         return 50;
+    }
+
+    public int getAmountPlaced() {
+        int amount = 0;
+        for (String key : wagers.keySet()) {
+            amount += wagers.get(key);
+        }
+        return amount;
+    }
+
+    public String getWagers() {
+        StringBuilder output = new StringBuilder();
+        int counter = 1;
+        for (String key : wagers.keySet()) {
+            output.append("[").append(key).append("]").append(" - ").append(wagers.get(key));
+            if (counter % 4 == 0) {
+                output.append("\n");
+            } else {
+                output.append(", ");
+            }
+            counter++;
+        }
+        return output.substring(0, output.length() - 2); // truncates last comma-space
     }
 }
