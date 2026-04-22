@@ -1,7 +1,7 @@
 package bsu.edu.cs.cs222.games.roulette;
 
 import bsu.edu.cs.cs222.characters.User;
-import bsu.edu.cs.cs222.helpers.ValueFactory;
+import bsu.edu.cs.cs222.helpers.HelpersFX;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +9,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 import static javafx.scene.paint.Color.BLACK;
 
@@ -51,7 +54,7 @@ public class ControllerRoulette {
     public void setUser(User user) {
         this.user = user;
         points = user.getPoints();
-        ValueFactory.setFactory(setPoints, user.getPoints());
+        HelpersFX.setFactory(setPoints, user.getPoints());
         pointsLabel.setText(user.getUsername() + ": " + user.getPoints());
     }
 
@@ -158,6 +161,18 @@ public class ControllerRoulette {
             label.setTextFill(Color.web("#BD203F"));
         } else {
             label.setTextFill(BLACK);
+        }
+    }
+
+    public void exit() throws IOException {
+        // Create confirmation panel
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("exit");
+        alert.setHeaderText("Do you want to exit roulette?");
+        alert.setHeaderText("All data will be saved?");
+
+        if(alert.showAndWait().get() == ButtonType.OK) {
+            HelpersFX.gotoMainMenu(user, (Stage) winsLabel.getScene().getWindow());
         }
     }
 }
