@@ -11,6 +11,8 @@ public class HorseRace {
     private final User user;
     private JTextArea outputArea;
     private JFrame frame;
+    private int userGuess;
+    private int wager;
 
     public HorseRace(User user) {
         this.user = user;

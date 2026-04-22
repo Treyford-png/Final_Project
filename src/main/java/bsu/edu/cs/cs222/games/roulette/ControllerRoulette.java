@@ -1,26 +1,36 @@
 package bsu.edu.cs.cs222.games.roulette;
 
 import bsu.edu.cs.cs222.characters.User;
+import bsu.edu.cs.cs222.helpers.HelpersFX;
 import javafx.animation.RotateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
+
+import static javafx.scene.paint.Color.BLACK;
 
 public class ControllerRoulette {
 
     @FXML private ImageView wheelImage;
     @FXML private Label pointsLabel;
+    @FXML private Label resultLabel;
+    @FXML private Label betLabel;
+    @FXML private Spinner<Integer> setPoints;
+    @FXML private Label winsLabel;
+    @FXML private Label outcomeLabel;
 
     private Roulette roulette;
-
+    User user;
     private int points = 1000;
     private int betAmount = 0;
-
+    private String betText;
     private String colorGuess = "";
     private String numberGuess = "x";
 
@@ -41,105 +51,50 @@ public class ControllerRoulette {
             "22","24","26","28","29","31","33","35"
     };
 
+    public void setUser(User user) {
+        this.user = user;
+        points = user.getPoints();
+        HelpersFX.setFactory(setPoints, user.getPoints());
+        pointsLabel.setText(user.getUsername() + ": " + user.getPoints());
+    }
+
     @FXML
     public void initialize() {
-
-        roulette = new Roulette(new User("You", "test", 0));
+        roulette = new Roulette(new User("placeholder", "placeholder", 0));
 
         Image image = new Image(
                 getClass().getResource("/images/wheel_pixel.jpg").toExternalForm()
         );
         wheelImage.setImage(image);
-
-        updatePoints();
+        betText = "empty";
     }
 
-    @FXML
-    private void betRed() {
-        colorGuess = "red";
-        showBetModeChoice();
+    public void setBetToButton(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        betText = clickedButton.getText();
+        System.out.println(clickedButton.getText());
+        setTextColor(betLabel, betText);
+        getBet();
+        betLabel.setText(betAmount + "p on " + betText);
     }
 
-    @FXML
-    private void betBlack() {
-        colorGuess = "black";
-        showBetModeChoice();
-    }
+    public void getBet() {
+        betAmount = setPoints.getValue();
+        if (betText.equals("Black") || betText.equals("Red")) {
+            numberGuess = "x";
+            colorGuess = betText.toLowerCase();
+        } else {
+            numberGuess = betText;
+            colorGuess = "x";
+        }
 
-    @FXML
-    private void colorOnlyBet() {
-        betMode = BetMode.COLOR_ONLY;
-        numberGuess = "x";
-
-        askBet();
-    }
-
-    private void showBetModeChoice() {
-
-        ButtonType numberBet = new ButtonType("Number + Color");
-        ButtonType colorBet = new ButtonType("Color Only");
-        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Choose Bet Type");
-        alert.setHeaderText("Select betting mode");
-        alert.setContentText("How do you want to bet?");
-
-        alert.getButtonTypes().setAll(numberBet, colorBet, cancel);
-
-        alert.showAndWait().ifPresent(choice -> {
-
-            if (choice == numberBet) {
-                betMode = BetMode.NUMBER_COLOR;
-                showNumberPicker(colorGuess.equals("red") ? redNumbers : blackNumbers);
-            }
-
-            else if (choice == colorBet) {
-                betMode = BetMode.COLOR_ONLY;
-                colorOnlyBet();
-            }
-        });
-    }
-
-    private void showNumberPicker(String[] numbers) {
-
-        ChoiceDialog<String> dialog = new ChoiceDialog<>(numbers[0], numbers);
-        dialog.setTitle("Pick Number");
-        dialog.setHeaderText("Choose a " + colorGuess + " number");
-        dialog.setContentText("Number:");
-
-        dialog.showAndWait().ifPresent(choice -> {
-            numberGuess = choice;
-            askBet();
-        });
-    }
-
-    private void askBet() {
-
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Place Bet");
-        dialog.setHeaderText("You have " + points + " points");
-        dialog.setContentText("Enter bet amount:");
-
-        dialog.showAndWait().ifPresent(input -> {
-            try {
-                betAmount = Integer.parseInt(input);
-            } catch (Exception e) {
-                betAmount = 0;
-            }
-        });
+        System.out.println(betText);
     }
 
     @FXML
     private void handleSpin() {
-
-        if (betAmount <= 0 || betAmount > points || betMode == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Invalid Bet");
-            alert.setContentText("Complete your bet before spinning.");
-            alert.showAndWait();
-            return;
-        }
+        getBet();
+        System.out.println(numberGuess + " " + colorGuess);
 
         RotateTransition rotate = new RotateTransition(Duration.seconds(4), wheelImage);
         rotate.setByAngle(1440);
@@ -147,49 +102,25 @@ public class ControllerRoulette {
         rotate.setOnFinished(e -> {
 
             String number = roulette.spinWheel();
-            String color = roulette.getColor(number);
+            setTextColor(resultLabel, number);
+            resultLabel.setText(number);
 
-            int result = roulette.calcResults(
-                    number,
-                    numberGuess,
-                    colorGuess,
-                    betAmount
-            );
+            int points = roulette.calcResults(number, numberGuess, colorGuess, betAmount);
+            System.out.println(points);
 
-            points += result;
-            updatePoints();
-
-            String outcome;
-            if (result == betAmount * 7) {
-                outcome = "BIG WIN (x7)";
-            } else if (result == betAmount * 2) {
-                outcome = "WIN (x2)";
+            if (points <= 0) {
+                outcomeLabel.setText("LOSS");
+                winsLabel.setText(String.valueOf(points));
             } else {
-                outcome = "LOSS";
+                if (points == betAmount * 2) {
+                    outcomeLabel.setText("WIN (x2)");;
+                } else {
+                    outcomeLabel.setText("BIG WIN (x7)");
+                }
+                winsLabel.setText("+" + points);
             }
 
-            try {
-                FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/fxmls/result-viewer-roulette.fxml")
-                );
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(loader.load()));
-
-                ResultController controller = loader.getController();
-                controller.setData(
-                        number,
-                        color,
-                        outcome,
-                        points
-                );
-
-                stage.setTitle("Spin Result");
-                stage.show();
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            updatePoints(points);
 
             betAmount = 0;
             colorGuess = "";
@@ -200,7 +131,48 @@ public class ControllerRoulette {
         rotate.play();
     }
 
-    private void updatePoints() {
-        pointsLabel.setText("Points: " + points);
+    private void updatePoints(int points) {
+        user.addPoints(points);
+        pointsLabel.setText(user.getUsername() + ": " + user.getPoints());
+    }
+
+    public void setTextColor(Label label, String text) {
+        // Handles colors
+        if (text.equals("Red")) {
+            label.setTextFill(Color.web("#BD203F"));
+            return;
+        } else if (text.equals("Black")) {
+            label.setTextFill(BLACK);
+            return;
+        } else if (text.equals("0") || text.equals("00")) {
+            label.setTextFill(Color.web("#178A69"));
+            return;
+        }
+
+        // Handles numbers
+        boolean isRed = false;
+        for (String str : redNumbers) {
+            if (str.equals(text)) {
+                isRed = true;
+                break;
+            }
+        }
+        if (isRed) {
+            label.setTextFill(Color.web("#BD203F"));
+        } else {
+            label.setTextFill(BLACK);
+        }
+    }
+
+    public void exit() throws IOException {
+        // Create confirmation panel
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("exit");
+        alert.setHeaderText("Do you want to exit roulette?");
+        alert.setHeaderText("All data will be saved?");
+
+        if(alert.showAndWait().get() == ButtonType.OK) {
+            HelpersFX.gotoMainMenu(user, (Stage) winsLabel.getScene().getWindow());
+        }
     }
 }

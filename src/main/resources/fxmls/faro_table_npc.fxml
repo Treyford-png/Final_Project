@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="277.0" prefWidth="376.0" style="-fx-background-color: #e1b084;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.games.faro.TableController">
+    <children>
+        <VBox alignment="CENTER" layoutX="15.0" prefHeight="275.0" prefWidth="348.0" spacing="5.0">
+            <children>
+                <Label fx:id="nameLabel" text="NAME">
+                    <font>
+                        <Font name="Playbill" size="30.0" />
+                    </font>
+                </Label>
+                <TextArea fx:id="betsArea" editable="false" prefHeight="181.0" prefWidth="348.0" wrapText="true">
+                    <font>
+                        <Font name="Goudy Old Style" size="22.0" />
+                    </font>
+                </TextArea>
+                <HBox alignment="CENTER" prefHeight="36.0" prefWidth="600.0" spacing="30.0">
+                    <children>
+                        <Button fx:id="updateButton" mnemonicParsing="false" onAction="#showBets" prefHeight="34.0" prefWidth="66.0" text="UPDATE">
+                            <font>
+                                <Font name="Goudy Old Style Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="277.0" layoutY="11.0" mnemonicParsing="false" onAction="#close" prefHeight="34.0" prefWidth="66.0" text="CLOSE">
+                            <font>
+                                <Font name="Goudy Old Style Bold" size="12.0" />
+                            </font></Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

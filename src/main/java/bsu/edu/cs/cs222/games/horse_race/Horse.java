@@ -4,12 +4,12 @@ public class Horse {
     private final int name;
     private final int flipChance; // Chance of 'flipping a coin' and advancing
     private int position; // location on track
-    public static final int TRACK_LEN = 10;
+    public static final int TRACK_LEN = 85;
 
     public Horse(int name, int flipChance) {
         this.name = name;
         this.flipChance = flipChance;
-        this.position = 9;
+        this.position = 84;
     }
 
     public int getName() {
@@ -21,7 +21,7 @@ public class Horse {
     }
 
     public void moveToStart() {
-        position = 0;
+        position = getTrackLen() - 1;
     }
 
     public boolean hasWon() {

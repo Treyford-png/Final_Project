@@ -1,5 +1,7 @@
 package bsu.edu.cs.cs222;
 
+import bsu.edu.cs.cs222.characters.User;
+import bsu.edu.cs.cs222.menues.MainMenuController;
 import bsu.edu.cs.cs222.menues.leaderboard.Leaderboard;
 import bsu.edu.cs.cs222.menues.leaderboard.RunLeaderboard;
 import javafx.application.Application;
@@ -13,10 +15,22 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Launcher extends Application {
+public class BypassLauncher extends Application {
     @Override
     public void start(Stage stage) {
         try {
+
+            FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/main_menu.fxml"));
+            Parent root = mmLoader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            MainMenuController mmController = mmLoader.getController();
+            mmController.setUser(new User("Test", "test", 5000));
+
+            stage.setScene(scene);
+            stage.show();
+
+            /*
             // Legal Notices
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/legal_stuff.fxml")));
             Scene scene = new Scene(root);
@@ -41,6 +55,7 @@ public class Launcher extends Application {
                     Platform.runLater(() -> scene.setRoot(root3));
                 }
             }, 4000);
+             */
 
         } catch (Exception e) {
             System.out.println("Error");
