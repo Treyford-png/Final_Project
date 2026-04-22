@@ -1,34 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.MotionBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="bsu.edu.cs.cs222.games.liberty_bell.LibertyBellController"
-      alignment="CENTER"
-      spacing="20"
-      style="-fx-background-color: #2b1a0e; -fx-padding: 30;">
+<StackPane maxHeight="700.0" maxWidth="1200.0" minHeight="700.0" minWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.games.liberty_bell.LibertyBellController">
 
-    <!-- Title -->
-    <Label text=" LIBERTY BELL SLOTS "
-           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f5c842;"/>
+    <ImageView fitHeight="598.0" fitWidth="1151.0" preserveRatio="false">
+        <image>
+            <Image url="@../images/libertybell_bg.jpg" />
+        </image>
+    </ImageView>
 
-    <Label text="~ Frontier Games ~"
-           style="-fx-font-size: 13px; -fx-text-fill: #c9a84c; -fx-font-style: italic;"/>
+          <VBox alignment="CENTER" prefHeight="652.0" prefWidth="1200.0" spacing="20.0" style="-fx-padding: 30; -fx-background-color: rgba(43,26,14,0.75); -fx-background-radius: 12;">
 
-    <!-- The 3 Reels -->
-    <HBox alignment="CENTER" spacing="12">
-        <Label fx:id="reel1" text="❓"
-               style="-fx-font-size: 44px; -fx-background-color: #1a0e05;
-                      -fx-border-color: #f5c842; -fx-border-width: 3;
-                      -fx-border-radius: 8; -fx-background-radius: 8;
-                      -fx-padding: 12 18;"/>
-        <Label fx:id="reel2" text="❓"
-               style="-fx-font-size: 44px; -fx-background-color: #1a0e05;
-                      -fx-border-color: #f5c842; -fx-border-width: 3;
-                      -fx-border-radius: 8; -fx-background-radius: 8;
-                      -fx-padding: 12 18;"/>
-        <Label fx:id="reel3" text="❓"
-               style="-fx-f
+              <Label alignment="CENTER" prefHeight="59.0" prefWidth="382.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #000000;" text="LIBERTY BELL SLOTS" textAlignment="RIGHT" textFill="#fcfcfc">
+            <font>
+                <Font name="Playbill" size="22.0" />
+            </font>
+            <effect>
+                <Glow />
+            </effect>
+      </Label>
+
+              <Label style="-fx-font-size: 13px; -fx-text-fill: #c9a84c; " text="FRONTIER GAMES" underline="true">
+            <font>
+                <Font name="Big Carlson" size="13.0" />
+            </font>
+            <effect>
+                <Bloom />
+            </effect>
+      </Label>
+
+              <HBox alignment="CENTER" spacing="12">
+            <Label fx:id="reel1" prefHeight="136.0" prefWidth="111.0" style="-fx-font-size: 44px; -fx-background-color: #ac8658;                           -fx-border-color: #000000; -fx-border-width: 3;                           -fx-border-radius: 8; -fx-background-radius: 8;                           -fx-padding: 12 18;" textFill="#252222" />
+            <Label fx:id="reel3" prefHeight="136.0" prefWidth="111.0" style="-fx-font-size: 44px; -fx-background-color: #a9875d;                           -fx-border-color: #000000; -fx-border-width: 3;                           -fx-border-radius: 8; -fx-background-radius: 8;                           -fx-padding: 12 18;" textFill="#280c0c" />
+            <Label fx:id="reel2" prefHeight="136.0" prefWidth="111.0" style="-fx-font-size: 44px; -fx-background-color: #bc9667;                           -fx-border-color: #000000; -fx-border-width: 3;                           -fx-border-radius: 8; -fx-background-radius: 8;                           -fx-padding: 12 18;" textFill="#1b0707" />
+        </HBox>
+
+              <Label style="-fx-font-size: 14px; -fx-text-fill: #f5c842;" text="Place Your Wager, Pardner ">
+            <font>
+                <Font name="Plantagenet Cherokee" size="13.0" />
+            </font>
+            <effect>
+                <Glow />
+            </effect>
+      </Label>
+
+              <TextField fx:id="wagerField" maxWidth="200" promptText="Enter points..." style="-fx-background-color: #f0e48c00; -fx-text-fill: #f5c842;                           -fx-border-color: #f5c842; -fx-border-width: 2;                           -fx-border-radius: 6; -fx-background-radius: 6;                           -fx-font-size: 14px; -fx-padding: 6 12;" />
+
+              <Button fx:id="spinButton" defaultButton="true" onAction="#handleSpin" style="-fx-background-color: #000000; -fx-text-fill: #d9c7be;                        -fx-font-size: 14px; -fx-font-weight: bold;                        -fx-border-color: #f0f8ff; -fx-border-width: 2;                        -fx-border-radius: 8; -fx-background-radius: 8;                        -fx-padding: 8 20;" text="SPIN" textFill="#bcae51" wrapText="true">
+            <font>
+                <Font name="PingFang HK Regular" size="13.0" />
+            </font>
+            <effect>
+                <Glow level="0.8" />
+            </effect>
+      </Button>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Pane prefHeight="100.0" prefWidth="524.0" />
+         
+                         <ImageView fitHeight="116.0" fitWidth="119.0" preserveRatio="true" style="-fx-opacity: .7;" x="500.0">
+                    <image>
+                        <Image url="@../images/cowboy.png" />
+                    </image>
+                    <effect>
+                  <MotionBlur radius="0.0">
+                     <input>
+                        <GaussianBlur />
+                     </input>
+                  </MotionBlur>
+                    </effect>
+                </ImageView>
+         </children>
+      </HBox>
+
+              <Label fx:id="resultLabel" style="-fx-font-size: 16px; -fx-text-fill: #f5c842; -fx-font-weight: bold;" text="" />
+    </VBox>
+   <VBox prefHeight="0.0" prefWidth="1139.0">
+      <children>
+         <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: maroon;">
+            <items>
+               <Label fx:id="usernamePointsLabel" text="Name - Points" textFill="WHITE">
+                  <font>
+                     <Font name="Playbill" size="26.0" />
+                  </font>
+               </Label>
+            </items>
+         </ToolBar>
+      </children>
+   </VBox>
+
+
+
+</StackPane>
