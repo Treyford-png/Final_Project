@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="343.0" fitWidth="513.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/log_book_1.png" />
+            <Image url="@../../images/log_book_1.png" />
          </image>
       </ImageView>
       <VBox layoutX="269.0" layoutY="59.0" prefHeight="36.0" prefWidth="186.0">

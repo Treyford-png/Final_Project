@@ -18,7 +18,7 @@
          <children>
                <ImageView fx:id="wheelImage" fitHeight="352.0" fitWidth="329.0" preserveRatio="true">
                    <image>
-                       <Image url="@../images/wheel_pixel.jpg" />
+                       <Image url="@../../images/wheel_pixel.jpg" />
                    </image>
             </ImageView>
             <Label fx:id="resultLabel" alignment="CENTER" prefHeight="61.0" prefWidth="307.0" textFill="WHITE">

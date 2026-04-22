@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.effect.GaussianBlur?>
-<?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.MotionBlur?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<StackPane maxHeight="700.0" maxWidth="1200.0" minHeight="700.0" minWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.games.liberty_bell.LibertyBellController">
+<StackPane maxHeight="700.0" maxWidth="1200.0" minHeight="700.0" minWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs.cs222.games.liberty_bell.LibertyBellController">
 
     <ImageView fitHeight="598.0" fitWidth="1151.0" preserveRatio="false">
         <image>
-            <Image url="@../images/libertybell_bg.jpg" />
+            <Image url="@../../images/libertybell_bg.jpg" />
         </image>
     </ImageView>
 
@@ -59,9 +49,9 @@
             </effect>
       </Label>
 
-              <TextField fx:id="wagerField" maxWidth="200" promptText="Enter points..." style="-fx-background-color: #f0e48c00; -fx-text-fill: #f5c842;                           -fx-border-color: #f5c842; -fx-border-width: 2;                           -fx-border-radius: 6; -fx-background-radius: 6;                           -fx-font-size: 14px; -fx-padding: 6 12;" />
+              <TextField fx:id="wagerField" alignment="CENTER" editable="false" maxWidth="200" prefHeight="36.0" prefWidth="163.0" style="-fx-background-color: #f0e48c00; -fx-text-fill: #f5c842;                           -fx-border-color: #f5c842; -fx-border-width: 2;                           -fx-border-radius: 6; -fx-background-radius: 6;                           -fx-font-size: 14px; -fx-padding: 6 12;" text="50" />
 
-              <Button fx:id="spinButton" defaultButton="true" onAction="#handleSpin" style="-fx-background-color: #000000; -fx-text-fill: #d9c7be;                        -fx-font-size: 14px; -fx-font-weight: bold;                        -fx-border-color: #f0f8ff; -fx-border-width: 2;                        -fx-border-radius: 8; -fx-background-radius: 8;                        -fx-padding: 8 20;" text="SPIN" textFill="#bcae51" wrapText="true">
+              <Button fx:id="spinButton" defaultButton="true" onAction="#handleSpin" onMouseClicked="#handleSpin" style="-fx-background-color: #000000; -fx-text-fill: #d9c7be;                        -fx-font-size: 14px; -fx-font-weight: bold;                        -fx-border-color: #f0f8ff; -fx-border-width: 2;                        -fx-border-radius: 8; -fx-background-radius: 8;                        -fx-padding: 8 20;" text="SPIN" textFill="#bcae51" wrapText="true">
             <font>
                 <Font name="PingFang HK Regular" size="13.0" />
             </font>
@@ -75,7 +65,7 @@
          
                          <ImageView fitHeight="116.0" fitWidth="119.0" preserveRatio="true" style="-fx-opacity: .7;" x="500.0">
                     <image>
-                        <Image url="@../images/cowboy.png" />
+                        <Image url="@../../images/cowboy.png" />
                     </image>
                     <effect>
                   <MotionBlur radius="0.0">
