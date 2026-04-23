@@ -11,6 +11,14 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Run application
+ * Runs 2 start pages before opening up main game
+ *
+ * @author Holden Hankins
+ * @author Laura Romero
+ * @author Treyford Mercer
+ */
 public class Launcher extends Application {
     @Override
     public void start(Stage stage) {

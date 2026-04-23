@@ -6,16 +6,16 @@ import bsu.edu.cs.cs222.games.horse_race.HorseRace;
 import bsu.edu.cs.cs222.games.liberty_bell.LibertyBellGame;
 import bsu.edu.cs.cs222.games.roulette.Roulette;
 import bsu.edu.cs.cs222.games.vingt_un.VingtUn;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.util.Scanner;
 
 
-
+/**
+ * Terminal based main menu
+ *
+ * @author Treyford Mercer
+ * @author Holden Hankins
+ */
 public class MainMenu {
     private Scanner menuScanner;
     private final User user;
@@ -67,8 +67,8 @@ public class MainMenu {
                 faro.runGame();
                 break;
             case 2: // Horse Race
-                //HorseRace horseRace = new HorseRace(user);
-                //horseRace.horseRace();
+                HorseRace horseRace = new HorseRace(user);
+                horseRace.horseRace();
                 break;
             case 3: // Liberty Bell
                 LibertyBellGame libertyBell = new LibertyBellGame(user);

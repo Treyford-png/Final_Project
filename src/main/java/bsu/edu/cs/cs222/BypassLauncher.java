@@ -8,6 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Debug terminal that bypasses the launcher entirely for better testing
+ *
+ * @author Holden Hankins
+ */
 public class BypassLauncher extends Application {
     @Override
     public void start(Stage stage) {
@@ -22,33 +27,6 @@ public class BypassLauncher extends Application {
 
             stage.setScene(scene);
             stage.show();
-
-            /*
-            // Legal Notices
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/legal_stuff.fxml")));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-            // Splash Screen
-            Parent root2 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/splash_screen.fxml")));
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Platform.runLater(() -> scene.setRoot(root2));
-                }
-            }, 2000);
-
-            // Title Screen
-            Parent root3 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/launch_page.fxml")));
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Platform.runLater(() -> scene.setRoot(root3));
-                }
-            }, 4000);
-             */
 
         } catch (Exception e) {
             System.out.println("Error");

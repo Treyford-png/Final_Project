@@ -17,6 +17,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Java FX launcher
+ * Allows user to click on a builder to enter its game
+ *
+ * @author Holden Hankins
+ * @author Treyford Mercer
+ */
 public class MainMenuController {
 
     private User user;
@@ -29,6 +36,9 @@ public class MainMenuController {
         setLabel();
     }
 
+    /**
+     * Sets the bottom label's text
+     */
     public void setLabel() {
         playerInfo.setText(" " + user.getUsername() + " - " + user.getPoints() + "p");
     }

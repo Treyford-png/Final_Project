@@ -11,6 +11,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+
+/**
+ * Controller for the launch screen for when the user first enters the game
+ *
+ * @author Holden Hankins
+ * @author Laura Romero
+ * @author Treyfor Mercer
+ */
 public class LaunchController {
 
     @FXML
