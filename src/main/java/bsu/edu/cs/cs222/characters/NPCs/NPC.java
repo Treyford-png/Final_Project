@@ -2,6 +2,17 @@ package bsu.edu.cs.cs222.characters.NPCs;
 
 import java.io.Serializable;
 
+/**
+ * Serializable object that allows for NPC data to be stored.
+ * id - findable 3-char set that is used for calling
+ * name
+ * points
+ * USED FOR ITERATION 4:
+ * vuTarget - amount that will be bet by that player
+ * isOut - if the NPC is out of money
+ *
+ * @author Holden Hankins
+ */
 public class NPC implements Serializable {
     private final String id;
     private final String name;

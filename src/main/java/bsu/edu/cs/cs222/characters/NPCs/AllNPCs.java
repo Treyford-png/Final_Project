@@ -2,6 +2,15 @@ package bsu.edu.cs.cs222.characters.NPCs;
 
 import java.io.*;
 
+/**
+ * Full list of all NPCs in the game
+ * Each NPC is a unique ahistorical character
+ * However, they are all based on real occupations with accurate incomes
+ *
+ * @author Holden Hankins
+ * @author Treyford Mercer
+ * @author Laura Romero
+ */
 public class AllNPCs implements Serializable {
     private NPCHashMap npcs;
     private String username;
@@ -46,6 +55,10 @@ public class AllNPCs implements Serializable {
         return npc.getPoints();
     }
 
+    /**
+     * Saves all NPCs as serializable data
+     * File name is username.dat
+     */
     public void saveNPCs() {
         try {
             FileOutputStream fOut = new FileOutputStream("src/main/resources/users/" + username + ".dat");
@@ -58,6 +71,9 @@ public class AllNPCs implements Serializable {
         }
     }
 
+    /**
+     * Loads all NPC data from that user
+     */
     public void loadNPCs() {
         File file = new File("src/main/resources/users/" + username + ".dat");
         if (!file.exists()) {
@@ -78,6 +94,12 @@ public class AllNPCs implements Serializable {
         }
     }
 
+    /**
+     * Gets an NPC at a specific point in the list
+     * Used for randomly getting an NPC
+     * @param index number in order
+     * @return npc
+     */
     public NPC getNPCAtIndex(int index) {
         System.out.println(index);
         int i = 0;
@@ -90,6 +112,10 @@ public class AllNPCs implements Serializable {
         return null;
     }
 
+    /**
+     * Simple toString method
+     * @return "[name] - [points]p\n"
+     */
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
