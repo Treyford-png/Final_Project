@@ -210,7 +210,7 @@ public class ControllerRoulette {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("exit");
         alert.setHeaderText("Do you want to exit roulette?");
-        alert.setHeaderText("All data will be saved?");
+        alert.setContentText("All data will be saved");
 
         if(alert.showAndWait().get() == ButtonType.OK) {
             HelpersFX.gotoMainMenu(user, (Stage) winsLabel.getScene().getWindow());

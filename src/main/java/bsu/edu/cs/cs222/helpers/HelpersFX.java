@@ -5,6 +5,8 @@ import bsu.edu.cs.cs222.menues.MainMenuController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
@@ -56,6 +58,15 @@ public class HelpersFX {
                 };
         spinner.setValueFactory(valueFactory);
         spinner.setEditable(true);
+    }
+
+    public static boolean confirmExit(String gameName) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("exit");
+        alert.setHeaderText("Do you want to exit " + gameName + "?");
+        alert.setContentText("All data will be saved?");
+
+        return alert.showAndWait().get() == ButtonType.OK;
     }
 
 }

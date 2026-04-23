@@ -12,6 +12,7 @@ import java.util.HashMap;
  * HashMap<String, String> colorMap numbers and their corresponding color on wheel
  *
  * @author Treyford Mercer
+ * @author JJ Owsley
  */
 public class Roulette {
     private final User user;

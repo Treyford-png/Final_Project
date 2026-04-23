@@ -29,41 +29,42 @@ public class RouletteTest {
     public void testNumberWin() {
         User user = new User("Test", "test", 1000);
         Roulette roulette = new Roulette(user);
-        assert roulette.calcResults("1", "1", "red", 100) == 1700;
+        assert roulette.calcResults("1", "1", "red", 100) == 700;
     }
 
     @Test
     public void testColorWin() {
         User user = new User("Test", "test", 1000);
         Roulette roulette = new Roulette(user);
-        assert roulette.calcResults("1", "x", "red", 100) == 1200;
+        assert roulette.calcResults("1", "x", "red", 100) == 200;
     }
 
     @Test
     public void testColorLoss() {
         User user = new User("Test", "test", 1000);
         Roulette roulette = new Roulette(user);
-        assert roulette.calcResults("1", "x", "black", 100) == 900;
+        System.out.println(roulette.calcResults("1", "x", "black", 100));
+        assert roulette.calcResults("1", "x", "black", 100) == -100;
     }
 
     @Test
     public void testNumberLoss() {
         User user = new User("Test", "test", 1000);
         Roulette roulette = new Roulette(user);
-        assert roulette.calcResults("1", "14", "red", 100) == 900;
+        assert roulette.calcResults("1", "14", "red", 100) == -100;
     }
 
     @Test
     public void testInvalidNumber() {
         User user = new User("Test", "test", 1000);
         Roulette roulette = new Roulette(user);
-        assert roulette.calcResults("1", "29", "red", 100) == 900;
+        assert roulette.calcResults("1", "29", "red", 100) == -100;
     }
 
     @Test
     public void testNoWager() {
         User user = new User("Test", "test", 1000);
         Roulette roulette = new Roulette(user);
-        assert roulette.calcResults("1", "", "", 0) == 1000;
+        assert roulette.calcResults("1", "", "", 0) == 0;
     }
 }

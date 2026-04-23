@@ -2,6 +2,7 @@ package bsu.edu.cs.cs222.games.faro;
 
 import bsu.edu.cs.cs222.characters.NPCs.NPC;
 import bsu.edu.cs.cs222.characters.User;
+import bsu.edu.cs.cs222.helpers.HelpersFX;
 import bsu.edu.cs.cs222.libraries.cards.*;
 import bsu.edu.cs.cs222.menues.MainMenuController;
 import javafx.event.ActionEvent;
@@ -384,11 +385,20 @@ public class FaroController {
         userPointsLabel.setText(user.getUsername() + " - " + players[0].getPoints());
     }
 
+    public void back() throws IOException {
+        boolean confirmed = HelpersFX.confirmExit("Faro");
+        if (confirmed) {
+
+            close();
+        }
+    }
+
     /**
-     * Goes back to main menu
+     * Saves points and goes back to main menu
      * @throws IOException exception
      */
     public void close() throws IOException {
+        user.addPoints(players[0].getPoints() - user.getPoints());
         FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/main_menu.fxml"));
         Parent root = mmLoader.load();
         Stage stage = (Stage) dealerCard.getScene().getWindow();

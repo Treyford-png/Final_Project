@@ -11,6 +11,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller that allows a user to see all 16 members of the town
+ *
+ * @author Holden Hankins
+ */
 public class MeetTownController {
     private User user;
     @FXML
@@ -24,6 +29,10 @@ public class MeetTownController {
         textArea.setText(allNPCs.toString());
     }
 
+    /**
+     * Go back to main menu
+     * @throws IOException exception
+     */
     public void back() throws IOException {
         FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/main_menu.fxml"));
         Parent root = mmLoader.load();

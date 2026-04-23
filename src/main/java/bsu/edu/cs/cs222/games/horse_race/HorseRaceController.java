@@ -1,5 +1,6 @@
 package bsu.edu.cs.cs222.games.horse_race;
 import bsu.edu.cs.cs222.characters.User;
+import bsu.edu.cs.cs222.helpers.HelpersFX;
 import bsu.edu.cs.cs222.menues.MainMenuController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -20,6 +21,8 @@ import java.util.TimerTask;
  *
  * @author Holden Hankins
  * @author JJ Owsley
+ * @author Laura Romero
+ * @author Treyford Mercer
  */
 public class HorseRaceController {
     private final Horse[] horses; // Array that holds all race horses
@@ -206,5 +209,9 @@ public class HorseRaceController {
         stage.show();
         MainMenuController mmController = mmLoader.getController();
         mmController.setUser(user);
+    }
+
+    public void back() throws IOException {
+        HelpersFX.gotoMainMenu(user, (Stage) path1.getScene().getWindow());
     }
 }

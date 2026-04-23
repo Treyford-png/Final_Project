@@ -286,11 +286,6 @@
          </font>
       </Label>
       <Spinner fx:id="setPoints" layoutX="918.0" layoutY="39.0" onMouseClicked="#getBet" prefHeight="26.0" prefWidth="174.0" />
-      <Button layoutX="672.0" layoutY="594.0" mnemonicParsing="false" onAction="#exit" prefHeight="52.0" prefWidth="136.0" text="EXIT">
-         <font>
-            <Font name="Goudy Old Style Bold" size="24.0" />
-         </font>
-      </Button>
       <VBox alignment="CENTER" layoutX="596.0" layoutY="415.0" prefHeight="164.0" prefWidth="275.0">
          <children>
             <Label fx:id="betLabel" alignment="CENTER" prefHeight="70.0" prefWidth="245.0" text="Make a bet..." textFill="WHITE">
@@ -307,6 +302,11 @@
       </VBox>
       <ToolBar layoutY="672.0" prefHeight="28.0" prefWidth="1210.0" style="-fx-background-color: maroon;">
          <items>
+            <Button mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: white;" text="🏠🏠" textFill="#890101">
+               <font>
+                  <Font name="Goudy Old Style Bold" size="10.0" />
+               </font>
+            </Button>
             <Label fx:id="pointsLabel" text="Username - points" textFill="WHITE">
                <font>
                   <Font name="Playbill" size="19.0" />

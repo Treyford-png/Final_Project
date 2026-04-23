@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 public class FaroTest {
     @Test
     public void testPlayGame() {
-        FaroController faro = new FaroController(new User("Test", "test", 1000));
+        Faro faro = new Faro(new User("Test", "test", 1000));
         FaroPlayer player = new FaroPlayer("Test", 1000);
-        faro.getCasekeep().populate();
+        faro.populateCasekeep();
         faro.burn();
         int previousPoints;
         int previousDealerPoints;

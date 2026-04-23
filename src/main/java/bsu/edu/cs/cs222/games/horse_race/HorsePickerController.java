@@ -73,4 +73,13 @@ public class HorsePickerController implements Initializable {
         // Transfer horse and amount (both as ints)
         hrc.horseRace(horseNum, wager);
     }
+
+    public void exit() throws IOException {
+        boolean confirmed = HelpersFX.confirmExit("horse race");
+        if (confirmed) {
+            Stage stage = (Stage) horseDropdown.getScene().getWindow();
+            stage.close();
+            hrc.back();
+        }
+    }
 }

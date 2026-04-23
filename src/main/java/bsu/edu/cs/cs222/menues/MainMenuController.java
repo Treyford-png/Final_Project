@@ -7,6 +7,7 @@ import bsu.edu.cs.cs222.games.horse_race.HorseRaceController;
 import bsu.edu.cs.cs222.games.liberty_bell.LibertyBellController;
 import bsu.edu.cs.cs222.games.roulette.ControllerRoulette;
 import bsu.edu.cs.cs222.games.vingt_un.VUController;
+import bsu.edu.cs.cs222.helpers.HelpersFX;
 import bsu.edu.cs.cs222.menues.leaderboard.Leaderboard;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -120,8 +121,11 @@ public class MainMenuController {
     }
 
     public void exit() {
-        System.out.println("\nSo long, pardner");
-        Stage stage = (Stage) playerInfo.getScene().getWindow();
-        stage.close();
+        HelpersFX.confirmExit("Frontier Games");
+        if (true) {
+            user.savePoints();
+            Stage stage = (Stage) playerInfo.getScene().getWindow();
+            stage.close();
+        }
     }
 }

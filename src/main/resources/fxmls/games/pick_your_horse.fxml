@@ -20,7 +20,7 @@
                   <Font name="Goudy Old Style Bold" size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="EXIT">
+            <Button mnemonicParsing="false" onMouseClicked="#exit" prefHeight="26.0" prefWidth="147.0" text="EXIT">
                <font>
                   <Font name="Goudy Old Style Bold" size="14.0" />
                </font>

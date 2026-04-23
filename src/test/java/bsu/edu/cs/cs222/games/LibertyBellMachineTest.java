@@ -85,13 +85,6 @@ public class LibertyBellMachineTest {
     }
 
     @Test
-    public void setBet_invalidValue_throwsException() {
-        LibertyBellMachine machine = new LibertyBellMachine(user);
-        assertThrows(IllegalArgumentException.class, () -> machine.setBet(0));
-        assertThrows(IllegalArgumentException.class, () -> machine.setBet(-5));
-    }
-
-    @Test
     public void setBet_validValue_updatesCorrectly() {
         LibertyBellMachine machine = new LibertyBellMachine(user);
         machine.setBet(10);

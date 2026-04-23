@@ -1,9 +1,13 @@
 package bsu.edu.cs.cs222.games.liberty_bell;
 
 import bsu.edu.cs.cs222.characters.User;
+import bsu.edu.cs.cs222.helpers.HelpersFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Handles the Liberty Bell slot machine graphical interface
@@ -82,5 +86,12 @@ public class LibertyBellController {
      */
     private void setPointsLabel() {
         usernamePointsLabel.setText(user.getUsername() + " - " + user.getPoints());
+    }
+
+    public void back() throws IOException {
+        boolean confirm = HelpersFX.confirmExit("the Liberty Bell slot machine?");
+        if (confirm) {
+            HelpersFX.gotoMainMenu(user, (Stage) reel1.getScene().getWindow());
+        }
     }
 }
