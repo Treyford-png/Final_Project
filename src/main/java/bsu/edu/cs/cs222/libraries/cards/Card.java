@@ -1,5 +1,10 @@
 package bsu.edu.cs.cs222.libraries.cards;
 
+/**
+ * Simple playing card
+ *
+ * @author Holden Hankins
+ */
 public class Card {
     private final String shortName;
     private final String name;

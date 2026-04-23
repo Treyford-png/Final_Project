@@ -5,6 +5,11 @@ import static bsu.edu.cs.cs222.libraries.cards.Suit.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Standard deck of 52 cards
+ *
+ * @author Holden Hankins
+ */
 public class CardDeck {
     private ArrayList<Card> deck = new ArrayList<>();
     Random random = new Random();

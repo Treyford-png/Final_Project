@@ -1,5 +1,10 @@
 package bsu.edu.cs.cs222.libraries.cards;
 
+/**
+ * Run card deck for testing
+ *
+ * @author Holden Hankins
+ */
 public class RunCards {
     static void main() {
         CardDeck deckOfCards = new CardDeck();
