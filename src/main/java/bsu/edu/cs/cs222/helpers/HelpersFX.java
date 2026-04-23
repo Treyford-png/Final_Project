@@ -11,7 +11,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * A few methods that are shared between multiple classes
+ *
+ * @author Holden Hankins
+ */
 public class HelpersFX {
+    /**
+     * Sends user back to main menu
+     * @param user the player
+     * @param mainStage the current stage
+     * @throws IOException exception
+     */
     public static void gotoMainMenu(User user, Stage mainStage) throws IOException {
         FXMLLoader mmLoader = new FXMLLoader(HelpersFX.class.getResource("/fxmls/menues/main_menu.fxml"));
         Parent root = mmLoader.load();
@@ -21,6 +32,15 @@ public class HelpersFX {
         mmController.setUser(user);
     }
 
+    /**
+     * Sets a value factory for a spinner
+     * Min value is 25
+     * Max value is points
+     * inc/dec by 25
+     *
+     * @param spinner JavaFX Spinner
+     * @param userPoints points from the user
+     */
     public static void setFactory(Spinner<Integer> spinner, int userPoints) {
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(25, userPoints, 25) {
