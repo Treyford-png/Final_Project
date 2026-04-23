@@ -6,6 +6,12 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Logic for creating a new user from the user's input
+ * Also contains a prompt for terminal
+ *
+ * @author Holden Hankins
+ */
 public class SignUp extends SignIn {
     /**
      * Gets username and password for new account and attempts to create account

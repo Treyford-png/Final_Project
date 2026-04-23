@@ -3,6 +3,12 @@ import bsu.edu.cs.cs222.characters.User;
 
 import java.util.Scanner;
 
+/**
+ * Class that contains basic methods used by both LogIn and SignUp, which extend this
+ * Also contains a prompt for terminal usage
+ *
+ * @author Holden Hankins
+ */
 public class SignIn {
     /**
      * Prompts the user for their username
@@ -21,17 +27,6 @@ public class SignIn {
         System.out.print("Password: ");
         return scanner.nextLine();
     }
-
-    /*
-    static boolean containsValidChars(String str) {
-        int hasSpace = str.indexOf(' ');
-        int hasDot = str.indexOf('.');
-        int hasSlash = str.indexOf('\\');
-        int hasComma = str.indexOf(',');
-
-        return hasSpace == -1 && hasDot == -1 && hasSlash == -1 && hasComma == -1;
-    }
-    */
 
     /**
      * Gets the user's request to either sign up or log in and directs them to the correct menu

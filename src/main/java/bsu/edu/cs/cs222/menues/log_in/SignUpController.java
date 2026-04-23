@@ -15,6 +15,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Creates and manages the book that is used for the user to sign up
+ *
+ * @author Holden Hankins
+ */
 public class SignUpController {
     @FXML
     private TextField usernameField;
