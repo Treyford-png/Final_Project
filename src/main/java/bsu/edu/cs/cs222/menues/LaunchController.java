@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -48,12 +50,17 @@ public class LaunchController {
     }
 
     public void goToCredits() throws IOException {
-
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxmls/menues/credits.fxml")));
+        Stage stage2 = new Stage();
+        stage2.setTitle("Credits");
+        stage2.setScene(new Scene(root));
+        stage2.show();
     }
 
     public void exit() throws IOException {
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.close();
+        System.exit(0);
     }
 
     public void loadMainMenu() throws IOException {
@@ -61,5 +68,6 @@ public class LaunchController {
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+        System.exit(0);
     }
 }
