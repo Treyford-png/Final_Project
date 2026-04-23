@@ -1,28 +1,16 @@
 package bsu.edu.cs.cs222.menues.leaderboard;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+/**
+ * Individual node for each leaderboard position
+ * I am doing this out of protest over not having structs in Java
+ *
+ * @author Holden Hankins
+ */
+public record LeaderboardNode(String username, int points) {
 
-public class LeaderboardNode {
-    private final String username;
-    private final int points;
-
-    public LeaderboardNode(String username, int points) {
-        this.username = username;
-        this.points = points;
-
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
+    /**
+     * @return "[name] - [points]"
+     */
     @Override
     public String toString() {
         return username + " - " + points;

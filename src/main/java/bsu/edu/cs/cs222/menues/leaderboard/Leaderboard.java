@@ -16,6 +16,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Leaderboard that allows the user to view a list of local runs
+ * This encourages replayability
+ * I will on my own sync to API
+ *
+ * @author Holden Hanknis
+ * @author Treyford Mercer
+ */
 public class Leaderboard {
     private final ArrayList<LeaderboardNode> leaderboard; // username, points
     private final String userFileName; // ONLY MODIFIED IN TESTS
@@ -53,6 +61,11 @@ public class Leaderboard {
         this.user = user;
     }
 
+    /**
+     * Grabs a list of users
+     * Accesses those users
+     * Sorts them in order of points
+     */
     public void populateLeaderboard() {
         try {
             // Gets all usernames, which is stored locally in list_of_users.csv
@@ -72,7 +85,7 @@ public class Leaderboard {
             }
 
             // Sorts array by points in ascending order
-            leaderboard.sort(Comparator.comparing(LeaderboardNode::getPoints).reversed());
+            leaderboard.sort(Comparator.comparing(LeaderboardNode::points).reversed());
             reader.close();
         } catch (IOException e) {
             corrupted = true;
@@ -102,6 +115,10 @@ public class Leaderboard {
         return corrupted;
     }
 
+    /**
+     * Goes back to main menu
+     * @throws IOException exception
+     */
     public void back() throws IOException {
         FXMLLoader mmLoader = new FXMLLoader(getClass().getResource("/fxmls/menues/main_menu.fxml"));
         Parent root = mmLoader.load();

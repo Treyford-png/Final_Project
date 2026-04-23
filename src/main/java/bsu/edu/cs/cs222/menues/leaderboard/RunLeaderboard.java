@@ -1,7 +1,11 @@
 package bsu.edu.cs.cs222.menues.leaderboard;
 
-import bsu.edu.cs.cs222.characters.User;
-
+/**
+ * Independently runs launcher
+ * Is used for testing and debugging
+ *
+ * @author Holden Hankins
+ */
 public class RunLeaderboard {
     public static void main(String[] args) {
         Leaderboard leaderboard = new Leaderboard();
