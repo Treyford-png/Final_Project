@@ -1,7 +1,7 @@
 package bsu.edu.cs.cs222.menues;
 
 import bsu.edu.cs.cs222.characters.User;
-import bsu.edu.cs.cs222.games.faro.Faro;
+import bsu.edu.cs.cs222.games.faro.FaroController;
 import bsu.edu.cs.cs222.games.horse_race.HorseRace;
 import bsu.edu.cs.cs222.games.liberty_bell.LibertyBellGame;
 import bsu.edu.cs.cs222.games.roulette.Roulette;
@@ -63,7 +63,7 @@ public class MainMenu {
                 System.out.println("So long partner!");
                 break;
             case 1: // Faro
-                Faro faro = new Faro(user);
+                FaroController faro = new FaroController(user);
                 faro.runGame();
                 break;
             case 2: // Horse Race

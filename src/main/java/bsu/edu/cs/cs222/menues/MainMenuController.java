@@ -2,7 +2,7 @@ package bsu.edu.cs.cs222.menues;
 
 import bsu.edu.cs.cs222.characters.NPCs.MeetTownController;
 import bsu.edu.cs.cs222.characters.User;
-import bsu.edu.cs.cs222.games.faro.Faro;
+import bsu.edu.cs.cs222.games.faro.FaroController;
 import bsu.edu.cs.cs222.games.horse_race.HorseRaceController;
 import bsu.edu.cs.cs222.games.liberty_bell.LibertyBellController;
 import bsu.edu.cs.cs222.games.roulette.ControllerRoulette;
@@ -38,7 +38,7 @@ public class MainMenuController {
         Parent root = faroLoader.load();
         Stage stage = (Stage) playerInfo.getScene().getWindow();
         stage.setScene(new Scene(root));
-        Faro faroController = faroLoader.getController();
+        FaroController faroController = faroLoader.getController();
         faroController.setUser(user);
         stage.show();
     }

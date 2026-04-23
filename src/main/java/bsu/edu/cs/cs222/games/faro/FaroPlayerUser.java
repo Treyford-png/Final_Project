@@ -5,6 +5,9 @@ import bsu.edu.cs.cs222.libraries.cards.CardDeck;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * User extension of FaroPlayer that allows them to place a wager themselves
+ */
 public class FaroPlayerUser extends FaroPlayer {
     Scanner faroScanner;
 

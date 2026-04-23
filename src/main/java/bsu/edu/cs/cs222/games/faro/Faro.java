@@ -1,38 +1,17 @@
 package bsu.edu.cs.cs222.games.faro;
 
-import bsu.edu.cs.cs222.characters.NPCs.AllNPCs;
 import bsu.edu.cs.cs222.characters.User;
 import bsu.edu.cs.cs222.libraries.cards.*;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.util.*;
 
 public class Faro {
-    private User user;
-    private FaroPlayer[] players;
-    private final Casekeep casekeep; // Used to hold list of cards left
+    private final User user;
+    private final FaroPlayer[] players;
+    private final Map<String, Integer> casekeep; // Used to hold list of cards left
     private CardDeck deck;
     private String winningCard;
     private String losingCard;
-    private AllNPCs allNPCs;
-    @FXML private Label dealerCard, playerCard, userPointsLabel,
-            npcOneName, npcTwoName, npcOneTotal, npcTwoTotal, npcOneBetPoints, npcTwoBetPoints, playerBetPoints;
-    @FXML private Button leftPlayerBets;
-
-    public Faro() {
-        casekeep = new Casekeep();
-        deck = new CardDeck();
-        deck.shuffle();
-    }
 
     public Faro(User user) {
         this.user = user;
@@ -44,29 +23,8 @@ public class Faro {
         players = new FaroPlayer[]{userPlayer, player2, player3};
 
         // Establish deck
-        casekeep = new Casekeep();
+        casekeep = new HashMap<>();
         deck = new CardDeck();
-        deck.shuffle();
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-        allNPCs = user.getAllNPCS();
-        FaroPlayerUser userPlayer = new FaroPlayerUser(user.getUsername(), user.getPoints());
-        FaroPlayerCPU player2 = new FaroPlayerCPU("Angel Eyes", 5000);
-        npcOneName.setText(player2.getName());
-        npcOneTotal.setText(String.valueOf(player2.getPoints()));
-
-        FaroPlayerCPU player3 = new FaroPlayerCPU("Tuco", 5000);
-        player3.setDealer(true);
-        npcTwoName.setText(player3.getName());
-        npcTwoTotal.setText(String.valueOf(player3.getPoints()));
-        players = new FaroPlayer[]{userPlayer, player2, player3};
-        updateUserPointsLabel();
-    }
-
-    public Casekeep getCasekeep() {
-        return casekeep;
     }
 
     /**
@@ -78,11 +36,14 @@ public class Faro {
 
         // Run 24 rounds ((52 - burn - final 3) / 2)
         for (int i = 0; i < 24; i++) {
+            // Print casekeep
+            System.out.println("\n" + getPlayers() + "\n");
+            System.out.println(casekeepOutput() + "\n");
 
             // User turn
             for (FaroPlayer player : players) {
                 if (!player.getIsDealer()) {
-                    player.placeWager(deck);
+                    System.out.println(player.getName() + "\n" + player.placeWager(deck) + "\n");
                 }
             }
 
@@ -93,16 +54,15 @@ public class Faro {
 
             // Draw 2 cards and print results
             drawCards();
+            System.out.println();
             scoreGame();
             for (int j = 0; j < 2; j++) {
                 if (players[j].getPoints() >= startPoints[j]) {
-                    JOptionPane.showMessageDialog (null,
-                            players[j].getName() + " won " + (players[j].getPoints() - startPoints[j]));
+                    System.out.println(players[j].getName() + " won " + (players[j].getPoints() - startPoints[j]));
                 }
                 else {
-                    JOptionPane.showMessageDialog(null,
-                            players[j].getName() + " lost " +
-                                    (((startPoints[j]) - players[j].getPoints()) / 2)); // Removes wager being readded
+                    System.out.println(players[j].getName() + " lost " +
+                            (((startPoints[j]) - players[j].getPoints()) / 2)); // Removes wager being readded
                 }
             } // close for
         } // close for (i < 24)
@@ -111,10 +71,24 @@ public class Faro {
     }
 
     /**
+     * Prints out the players with the amount of points they hold
+     */
+    public String getPlayers() {
+        StringBuilder string = new StringBuilder();
+        for (FaroPlayer player : players) {
+            if (player.getIsDealer()) { // Denotes dealer
+                string.append("(D) ");
+            }
+            string.append(player.getName()).append(" ").append(player.getPoints()).append("\n");
+        }
+        return string.toString();
+    }
+
+    /**
      * Resets the game state for a run
      */
     public void startGame() {
-        casekeep.populate();
+        populateCasekeep();
         deck = new CardDeck();
         deck.shuffle();
         burn();
@@ -125,41 +99,68 @@ public class Faro {
     // Removes 1 card from the deck
     public void burn() {
         Card card = deck.deal();
-        casekeep.update(GetCardKey.getCardKey(card));
-        JOptionPane.showMessageDialog(null, ("Burned card: " + card.getShortName()));
+        updateCasekeep(GetCardKey.getCardKey(card));
+        System.out.println("Burned card: " + card.getShortName());
     }
 
     /**
      * First drawn card is losing/dealer's card, second drawn card is winning/player's card
      */
     public void drawCards() {
-        playerWagers();
-
         // Draws both cards
         Card lCard = deck.deal();
         Card wCard = deck.deal();
 
         // Prints cards for players
-        dealerCard.setText(lCard.getCardOutput());
-        playerCard.setText(wCard.getCardOutput());
+        System.out.println("Dealer's card: [" + lCard.getShortName() + "]");
+        System.out.println("Player's card: [" + wCard.getShortName() + "]");
 
         // Updates casekeep
         winningCard = GetCardKey.getCardKey(wCard);
         losingCard = GetCardKey.getCardKey(lCard);
-        casekeep.update(winningCard);
-        casekeep.update(losingCard);
-
-        scoreGame();
+        updateCasekeep(winningCard);
+        updateCasekeep(losingCard);
     }
 
-    public void playerWagers() {
-        players[1].placeWager(deck);
-        players[2].placeWager(deck);
+    /**
+     * Casekeep is used as a way to keep track of cards remaining in the deck
+     */
+    public void populateCasekeep() {
+        casekeep.put("2", 4);
+        casekeep.put("3", 4);
+        casekeep.put("4", 4);
+        casekeep.put("5", 4);
+        casekeep.put("6", 4);
+        casekeep.put("7", 4);
+        casekeep.put("8", 4);
+        casekeep.put("9", 4);
+        casekeep.put("10", 4);
+        casekeep.put("k", 4);
+        casekeep.put("q", 4);
+        casekeep.put("j", 4);
+        casekeep.put("a", 4);
+    }
 
-        // updates labels
-        npcOneBetPoints.setText("(D)");
-        npcTwoBetPoints.setText("(" + players[2].getAmountPlaced() + "p)");
-        playerBetPoints.setText("(" + players[0].getAmountPlaced() + "p)");
+    /**
+     * Removed card from the casekeep
+     * @param key of a card in the HashMap
+     */
+    public void updateCasekeep(String key) {
+        int numLeft = casekeep.get(key) - 1;
+        casekeep.put(key, numLeft);
+    }
+
+    /**
+     * Prints entire casekeep
+     * @return formated [key] - #\n...
+     */
+    public String casekeepOutput() {
+        StringBuilder output = new StringBuilder();
+        output.append("Casekeep:\n");
+        for (String key : casekeep.keySet()) {
+            output.append("[").append(key).append("]").append(" - ").append(casekeep.get(key)).append("\n");
+        }
+        return output.toString();
     }
 
     /**
@@ -167,14 +168,12 @@ public class Faro {
      * Dealer is excluded as they do not wager and make points from players losing
      */
     public void scoreGame() {
+        FaroPlayer dealer = getDealer();
         for (FaroPlayer player : players) {
             if (!player.getIsDealer() ) {
                 scorePlayer(player);
             }
         }
-        updateUserPointsLabel();
-        npcOneTotal.setText(String.valueOf(players[1].getPoints()));
-        npcTwoTotal.setText(String.valueOf(players[2].getPoints()));
     }
 
     /**
@@ -189,7 +188,6 @@ public class Faro {
         if (losingWager > 0) {
             dealer.addPoints(losingWager);
             player.clearWager(losingCard);
-            JOptionPane.showMessageDialog (null, player.getName() + " lost " + losingWager);
         }
 
         // Adds winnings to winning card
@@ -198,7 +196,6 @@ public class Faro {
             dealer.subtractPoints(winningWager);
             player.addPoints(winningWager * 2); // Hands back wager and pays 1:1
             player.clearWager(winningCard);
-            JOptionPane.showMessageDialog (null, player.getName() + " won " + winningWager);
         }
     }
 
@@ -231,7 +228,7 @@ public class Faro {
      */
     public void finalThree() {
         char[] guessedOrder = new char[3];
-        System.out.println("Three cards left:\n" + casekeep.output() + "\n\nGuess the cards in order:");
+        System.out.println("Three cards left:\n" + casekeepOutput() + "\n\nGuess the cards in order:");
         Scanner faroScanner = new Scanner(System.in);
         for (int i = 0; i < 3; i++) {
             System.out.print("\n" + (i + 1) + ": ");
@@ -269,58 +266,14 @@ public class Faro {
             guess[i] = guess[j];
             guess[j] = temp;
         }
+
+        System.out.println("\n" + player.getName() + " guessed [" + guess[0] + "] ["
+                + guess[1] + "] [" + guess[2] +"]");
         scoreFinalThree(guess, order, player.getAmountToWager(), player);
     }
 
-    public void openCasekeep() throws IOException {
-        FXMLLoader casekeepLoader = new FXMLLoader(getClass().getResource("/fxmls/games/faro_casekeep.fxml"));
-        Parent root = casekeepLoader.load();
-        Stage stage2 = new Stage();
-        stage2.setTitle("Casekeep");
-        stage2.setScene(new Scene(root));
-        stage2.show();
-        CasekeepController casekeepController = casekeepLoader.getController();
-        casekeepController.setCasekeep(casekeep);
-    }
-
-    public void openCpuBets(ActionEvent event) throws IOException {
-        // Loads table stage
-        FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("/fxmls/games/faro_table_npc.fxml"));
-        Parent root = tableLoader.load();
-        Stage stage2 = new Stage();
-        stage2.setTitle("Table");
-        stage2.setScene(new Scene(root));
-        stage2.show();
-
-        // Passes NPC to controller
-        TableController tableController = tableLoader.getController();
-        Button clickedButton = (Button) event.getSource();
-        if (clickedButton.equals(leftPlayerBets)) {
-            tableController.setPlayer(players[1]);
-        } else {
-            tableController.setPlayer(players[2]);
-        }
-    }
-
-    public void openPlayerBets() throws IOException {
-        FXMLLoader playerTableLoader = new FXMLLoader(getClass().getResource("/fxmls/games/faro_table_player.fxml"));
-        Parent root = playerTableLoader.load();
-        Stage stage2 = new Stage();
-        stage2.setTitle("Your Table");
-        stage2.setScene(new Scene(root));
-        stage2.show();
-
-        // Passes user player to controller
-        TableController tableController = playerTableLoader.getController();
-        tableController.setPlayer(players[0]);
-    }
-
-    public void updateUserPointsLabel() {
-        userPointsLabel.setText(user.getUsername() + " - " + players[0].getPoints());
-    }
-
     /**
-     * Following 3 are used for testing only
+     * Following 3 are used for debugging only
      */
 
     public String getWinningCard() {

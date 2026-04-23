@@ -4,6 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+/**
+ * Purpose built controller to show how many cards are left
+ *
+ * @author Holden Hankins
+ */
 public class CasekeepController {
     @FXML public TextArea casekeepText;
     private Casekeep casekeep;

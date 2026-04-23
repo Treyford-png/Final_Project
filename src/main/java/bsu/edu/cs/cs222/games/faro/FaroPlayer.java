@@ -4,11 +4,18 @@ import bsu.edu.cs.cs222.libraries.cards.CardDeck;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Basis for a player in the game of Faro
+ * extended by FaroPlayerCPU and FaroPlayerUser
+ *
+ * @author Holden Hankins
+ */
 public class FaroPlayer {
     private final String name;
     private int points;
     private boolean isDealer;
     private final Map<String, Integer> wagers;
+    private Casekeep casekeep;
 
     public FaroPlayer(String name, int points) {
         this.name = name;
@@ -16,6 +23,10 @@ public class FaroPlayer {
         isDealer = false;
         wagers = new HashMap<>();
         populateWagers();
+    }
+
+    public void setCasekeep(Casekeep casekeep) {
+        this.casekeep = casekeep;
     }
 
     public String getName() {
@@ -58,6 +69,11 @@ public class FaroPlayer {
         return wagers.get(key);
     }
 
+    /**
+     * Given a card (key) and amount, adds that to the current list of bets
+     * @param key String card key
+     * @param amount int points to place
+     */
     public void addToWager(String key, int amount) {
         int current = wagers.get(key.toLowerCase());
         points -= amount;
@@ -81,6 +97,10 @@ public class FaroPlayer {
         return 50;
     }
 
+    /**
+     * Gets total amount of money on board
+     * @return int amount placed
+     */
     public int getAmountPlaced() {
         int amount = 0;
         for (String key : wagers.keySet()) {
@@ -89,6 +109,10 @@ public class FaroPlayer {
         return amount;
     }
 
+    /**
+     * Gets a list of all wagers placed
+     * @return wagers list
+     */
     public String getWagers() {
         StringBuilder output = new StringBuilder();
         int counter = 1;
